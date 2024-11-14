@@ -20,4 +20,4 @@ Permission is hereby granted, free of charge, to use, copy, and modify the softw
 
 6. **No Warranty**: The Software is provided "as-is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, or non-infringement.
 
-By using the DataPredict-Agent+ library, you agree to follow the terms outlined above.
+By using the DataPredict-Agent library, you agree to follow the terms outlined above.
