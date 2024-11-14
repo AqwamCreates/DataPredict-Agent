@@ -1,4 +1,4 @@
-# DataPredict-Agent License
+# DataPredict Agent License
 
 Copyright (c) 2024 Aqwam Harish Aiman
 
