@@ -2,6 +2,12 @@
 
 Copyright (c) [Year] Aqwam Harish Aiman
 
+## Contacts
+
+Email: aqwam.harish.aiman@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/aqwam-harish-aiman/
+
 ## Permissions
 
 Permission is hereby granted, free of charge, to use, copy, and modify the Software under the following conditions:
@@ -14,7 +20,7 @@ Permission is hereby granted, free of charge, to use, copy, and modify the Softw
 
 4. **Modification**: You are allowed to modify the Software for personal or internal use, but **any modifications or derivative works of the Software** must remain compliant with this license. These modifications must also only integrate with Aqwam Harish Aiman-created libraries.
 
-5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with Aqwam Harish Aiman libraries. Redistribution of Aqwam Harish Aiman libraries is still prohibited unless explicitly allowed by Aqwam Harish Aiman.
+5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with Aqwam Harish Aiman libraries. Redistribution of libraries authored by Aqwam Harish Aiman is prohibited.
 
 6. **No Warranty**: The Software is provided "as-is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, or non-infringement.
 
@@ -27,6 +33,3 @@ Permission is hereby granted, free of charge, to use, copy, and modify the Softw
 ## Conclusion
 
 By using the DataPredict-Agent+ library, you agree to follow the terms outlined above. These terms are designed to allow you to benefit from the features of DataPredict libraries while maintaining control over the distribution and modification of the libraries themselves.
-
-
-*For further inquiries or licensing questions, please contact Aqwam Harish Aiman directly at [contact@aqwam.com]*.
