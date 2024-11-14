@@ -8,13 +8,13 @@ LinkedIn: [www.linkedin.com/in/aqwam-harish-aiman](https://www.linkedin.com/in/a
 
 Permission is hereby granted, free of charge, to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
-1. **Usage Restriction**: The Software (DataPredict-Agent) may **only be used** in conjunction with other software libraries authored by Aqwam Harish Aiman. Software libraries not authored by Aqwam Harish Aiman are prohibited to be used with the Software.
+1. **Usage Restriction**: The Software (DataPredict-Agent) may **only be used** in conjunction with other software libraries authored by Aqwam Harish Aiman. Software libraries not authored by Aqwam Harish Aiman are prohibited from being used with the Software.
 
 2. **Original License Compliance**: The use of software libraries authored by Aqwam Harish Aiman within this Software does **not** override the original licensing terms of those software libraries.
 
 3. **Attribution**: You must include this original license in all copies or substantial portions of the Software.
 
-4. **Modification**: **Any modifications or derivative works of the Software** must remain compliant with this license and must only integrate with software libraries created by Aqwam Harish Aiman. Software libraries that are not authored by Aqwam Harish Aiman are prohibited to be in these modifications or derivative works.
+4. **Modification**: **Any modifications or derivative works of the Software** must remain compliant with this license and must only integrate with software libraries created by Aqwam Harish Aiman. Software libraries that are not authored by Aqwam Harish Aiman are prohibited from being used in these modifications or derivative works.
 
 5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with software libraries authored by Aqwam Harish Aiman. Redistribution of the software libraries authored by Aqwam Harish Aiman that are used in this Software is prohibited.
 
