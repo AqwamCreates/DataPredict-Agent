@@ -16,7 +16,7 @@ Permission is hereby granted, free of charge, to use, copy, and modify the softw
 
 4. **Modification**: You are allowed to modify the Software for personal or internal use. However, **any modifications or derivative works of the Software** must remain compliant with this license and must only integrate with libraries created by Aqwam Harish Aiman.
 
-5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with libraries authored by Aqwam Harish Aiman. Redistribution of those libraries is prohibited.
+5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with libraries authored by Aqwam Harish Aiman. Redistribution of those libraries authored by Aqwam Harish Aiman are prohibited.
 
 6. **No Warranty**: The Software is provided “AS IS”, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. in no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings in the software.
 
