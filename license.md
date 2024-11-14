@@ -26,4 +26,4 @@ Permission is hereby granted, free of charge, to use, copy, and modify the softw
 
 ## Conclusion
 
-By using the DataPredict-Agent+ library, you agree to follow the terms outlined above. These terms are designed to allow you to benefit from the features of DataPredict libraries while maintaining control over the distribution and modification of the libraries themselves.
+By using the DataPredict-Agent+ library, you agree to follow the terms outlined above.
