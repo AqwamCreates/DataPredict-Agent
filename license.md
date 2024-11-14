@@ -4,7 +4,7 @@ Copyright (c) 2024 Aqwam Harish Aiman
 
 Email: aqwam.harish.aiman@gmail.com  
 
-LinkedIn: [www.linkedin.com/in/aqwam-harish-aiman](https://www.linkedin.com/in/aqwam-harish-aiman)
+LinkedIn: www.linkedin.com/in/aqwam-harish-aiman
 
 Permission is hereby granted, free of charge, to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
