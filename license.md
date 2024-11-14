@@ -1,5 +1,3 @@
-# DataPredict Agent License
-
 Copyright (c) 2024 Aqwam Harish Aiman
 
 Email: aqwam.harish.aiman@gmail.com  
