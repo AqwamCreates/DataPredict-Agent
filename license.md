@@ -6,7 +6,7 @@ LinkedIn: www.linkedin.com/in/aqwam-harish-aiman
 
 Permission is hereby granted, free of charge, to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
-1. **Usage Restriction**: The Software (DataPredict-Agent) may **only be used** in conjunction with other software libraries or frameworks that are solely copyrighted by Aqwam Harish Aiman. The software libraries or frameworks that do not meet this condition are prohibited from being used with the Software.
+1. **Usage Restriction**: The Software (DataPredict-Agent) **must be used** in conjunction with other software libraries or frameworks that are solely copyrighted by Aqwam Harish Aiman. The software libraries or frameworks that do not meet this condition are prohibited from being used with the Software.
 
 2. **Original License Compliance**: The use of software libraries or frameworks that are solely copyrighted by Aqwam Harish Aiman within this Software does **not** override the original licensing terms of those software libraries or frameworks.
 
