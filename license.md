@@ -14,7 +14,7 @@ Permission is hereby granted, free of charge, to use, copy, and modify the softw
 
 3. **Attribution**: You must include this original license in all copies or substantial portions of the Software.
 
-4. **Modification**: You are allowed to modify the Software for personal or internal use. However, **any modifications or derivative works of the Software** must remain compliant with this license and must only integrate with libraries created by Aqwam Harish Aiman.
+4. **Modification**: **Any modifications or derivative works of the Software** must remain compliant with this license and must only integrate with libraries created by Aqwam Harish Aiman.
 
 5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with libraries authored by Aqwam Harish Aiman. Redistribution of those libraries authored by Aqwam Harish Aiman are prohibited.
 
