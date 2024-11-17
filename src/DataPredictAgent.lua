@@ -66,7 +66,7 @@ function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 	
 	local dictionaryOfServerDictionary = self.dictionaryOfServerDictionary
 	
-	if (type(serverDictionary.serverName) ~= "string") then error("The server name must be a string.") end
+	if (type(serverName) ~= "string") then error("The server name must be a string.") end
 	
 	if (dictionaryOfServerDictionary[serverName]) then error("The server " .. serverName .. " already exists.") end
 	
@@ -96,7 +96,7 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 	
-	if (type(agentDictionary.serverName) ~= "string") then error("The agent name must be a string.") end
+	if (type(agentName) ~= "string") then error("The agent name must be a string.") end
 
 	if (dictionaryOfAgentDictionary[agentName]) then error("The agent " .. agentName .. " already exists.") end
 	
