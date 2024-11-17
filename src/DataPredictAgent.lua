@@ -227,11 +227,11 @@ function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenP
 	return prompt
 end
 
-function DataPredictAgent:sendServerRequest(serverName, stringToSend)
+function DataPredictAgent:sendServerRequest(serverName, message)
 	
 	local serverDictionary = self:getServerDictionary(serverName)
 	
-	local requestBody = HttpService:JSONEncode({message = stringToSend})
+	local requestBody = HttpService:JSONEncode({message = message})
 	
 	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
 	
