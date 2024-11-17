@@ -252,6 +252,8 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, agentActio
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
 	local thread = task.spawn(function()
+		
+		task.desynchronize()
 
 		while (dictionaryOfAgentActionDictionary[agentName]) do
 			
@@ -282,6 +284,8 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
 	local thread = task.spawn(function()
+		
+		task.desynchronize()
 
 		while (dictionaryOfAgentActionDictionary[agentName]) do
 
@@ -312,7 +316,9 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, isInitialHiddenPromptAd
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
 	local thread = task.spawn(function()
-
+		
+		task.desynchronize()
+		
 		while (dictionaryOfAgentActionDictionary[agentName]) do
 			
 			if (#agentActionToDoArray == 0) then
