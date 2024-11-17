@@ -215,7 +215,7 @@ function DataPredictAgent:processAgentResponse(agentName, response)
 		
 		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
 		
-		if string.find(response, agentActionDictionary.regularExpressionTrigger) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
+		if (string.find(response, agentActionDictionary.regularExpressionTrigger)) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
 		
 	end
 	
