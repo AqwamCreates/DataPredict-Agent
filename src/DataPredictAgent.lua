@@ -192,19 +192,19 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local chatCount = interactorDictionary[agentName].chatCount or 0
 	
-	local stringToSendToServer = ""
+	local stringToSend = ""
 	
-	if (initialHiddenPrompt) and (chatCount == 0) then stringToSendToServer = stringToSendToServer .. initialHiddenPrompt .. "\n\n" end
+	if (initialHiddenPrompt) and (chatCount == 0) then stringToSend = stringToSend .. initialHiddenPrompt .. "\n\n" end
 	
-	if (hiddenPrompt) then stringToSendToServer = stringToSendToServer .. hiddenPrompt .. "\n\n"  end
+	if (hiddenPrompt) then stringToSend = stringToSend .. hiddenPrompt .. "\n\n"  end
 	
-	stringToSendToServer = stringToSendToServer .. message
+	stringToSend = stringToSend .. message
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
 	
 	local requestBody = HttpService:JSONEncode({
 		
-		message = stringToSendToServer
+		message = stringToSend
 		
 	})
 
