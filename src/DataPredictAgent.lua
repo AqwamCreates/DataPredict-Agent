@@ -2,12 +2,6 @@ local HttpService = game:GetService("HttpService")
 
 --------------------------------------------------------------------------------
 
-local DataPredictLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value) -- Aqwam's Machine Learning And Deep Learning Library
-
-local DataPredictNeuralLibrary = require(script.AqwamDeepLearningLibraryLinker.Value) -- Aqwam's Deep Learning Library
-
---------------------------------------------------------------------------------
-
 local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
@@ -99,8 +93,6 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	if (type(agentDictionary.serverName) ~= "string") then error("The agent name must be a string.") end
 
 	if (dictionaryOfAgentDictionary[agentName]) then error("The agent name already exists.") end
-	
-	if (agentDictionary.scope ~= "Global") and (agentDictionary.scope ~= "Local") then error("The mode must be either \"Global\" or \"Local\" .") end
 	
 	agentDictionary.errorPrompt = agentDictionary.errorPrompt or "Something went wrong. Please try again later."
 	
