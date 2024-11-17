@@ -265,13 +265,13 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local prompt = self:buildAgentPrompt(agentName, message, isInitialHiddenPromptAdded)
 	
-	local reply = self:sendRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
+	local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
 
-	self:processResponse(agentName, reply)
+	self:processAgentResponse(agentName, response)
 
-	return reply
+	return response
 	
 end
 
