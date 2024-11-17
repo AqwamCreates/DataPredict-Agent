@@ -60,29 +60,21 @@ function DataPredictAgent:destroy()
 	
 end
 
-function DataPredictAgent:addServerDictionary(serverName, ipAddress, mode)
+function DataPredictAgent:addServerDictionary(serverName, serverDicionary)
 	
 	local dictionaryOfServerDictionary = self.dictionaryOfServerDictionary
 	
-	if (type(serverName) ~= "string") then error("The server name must be a string.") end
+	if (type(serverDicionary.serverName) ~= "string") then error("The server name must be a string.") end
 	
 	if (dictionaryOfServerDictionary[serverName]) then error("The server name already exists.") end
 	
-	if (type(ipAddress) ~= "string") then error("The IP address must be a string.") end
+	if (type(serverDicionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
 	
-	if (type(mode) ~= "string") then error("The mode must be a string.") end
+	if (type(serverDicionary.mode) ~= "string") then error("The mode must be a string.") end
 	
-	if (mode ~= "Chat") and (mode ~= "Instruct") then error("The mode must be either \"Chat\" or \"Instruct\" .") end
+	if (serverDicionary.mode ~= "Chat") and (serverDicionary.mode ~= "Instruct") then error("The mode must be either \"Chat\" or \"Instruct\" .") end
 	
-	dictionaryOfServerDictionary[serverName] = {
-		
-		name = serverName,
-		
-		ipAddress = ipAddress,
-		
-		mode = mode
-		
-	}
+	dictionaryOfServerDictionary[serverName] = serverDicionary
 	
 end
 
@@ -98,29 +90,19 @@ function DataPredictAgent:getServerDictionary(serverName)
 		
 end
 
-function DataPredictAgent:addAgentDictionary(agentName, serverName, scope, errorPrompt, initialHiddenPrompt, hiddenPrompt)
+function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 	
-	if (type(serverName) ~= "string") then error("The agent name must be a string.") end
+	if (type(agentDictionary.serverName) ~= "string") then error("The agent name must be a string.") end
 
 	if (dictionaryOfAgentDictionary[agentName]) then error("The agent name already exists.") end
 	
-	if (scope ~= "Global") and (scope ~= "Local") then error("The mode must be either \"Global\" or \"Local\" .") end
+	if (agentDictionary.scope ~= "Global") and (agentDictionary.scope ~= "Local") then error("The mode must be either \"Global\" or \"Local\" .") end
 	
-	dictionaryOfAgentDictionary[agentName] = {
-		
-		serverName = serverName,
-		
-		scope = scope,
-		
-		errorPrompt = errorPrompt or "Something went wrong. Please chat with me later.",
-		
-		initialHiddenPrompt = initialHiddenPrompt,
-		
-		hiddenPrompt = hiddenPrompt
-		
-	}
+	agentDictionary.errorPrompt = agentDictionary.errorPrompt or "Something went wrong. Please try again later."
+	
+	dictionaryOfAgentDictionary[agentName] = agentDictionary
 	
 end
 
