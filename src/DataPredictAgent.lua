@@ -2,9 +2,9 @@ local HttpService = game:GetService("HttpService")
 
 --------------------------------------------------------------------------------
 
-local DataPredictLibrary -- Aqwam's Machine Learning And Deep Learning Library
+local DataPredictLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value) -- Aqwam's Machine Learning And Deep Learning Library
 
-local DataPredictNeuralLibrary  -- Aqwam's Deep Learning Library
+local DataPredictNeuralLibrary = require(script.AqwamDeepLearningLibraryLinker.Value)  -- Aqwam's Deep Learning Library
 
 --------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ local DataPredictAgent = {}
 
 --------------------------------------------------------------------------------
 
-function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed!
+function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed.
 	
 	if (DataPredictAgentGlobalInstance) and (isLockedToGlobalInstance) then return DataPredictAgentGlobalInstance end
 
