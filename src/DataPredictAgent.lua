@@ -60,7 +60,7 @@ function DataPredictAgent:destroy()
 	
 end
 
-function DataPredictAgent:addServerDictionary(serverName, ip, mode)
+function DataPredictAgent:addServerDictionary(serverName, ipAddress, mode)
 	
 	local dictionaryOfServerDictionary = self.dictionaryOfServerDictionary
 	
@@ -68,7 +68,7 @@ function DataPredictAgent:addServerDictionary(serverName, ip, mode)
 	
 	if (dictionaryOfServerDictionary[serverName]) then error("The server name already exists.") end
 	
-	if (type(ip) ~= "string") then error("The IP must be a string.") end
+	if (type(ipAddress) ~= "string") then error("The IP address must be a string.") end
 	
 	if (type(mode) ~= "string") then error("The mode must be a string.") end
 	
@@ -78,7 +78,7 @@ function DataPredictAgent:addServerDictionary(serverName, ip, mode)
 		
 		name = serverName,
 		
-		ip = ip,
+		ipAddress = ipAddress,
 		
 		mode = mode
 		
@@ -200,7 +200,7 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 
 	local success, response = pcall(function()
 		
-		return HttpService:PostAsync(serverDictionary.ip, requestBody, Enum.HttpContentType.ApplicationJson)
+		return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson)
 		
 	end)
 	
