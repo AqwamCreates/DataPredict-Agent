@@ -44,7 +44,7 @@ end
 
 function DataPredictAgent:destroy()
 	
-	if (isLockedToGlobalInstance) then
+	if (isLockedToGlobalInstance) and (self == DataPredictAgentGlobalInstance) then -- Ensuring that if this instance is not a global instance, then the global instance must not be destroyed. This can happen if the global instance is created after creating the local instances.
 		
 		isLockedToGlobalInstance = false
 		
