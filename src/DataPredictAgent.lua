@@ -204,11 +204,9 @@ function DataPredictAgent:bindAgentActionToAgent(agentName, agentActionName, fun
 	
 end
 
-function DataPredictAgent:buildPrompt(agentName, interactorName, message, isInitialHiddenPromptAdded)
+function DataPredictAgent:buildAgentPrompt(agentName, message, isInitialHiddenPromptAdded)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
-	
-	local interactorDictionary = self:getInteractorDictionary(interactorName)
 	
 	local prompt = ""
 
@@ -265,7 +263,7 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local isInitialHiddenPromptAdded = (chatCount == 0)
 	
-	local prompt = self:buildPrompt(agentName, interactorName, message, isInitialHiddenPromptAdded)
+	local prompt = self:buildAgentPrompt(agentName, message, isInitialHiddenPromptAdded)
 	
 	local reply = self:sendRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 	
