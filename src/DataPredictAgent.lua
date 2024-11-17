@@ -172,38 +172,6 @@ function DataPredictAgent:getAgentActionDictionary(agentActionName)
 
 end
 
-function DataPredictAgent:bindAgentActionToAgent(agentName, agentActionName, functionToRun)
-	
-	local agentActionArrayIndex
-	
-	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
-	
-	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
-	
-	local agentActionToDoArray = agentDictionary.agentActionToDoArray
-	
-	local thread = task.spawn(function()
-		
-		while dictionaryOfAgentActionDictionary[agentName] do
-			
-			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
-			
-			if (agentActionArrayIndex) then
-				
-				table.remove(agentActionToDoArray, agentActionArrayIndex)
-				
-				functionToRun() 
-				
-			end
-			
-		end
-		
-	end)
-	
-	return thread
-	
-end
-
 function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenPromptAdded)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
@@ -273,6 +241,96 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 
 	return response
 	
+end
+
+function DataPredictAgent:bindAgentActionToAgentSequential(agentName, agentActionName, functionToRun)
+	
+	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+
+	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
+
+	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+
+	local thread = task.spawn(function()
+
+		while (dictionaryOfAgentActionDictionary[agentName]) do
+			
+			if (#agentActionToDoArray >= 1) then
+				
+				functionToRun(agentActionToDoArray[1])
+
+				table.remove(agentActionToDoArray, 1)
+				
+			end
+
+		end
+
+	end)
+
+	return thread
+	
+end
+
+function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionName, functionToRun)
+
+	local agentActionArrayIndex
+
+	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+
+	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
+
+	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+
+	local thread = task.spawn(function()
+
+		while (dictionaryOfAgentActionDictionary[agentName]) do
+
+			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
+
+			if (agentActionArrayIndex) then
+
+				table.remove(agentActionToDoArray, agentActionArrayIndex)
+
+				functionToRun() 
+
+			end
+
+		end
+
+	end)
+
+	return thread
+
+end
+
+function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessage, isInitialHiddenPromptAdded)
+
+	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+
+	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
+
+	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+
+	local thread = task.spawn(function()
+
+		while (dictionaryOfAgentActionDictionary[agentName]) do
+			
+			if (#agentActionToDoArray == 0) then
+				
+				local prompt = self:createAgentPrompt(agentName, freeWillMessage, isInitialHiddenPromptAdded)
+
+				local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
+
+				self:processAgentResponse(agentName, response)
+				
+			end
+
+		end
+
+	end)
+
+	return thread
+
 end
 
 return DataPredictAgent
