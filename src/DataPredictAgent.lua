@@ -303,7 +303,7 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 
 end
 
-function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessage, isInitialHiddenPromptAdded)
+function DataPredictAgent:bindFreeWillToAgent(agentName, isInitialHiddenPromptAdded, freeWillMessageGeneratorFunction)
 
 	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
 
@@ -316,6 +316,8 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessage, isInit
 		while (dictionaryOfAgentActionDictionary[agentName]) do
 			
 			if (#agentActionToDoArray == 0) then
+				
+				local freeWillMessage = freeWillMessageGeneratorFunction()
 				
 				local prompt = self:createAgentPrompt(agentName, freeWillMessage, isInitialHiddenPromptAdded)
 
