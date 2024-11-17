@@ -259,7 +259,7 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
 
-	local chatCount = interactorDictionary[agentName] and interactorDictionary[agentName].chatCount or 0
+	local chatCount = interactorDictionary[agentName].chatCount or 0
 	
 	local isInitialHiddenPromptAdded = (chatCount == 0)
 	
