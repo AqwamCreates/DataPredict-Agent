@@ -243,7 +243,7 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 end
 
-function DataPredictAgent:bindAgentActionToAgentSequential(agentName, agentActionName, functionToRun)
+function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionToRun)
 	
 	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
 
