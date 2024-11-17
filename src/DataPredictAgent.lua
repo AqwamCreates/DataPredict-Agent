@@ -1,7 +1,5 @@
 local HttpService = game:GetService("HttpService")
 
-local PathFindingService = game:GetService("PathfindingService")
-
 --------------------------------------------------------------------------------
 
 local DataPredictLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value) -- Aqwam's Machine Learning And Deep Learning Library
@@ -32,7 +30,7 @@ function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot de
 	
 	NewDataPredictAgentInstance.dictionaryOfInteractorDictionary = {}
 	
-	NewDataPredictAgentInstance.dictionaryOfLocationDictionary = {}
+	NewDataPredictAgentInstance.dictionaryOfAgentActionDictionary = {}
 	
 	if (isGlobalInstance) then
 		
@@ -106,6 +104,10 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.errorPrompt = agentDictionary.errorPrompt or "Something went wrong. Please try again later."
 	
+	agentDictionary.agentActionArray = agentDictionary.agentActionArray or {}
+	
+	agentDictionary.agentActionToDoArray = agentDictionary.agentActionToDoArray or {}
+	
 	dictionaryOfAgentDictionary[agentName] = agentDictionary
 	
 end
@@ -146,27 +148,59 @@ function DataPredictAgent:getInteractorDictionary(interactorName)
 	
 end
 
-function DataPredictAgent:addLocationDictionary(locationName, locationDictionary)
+function DataPredictAgent:addAgentActionDictionary(agentActionName, agentActionDictionary)
+
+	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+
+	if (type(agentActionName) ~= "string") then error("The agent action name must be a string.") end
+
+	if (dictionaryOfAgentActionDictionary[agentActionName]) then error("The agent action name already exists.") end
 	
-	local dictionaryOfLocationDictionary = self.dictionaryOfLocationDictionary
-	
-	if (type(locationName) ~= "string") then error("The location name must be a string.") end
-	
-	if (dictionaryOfLocationDictionary[locationName]) then error("The location name already exists.") end
-	
-	dictionaryOfLocationDictionary[locationName] = locationDictionary or {}
-	
+	if (type(agentActionDictionary.regularExpressionTrigger) ~= "string") then error("The regular expression trigger must be a string.") end
+
+	dictionaryOfAgentActionDictionary[agentActionName] = agentActionDictionary or {}
+
 end
 
-function DataPredictAgent:removeLocationDictionary(locationName)
-	
-	self.dictionaryOfLocationDictionary[locationName] = nil
-	
+function DataPredictAgent:removeAgentActionDictionary(agentActionName)
+
+	self.dictionaryOfAgentActionDictionary[agentActionName] = nil
+
 end
 
-function DataPredictAgent:getLocationDictionary(locationName)
+function DataPredictAgent:getAgentActionDictionary(agentActionName)
+
+	return self.dictionaryOfAgentActionDictionary[agentActionName]
+
+end
+
+function DataPredictAgent:bindAgentActionToAgent(agentName, agentActionName, functionToRun)
 	
-	return self.dictionaryOfLocationDictionary[locationName]
+	local agentActionArrayIndex
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+	
+	local thread = task.spawn(function()
+		
+		while true do
+			
+			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
+			
+			if (agentActionArrayIndex) then
+				
+				table.remove(agentActionToDoArray, agentActionArrayIndex)
+				
+				functionToRun() 
+				
+			end
+			
+		end
+		
+	end)
+	
+	return thread
 	
 end
 
@@ -202,27 +236,21 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
 	
-	local requestBody = HttpService:JSONEncode({
-		
-		message = stringToSend
-		
-	})
+	local requestBody = HttpService:JSONEncode({message = stringToSend})
 
-	local success, response = pcall(function()
-		
-		return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson)
-		
-	end)
+	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
 	
-	if (success) then
+	local reply = (success and HttpService:JSONDecode(response).answer) or agentDictionary.errorPrompt
+	
+	for _, agentActionName in agentDictionary.agentActionArray do
 		
-		return HttpService:JSONDecode(response).answer
+		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
 		
-	else
-		
-		return agentDictionary.errorPrompt
-		
+		if (string.find(reply, agentActionDictionary.regularExpressionTrigger)) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
+
 	end
+	
+	return reply
 	
 end 
 
