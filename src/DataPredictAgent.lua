@@ -1,5 +1,7 @@
 local HttpService = game:GetService("HttpService")
 
+local PathFindingService = game:GetService("PathfindingService")
+
 --------------------------------------------------------------------------------
 
 local DataPredictLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value) -- Aqwam's Machine Learning And Deep Learning Library
@@ -29,6 +31,8 @@ function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot de
 	NewDataPredictAgentInstance.dictionaryOfAgentDictionary = {}
 	
 	NewDataPredictAgentInstance.dictionaryOfInteractorDictionary = {}
+	
+	NewDataPredictAgentInstance.dictionaryOfLocationDictionary = {}
 	
 	if (isGlobalInstance) then
 		
@@ -139,6 +143,30 @@ end
 function DataPredictAgent:getInteractorDictionary(interactorName)
 	
 	return self.dictionaryOfInteractorDictionary[interactorName]
+	
+end
+
+function DataPredictAgent:addLocationDictionary(locationName, locationDictionary)
+	
+	local dictionaryOfLocationDictionary = self.dictionaryOfLocationDictionary
+	
+	if (type(locationName) ~= "string") then error("The location name must be a string.") end
+	
+	if (dictionaryOfLocationDictionary[locationName]) then error("The location name already exists.") end
+	
+	dictionaryOfLocationDictionary[locationName] = locationDictionary or {}
+	
+end
+
+function DataPredictAgent:removeLocationDictionary(locationName)
+	
+	self.dictionaryOfLocationDictionary[locationName] = nil
+	
+end
+
+function DataPredictAgent:getLocationDictionary(locationName)
+	
+	return self.dictionaryOfLocationDictionary[locationName]
 	
 end
 
