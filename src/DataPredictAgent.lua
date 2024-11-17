@@ -62,21 +62,21 @@ function DataPredictAgent:destroy()
 	
 end
 
-function DataPredictAgent:addServerDictionary(serverName, serverDicionary)
+function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 	
 	local dictionaryOfServerDictionary = self.dictionaryOfServerDictionary
 	
-	if (type(serverDicionary.serverName) ~= "string") then error("The server name must be a string.") end
+	if (type(serverDictionary.serverName) ~= "string") then error("The server name must be a string.") end
 	
 	if (dictionaryOfServerDictionary[serverName]) then error("The server " .. serverName .. " already exists.") end
 	
-	if (type(serverDicionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
+	if (type(serverDictionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
 	
-	if (type(serverDicionary.mode) ~= "string") then error("The mode must be a string.") end
+	if (type(serverDictionary.mode) ~= "string") then error("The mode must be a string.") end
 	
-	if (serverDicionary.mode ~= "Chat") and (serverDicionary.mode ~= "Instruct") then error("The mode must be either \"Chat\" or \"Instruct\" .") end
+	if (serverDictionary.mode ~= "Chat") and (serverDictionary.mode ~= "Instruct") then error("The mode must be either \"Chat\" or \"Instruct\" .") end
 	
-	dictionaryOfServerDictionary[serverName] = serverDicionary
+	dictionaryOfServerDictionary[serverName] = serverDictionary
 	
 end
 
