@@ -204,54 +204,77 @@ function DataPredictAgent:bindAgentActionToAgent(agentName, agentActionName, fun
 	
 end
 
+function DataPredictAgent:buildPrompt(agentName, interactorName, message, isInitialHiddenPromptAdded)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local interactorDictionary = self:getInteractorDictionary(interactorName)
+	
+	local prompt = ""
+
+	if (agentDictionary.initialHiddenPrompt) and (isInitialHiddenPromptAdded) then
+		
+		prompt = prompt .. agentDictionary.initialHiddenPrompt .. "\n\n"
+		
+	end
+
+	if (agentDictionary.hiddenPrompt) then
+		
+		prompt = prompt .. agentDictionary.hiddenPrompt .. "\n\n"
+		
+	end
+
+	prompt = prompt .. message
+	
+	return prompt
+end
+
+function DataPredictAgent:sendServerRequest(serverName, stringToSend)
+	
+	local serverDictionary = self:getServerDictionary(serverName)
+	
+	local requestBody = HttpService:JSONEncode({message = stringToSend})
+	
+	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
+	
+	return (success and HttpService:JSONDecode(response).answer) or nil
+	
+end
+
+function DataPredictAgent:processAgentResponse(agentName, response)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	for _, agentActionName in ipairs(agentDictionary.agentActionArray) do
+		
+		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
+		
+		if string.find(response, agentActionDictionary.regularExpressionTrigger) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
+		
+	end
+	
+end
+
 function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
 
-	if (not agentDictionary) then error("The agent name does not exist.") end
+	local chatCount = interactorDictionary[agentName] and interactorDictionary[agentName].chatCount or 0
 	
-	if (not interactorDictionary) then error("The interactor name does not exist.") end
+	local isInitialHiddenPromptAdded = (chatCount == 0)
 	
-	local serverName = agentDictionary.serverName
+	local prompt = self:buildPrompt(agentName, interactorName, message, isInitialHiddenPromptAdded)
 	
-	local initialHiddenPrompt = agentDictionary.initialHiddenPrompt
-	
-	local hiddenPrompt = agentDictionary.hiddenPrompt
-	
-	local serverDictionary = self:getServerDictionary(serverName)
-	
-	if (not interactorDictionary[agentName]) then interactorDictionary[agentName] = {} end
-	
-	local chatCount = interactorDictionary[agentName].chatCount or 0
-	
-	local stringToSend = ""
-	
-	if (initialHiddenPrompt) and (chatCount == 0) then stringToSend = stringToSend .. initialHiddenPrompt .. "\n\n" end
-	
-	if (hiddenPrompt) then stringToSend = stringToSend .. hiddenPrompt .. "\n\n"  end
-	
-	stringToSend = stringToSend .. message
+	local reply = self:sendRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
-	
-	local requestBody = HttpService:JSONEncode({message = stringToSend})
 
-	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
-	
-	local reply = (success and HttpService:JSONDecode(response).answer) or agentDictionary.errorPrompt
-	
-	for _, agentActionName in agentDictionary.agentActionArray do
-		
-		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
-		
-		if (string.find(reply, agentActionDictionary.regularExpressionTrigger)) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
+	self:processResponse(agentName, reply)
 
-	end
-	
 	return reply
 	
-end 
+end
 
 return DataPredictAgent
