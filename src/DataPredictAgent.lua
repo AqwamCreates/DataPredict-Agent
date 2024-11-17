@@ -52,11 +52,11 @@ function DataPredictAgent:destroy()
 		
 	end
 	
+	setmetatable(self, nil)
+	
 	table.clear(self)
 	
 	self = nil
-	
-	return nil
 	
 end
 
