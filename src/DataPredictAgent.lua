@@ -245,13 +245,15 @@ end
 
 function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionToRun)
 	
+	local thread
+	
 	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
 
 	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
-
-	local thread = task.spawn(function()
+	
+	thread = task.spawn(function()
 		
 		task.desynchronize()
 
@@ -266,6 +268,8 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 			end
 
 		end
+		
+		task.cancel(thread)
 
 	end)
 
@@ -274,6 +278,8 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 end
 
 function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionName, functionToRun)
+	
+	local thread
 
 	local agentActionArrayIndex
 
@@ -283,7 +289,7 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
-	local thread = task.spawn(function()
+	thread = task.spawn(function()
 		
 		task.desynchronize()
 
@@ -300,6 +306,8 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 			end
 
 		end
+		
+		task.cancel(thread)
 
 	end)
 
@@ -308,6 +316,8 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 end
 
 function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGeneratorFunction)
+	
+	local thread
 
 	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
 
@@ -315,7 +325,7 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
-	local thread = task.spawn(function()
+	thread = task.spawn(function()
 		
 		task.desynchronize()
 		
@@ -334,6 +344,8 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 			end
 
 		end
+		
+		task.cancel(thread)
 
 	end)
 
