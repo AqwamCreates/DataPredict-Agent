@@ -68,7 +68,7 @@ function DataPredictAgent:addServerDictionary(serverName, serverDicionary)
 	
 	if (type(serverDicionary.serverName) ~= "string") then error("The server name must be a string.") end
 	
-	if (dictionaryOfServerDictionary[serverName]) then error("The server name already exists.") end
+	if (dictionaryOfServerDictionary[serverName]) then error("The server name " .. serverName .. "    already exists.") end
 	
 	if (type(serverDicionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
 	
@@ -98,7 +98,7 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	if (type(agentDictionary.serverName) ~= "string") then error("The agent name must be a string.") end
 
-	if (dictionaryOfAgentDictionary[agentName]) then error("The agent name already exists.") end
+	if (dictionaryOfAgentDictionary[agentName]) then error("The agent name " .. agentName .. "   already exists.") end
 	
 	agentDictionary.errorPrompt = agentDictionary.errorPrompt or "Something went wrong. Please try again later."
 	
@@ -128,7 +128,7 @@ function DataPredictAgent:addInteractorDictionary(interactorName, interactorDict
 	
 	if (type(interactorName) ~= "string") then error("The interactor name must be a string.") end
 
-	if (dictionaryOfInteractorDictionary[interactorName]) then error("The interactor name already exists.") end
+	if (dictionaryOfInteractorDictionary[interactorName]) then error("The interactor name " .. interactorName .. "  already exists.") end
 	
 	dictionaryOfInteractorDictionary[interactorName] = interactorDictionary or {}
 	
@@ -152,7 +152,7 @@ function DataPredictAgent:addAgentActionDictionary(agentActionName, agentActionD
 
 	if (type(agentActionName) ~= "string") then error("The agent action name must be a string.") end
 
-	if (dictionaryOfAgentActionDictionary[agentActionName]) then error("The agent action name already exists.") end
+	if (dictionaryOfAgentActionDictionary[agentActionName]) then error("The agent action name " .. agentActionName .. " already exists.") end
 	
 	if (type(agentActionDictionary.regularExpressionTrigger) ~= "string") then error("The regular expression trigger must be a string.") end
 
