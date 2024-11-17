@@ -178,13 +178,15 @@ function DataPredictAgent:bindAgentActionToAgent(agentName, agentActionName, fun
 	
 	local agentActionArrayIndex
 	
-	local agentDictionary = self:getAgentDictionary(agentName)
+	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+	
+	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
 	
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 	
 	local thread = task.spawn(function()
 		
-		while true do
+		while dictionaryOfAgentActionDictionary[agentName] do
 			
 			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
 			
