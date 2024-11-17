@@ -136,7 +136,7 @@ function DataPredictAgent:getAgentDictionary(agentName)
 	
 end
 
-function DataPredictAgent:addInteractorDictionary(interactorName)
+function DataPredictAgent:addInteractorDictionary(interactorName, interactorDictionary)
 	
 	local dictionaryOfInteractorDictionary = self.dictionaryOfInteractorDictionary
 	
@@ -144,7 +144,7 @@ function DataPredictAgent:addInteractorDictionary(interactorName)
 
 	if (dictionaryOfInteractorDictionary[interactorName]) then error("The interactor name already exists.") end
 	
-	dictionaryOfInteractorDictionary[interactorName] = {}
+	dictionaryOfInteractorDictionary[interactorName] = interactorDictionary or {}
 	
 end
 
