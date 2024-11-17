@@ -2,6 +2,12 @@ local HttpService = game:GetService("HttpService")
 
 --------------------------------------------------------------------------------
 
+local AqwamMachineLearningAndDeepLearningLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker)
+
+local AqwamDeepLearningLibraryLibrary = require(script.AqwamDeepLearningLibraryLinker)
+
+--------------------------------------------------------------------------------
+
 local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
