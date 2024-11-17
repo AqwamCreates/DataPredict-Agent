@@ -4,7 +4,7 @@ local HttpService = game:GetService("HttpService")
 
 local DataPredictLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value) -- Aqwam's Machine Learning And Deep Learning Library
 
-local DataPredictNeuralLibrary = require(script.AqwamDeepLearningLibraryLinker.Value)  -- Aqwam's Deep Learning Library
+local DataPredictNeuralLibrary = require(script.AqwamDeepLearningLibraryLinker.Value) -- Aqwam's Deep Learning Library
 
 --------------------------------------------------------------------------------
 
