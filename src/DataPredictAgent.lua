@@ -30,7 +30,7 @@ function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot de
 	
 	NewDataPredictAgentInstance.dictionaryOfInteractorDictionary = {}
 	
-	if (isGlobalInstance) and (not isLockedToGlobalInstance) then
+	if (isGlobalInstance) then
 		
 		DataPredictAgentGlobalInstance = NewDataPredictAgentInstance
 		
