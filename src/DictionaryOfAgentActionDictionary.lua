@@ -30,7 +30,7 @@ local DictionaryOfAgentActionDictionary = {}
 
 DictionaryOfAgentActionDictionary["follow"] = {
 
-	regularExpressionTrigger = "(?i)\\b(follow|shadow|keep\\s*up|stay\\s*close|trail|stay\\s*with|stick\\s*to)\\b.*\\b(player|you|your lead)\\b"
+	regularExpressionTrigger = "(?i)\\b(follow|shadow|keep\\s*up|stay\\s*close|trail|stay\\s*with|stick\\s*to)\\b.*\\b(player|you|your)\\b"
 
 }
 
