@@ -1,3 +1,3 @@
 # DataPredict-Agents
 
-You can view the Terms And Conditions [here](https://github.com/AqwamCreates/DataPredict-Agent/blob/main/docs/TermsAndConditions.md).
+By using or possessing any copies of this library or its assets (including the icons), you agree to our [Terms and Conditions](docs/TermsAndConditions.md).
