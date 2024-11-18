@@ -237,7 +237,7 @@ function DataPredictAgent:sendServerRequest(serverName, message)
 	
 end
 
-function DataPredictAgent:processAgentResponse(agentName, response)
+function DataPredictAgent:act(agentName, response)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
@@ -269,7 +269,7 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
 
-	self:processAgentResponse(agentName, response)
+	self:act(agentName, response)
 
 	return response
 	
@@ -375,7 +375,7 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 
 				local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 
-				self:processAgentResponse(agentName, response)
+				self:act(agentName, response)
 				
 			end
 			
