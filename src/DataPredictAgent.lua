@@ -228,6 +228,8 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
+	
+	interactorDictionary[agentName] = interactorDictionary[agentName] or {}
 
 	local chatCount = interactorDictionary[agentName].chatCount or 0
 	
