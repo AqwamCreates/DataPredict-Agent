@@ -42,9 +42,7 @@ local agentDictionary = {}
 
 local agentActionArray = {}
 
-local serverDictionary = {
-
-}
+local serverDictionary = {}
 
 for actionName, content in DictionaryOfAgentActionDictionary do
 	
