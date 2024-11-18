@@ -1,6 +1,6 @@
 **Copyright (c) 2024 Aqwam Harish Aiman**
 
-Email: aqwam.harish.aiman@gmail.com  
+Email: aqwam.harish.aiman@gmail.com
 
 LinkedIn: www.linkedin.com/in/aqwam-harish-aiman
 
@@ -16,7 +16,7 @@ Permission is hereby granted, free of charge, to use, copy, and modify the softw
 
 5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and use it in combination with software libraries or frameworks that are solely copyrighted by Aqwam Harish Aiman. Redistribution of the software libraries or frameworks that are solely copyrighted by Aqwam Harish Aiman used in this Software is prohibited.
 
-6. **No Trademark Use**: You **may not** use any trademark, service mark, or trade name associated with the Software or Aqwam Harish Aiman’s works, including but not limited to the name "DataPredict Agent" or any other related branding. This restriction applies to the use of such trademarks for the purpose of promoting or selling the Software or any derivative works thereof.
+6. **No Trademark Claims**: You **are strictly prohibited** from using any trademarks, service marks, or trade names associated with the Software (including, but not limited to, "DataPredict Agent") in any form or manner that may suggest ownership, affiliation, or endorsement by Aqwam Harish Aiman, **without prior, explicit, written consent**. Any attempt to claim such rights or to use these marks in any way that could confuse or mislead the public is **forbidden**.
 
 7. **No Warranty**: The Software is provided “AS IS,” without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
 
