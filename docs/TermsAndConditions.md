@@ -14,7 +14,7 @@ Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licens
 
 6. **No Trademark Claims**: You **are strictly prohibited** from using any trademarks, service marks, or trade names associated with the Software (including, but not limited to, "DataPredict Agent") in any form or manner that may suggest ownership, affiliation, or endorsement by the Licensor, **without prior, explicit, written consent**. Any attempt to claim such rights or use these marks in a manner that could confuse or mislead the public is **forbidden**.
 
-7. **Ownership and Credit**: You acknowledge that the Licensor retains all rights, title, and interest in and to the Software (the "Software"), and you shall not claim ownership of the Library or any part thereof. You shall provide proper attribution to Licensor in all publications, presentations, or projects that use the Library. The attribution must be placed in areas commonly viewed by the general public and must include one of the following combinations of materials:
+7. **Ownership and Credit**: You acknowledge that the Licensor retains all rights, title, and interest in and to the Software, and you shall not claim ownership of the Library or any part thereof. You shall provide proper attribution to Licensor in all publications, presentations, or projects that use the Library. The attribution must be placed in areas commonly viewed by the general public and must include one of the following combinations of materials:
    
    * The Software's icon and the Software's name.
      
