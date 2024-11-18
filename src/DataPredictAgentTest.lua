@@ -38,6 +38,6 @@ DataPredictAgent:addAgentDictionary("Lilith", agentDictionary)
 
 DataPredictAgent:addInteractorDictionary("Aqwam")
 
-local response = DataPredictAgent:chat("Lilith", "Aqwam", "Hi!")
+local response = DataPredictAgent:chat("Lilith", "Aqwam", "Respond to this: How are you today?")
 
 print(response)
