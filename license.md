@@ -20,16 +20,16 @@ Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licens
 
 7. **Ownership and Credit**: You acknowledge that the Licensor retains all rights, title, and interest in and to the Software (the "Software"), and you shall not claim ownership of the Library or any part thereof. You shall provide proper attribution to Licensor in all publications, presentations, or projects that use the Library. The attribution must be placed in areas commonly viewed by the general public and must include one of the following combinations of materials:
    
-   - The Software's icon and the Software's name.
+   * The Software's icon and the Software's name.
      
-   - The Software's name and the Software's source.
+   * The Software's name and the Software's source.
      
-   - The Software's icon and the Software's source.
+   * The Software's icon and the Software's source.
      
-   - Licensor's full name and the Software's source.
+   * Licensor's full name and the Software's source.
    
-   - Licensor's full name and the Software's name.
+   * Licensor's full name and the Software's name.
 
-9. **No Warranty**: The Software is provided “AS IS,” without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
+9. **No Warranty**: The Software is provided “AS IS,” without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
 
 By using the Software, you agree to follow the terms outlined above.
