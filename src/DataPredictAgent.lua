@@ -247,7 +247,7 @@ function DataPredictAgent:act(agentName, response)
 		
 		if (agentActionDictionary) then
 			
-			if (string.match(response, agentActionDictionary.regularExpressionTrigger)) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
+			if (string.find(response, agentActionDictionary.regularExpressionTrigger)) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
 			
 		end
 		
