@@ -2,9 +2,9 @@ local HttpService = game:GetService("HttpService")
 
 --------------------------------------------------------------------------------
 
-local AqwamMachineLearningAndDeepLearningLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker)
+local AqwamMachineLearningAndDeepLearningLibrary = require(script.AqwamDeepLearningLibraryLinker.Value)
 
-local AqwamDeepLearningLibraryLibrary = require(script.AqwamDeepLearningLibraryLinker)
+local AqwamDeepLearningLibraryLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value)
 
 --------------------------------------------------------------------------------
 
