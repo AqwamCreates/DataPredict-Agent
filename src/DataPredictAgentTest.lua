@@ -60,12 +60,16 @@ agentDictionary.serverName = "default"
 
 agentDictionary.hiddenPrompt =  HiddenPromptDictionary["default"] .. PersonalityDictionary["empathetic"] 
 
+local userName = "User"
+
+local agentName = "Lilith"
+
 DataPredictAgent:addServerDictionary("default", serverDictionary)
 
-DataPredictAgent:addAgentDictionary("Lilith", agentDictionary)
+DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
-DataPredictAgent:addInteractorDictionary("User")
+DataPredictAgent:addInteractorDictionary(userName)
 
-local response = DataPredictAgent:chat("Lilith", "User", "Respond to this: Hello! What's your name?")
+local response = DataPredictAgent:chat(userName, userName, "Respond to this: Hello! What's your name?")
 
 print(response)
