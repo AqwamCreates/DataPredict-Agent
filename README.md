@@ -2,7 +2,7 @@
 
 --------------------------------------------------------------------
 
-Aqwam's Deep Learning Library (Aqwam-DLL)
+Aqwam's AI Agent Library (DataPredict-Agent)
 
 Author: Aqwam Harish Aiman
 	
