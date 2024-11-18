@@ -149,3 +149,5 @@ DictionaryOfAgentActionDictionary["praise"] = {
 	regularExpressionTrigger = "(?i)\\b(praise|compliment|admire)\\b.*\\b(player|you)\\b(\\s*will)?"
 	
 }
+
+return DictionaryOfAgentActionDictionary
