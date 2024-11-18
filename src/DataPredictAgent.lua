@@ -2,7 +2,7 @@
 
 	--------------------------------------------------------------------
 
-	Aqwam's AI Agent Library (DataPredict-Agent)
+	Aqwam's AI Agent Library (DataPredict Agent)
 
 	Author: Aqwam Harish Aiman
 	
