@@ -84,7 +84,7 @@ DictionaryOfAgentActionDictionary["hug"] = {
 	
 }
 
-DictionaryOfAgentActionDictionary["hand holding"] = {
+DictionaryOfAgentActionDictionary["hand_holding"] = {
 	
 	regularExpressionTrigger = "(?i)\\b(hold\\s*hands|take\\s*hand)\\b.*\\b(player|you)\\b(\\s*will)?"
 	
