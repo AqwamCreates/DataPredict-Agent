@@ -64,8 +64,8 @@ DataPredictAgent:addServerDictionary("default", serverDictionary)
 
 DataPredictAgent:addAgentDictionary("Lilith", agentDictionary)
 
-DataPredictAgent:addInteractorDictionary("Aqwam")
+DataPredictAgent:addInteractorDictionary("User")
 
-local response = DataPredictAgent:chat("Lilith", "Aqwam", "Respond to this: Hello! What's your name?")
+local response = DataPredictAgent:chat("Lilith", "User", "Respond to this: Hello! What's your name?")
 
 print(response)
