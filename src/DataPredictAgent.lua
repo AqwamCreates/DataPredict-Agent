@@ -178,7 +178,7 @@ function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenP
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
-	local prompt = ""
+	local prompt = "You are " .. agentName .. ".\n\n"
 
 	if (agentDictionary.initialHiddenPrompt) and (isInitialHiddenPromptAdded) then
 		
