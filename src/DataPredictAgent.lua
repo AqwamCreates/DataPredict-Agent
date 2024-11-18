@@ -14,6 +14,8 @@ local isLockedToGlobalInstance = false
 
 local DataPredictAgent = {}
 
+DataPredictAgent.__index = DataPredictAgent
+
 --------------------------------------------------------------------------------
 
 function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed.
