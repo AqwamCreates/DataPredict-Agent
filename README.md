@@ -5,12 +5,12 @@
 Aqwam's AI Agent Library (DataPredict-Agent)
 
 Author: Aqwam Harish Aiman
-	
-YouTube: https://www.youtube.com/channel/UCUrwoxv5dufEmbGsxyEUPZw
-	
-LinkedIn: https://www.linkedin.com/in/aqwam-harish-aiman/
 
 Email: aqwam.harish.aiman@gmail.com
+
+LinkedIn: https://www.linkedin.com/in/aqwam-harish-aiman/
+	
+YouTube: https://www.youtube.com/channel/UCUrwoxv5dufEmbGsxyEUPZw
 	
 --------------------------------------------------------------------
 
