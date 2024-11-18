@@ -30,7 +30,7 @@ agentDictionary.agentActionArray = agentActionArray
 
 agentDictionary.serverName = "default"
 
-agentDictionary.hiddenPrompt =  HiddenPromptDictionary["default"] .. PersonalityDictionary["seductive"] 
+agentDictionary.hiddenPrompt =  HiddenPromptDictionary["default"] .. PersonalityDictionary["empathetic"] 
 
 DataPredictAgent:addServerDictionary("default", serverDictionary)
 
