@@ -241,7 +241,7 @@ function DataPredictAgent:processAgentResponse(agentName, response)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
-	for _, agentActionName in ipairs(agentDictionary.agentActionToDoArray) do
+	for _, agentActionName in ipairs(agentDictionary.agentActionArray) do
 		
 		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
 		
@@ -298,6 +298,8 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 				table.remove(agentActionToDoArray, 1)
 				
 			end
+			
+			task.wait()
 
 		end
 		
@@ -336,6 +338,8 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 				functionToRun() 
 
 			end
+			
+			task.wait()
 
 		end
 		
@@ -374,6 +378,8 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 				self:processAgentResponse(agentName, response)
 				
 			end
+			
+			task.wait()
 
 		end
 		
