@@ -42,13 +42,7 @@ local agentDictionary = {}
 
 local agentActionArray = {}
 
-local serverDictionary = {
-
-	ipAddress = "https://internet.com:8000/messages",
-
-	mode = "Chat"
-
-}
+local serverDictionary = {}
 
 for actionName, content in DictionaryOfAgentActionDictionary do
 
