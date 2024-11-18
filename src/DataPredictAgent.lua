@@ -241,7 +241,7 @@ function DataPredictAgent:processAgentResponse(agentName, response)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
-	for _, agentActionName in ipairs(agentDictionary.agentActionArray) do
+	for _, agentActionName in ipairs(agentDictionary.agentActionToDoArray) do
 		
 		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
 		
@@ -279,9 +279,9 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 	
 	local thread
 	
-	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 
-	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
+	local agentDictionary = dictionaryOfAgentDictionary[agentName]
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 	
@@ -289,7 +289,7 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 		
 		task.desynchronize()
 
-		while (dictionaryOfAgentActionDictionary[agentName]) do
+		while (dictionaryOfAgentDictionary[agentName]) do
 			
 			if (#agentActionToDoArray >= 1) then
 				
@@ -315,9 +315,9 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 
 	local agentActionArrayIndex
 
-	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 
-	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
+	local agentDictionary = dictionaryOfAgentDictionary[agentName]
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
@@ -325,7 +325,7 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 		
 		task.desynchronize()
 
-		while (dictionaryOfAgentActionDictionary[agentName]) do
+		while (dictionaryOfAgentDictionary[agentName]) do
 
 			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
 
@@ -351,9 +351,9 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 	
 	local thread
 
-	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 
-	local agentDictionary = dictionaryOfAgentActionDictionary[agentName]
+	local agentDictionary = dictionaryOfAgentDictionary[agentName]
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
@@ -361,7 +361,7 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 		
 		task.desynchronize()
 		
-		while (dictionaryOfAgentActionDictionary[agentName]) do
+		while (dictionaryOfAgentDictionary[agentName]) do
 			
 			if (#agentActionToDoArray == 0) then
 				
