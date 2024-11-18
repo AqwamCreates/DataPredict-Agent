@@ -1,9 +1,3 @@
-**Copyright (c) 2024 Aqwam Harish Aiman**
-
-Email: aqwam.harish.aiman@gmail.com
-
-LinkedIn: www.linkedin.com/in/aqwam-harish-aiman
-
 Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
 1. **Usage Restriction**: The Software (DataPredict Agent) **must be used** in conjunction with other software libraries or frameworks that are solely copyrighted by the Licensor. The software libraries or frameworks that do not meet this condition are prohibited from being used with the Software.
