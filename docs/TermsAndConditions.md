@@ -18,7 +18,7 @@
    
    * The modifications or derivative works of the Software may only include external APIs that are **solely copyrighted by the Licensor**.
      
-   * The modifications or derivative works that allow the use of third-party software libraries or frameworks that provide similar capabilities to the Licensor’s Exclusive External Software is **prohibited**, whether or not these third-party tools are used directly or indirectly through abstraction layers, wrappers, or any other method.
+   * The modifications or derivative works that allow the use of third-party software libraries or frameworks with the Software that provide similar capabilities to the Licensor’s Exclusive External Software is **prohibited**, whether or not these third-party tools are used directly or indirectly through abstraction layers, wrappers, or any other method.
 
 5. **Commercial Use**:
 
