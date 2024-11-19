@@ -6,7 +6,9 @@
 
     * The use of Software does **not** override the original licensing terms of any third-party software libraries or frameworks included in the Software. Users must comply with the licensing terms of any external libraries or frameworks integrated with the Software.
 
-2. **Attribution**: You must include this original license in all copies or substantial portions of the Software, providing clear attribution to the Licensor.
+2. **Attribution**:
+
+   * You must include this original license in all copies or substantial portions of the Software, providing clear attribution to the Licensor.
 
 3. **Modification Restrictions**:
    
