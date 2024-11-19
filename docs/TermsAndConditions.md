@@ -2,7 +2,7 @@
 
 Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
-1. **Usage Restriction**: The Software (DataPredict Agent) must not be used in conjunction with other software libraries or frameworks unless those libraries or frameworks include or are integrated with external APIs that are present within the source code of DataPredict Agent, and are solely copyrighted by the Licensor. The use of software libraries or frameworks that do not include such APIs, or that rely on external APIs not provided by the Licensor, is prohibited.
+1. **Usage Restriction**: The Software (DataPredict Agent) must not be used in conjunction with other software libraries or frameworks unless those libraries or frameworks include or are integrated with external APIs that are present within the source code of DataPredict Agent, and are solely copyrighted by the Licensor. The use of software libraries or frameworks that do not satisfy this condition is prohibited.
 
 2. **Original License Compliance**: The use of the Licensor's external APIs within this Software does **not** override the original licensing terms of those APIs or the associated software libraries or frameworks.
 
