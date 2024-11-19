@@ -14,13 +14,13 @@
    
    * Modifications or derivative works of the Software may only include external APIs that are **solely copyrighted by the Licensor**.
      
-   * Modifications that replicate or provide similar functionality to the Licensor’s libraries or frameworks (such as DataPredict, DataPredict Neural, MatrixL, and TensorL) **are strictly prohibited**, regardless of how such functionality is implemented (e.g., using alternative libraries, custom code, or external services).
+   * Modifications that replicate or provide similar functionality to the Licensor’s software libraries or frameworks (such as DataPredict, DataPredict Neural, MatrixL, and TensorL) **are strictly prohibited**, regardless of how such functionality is implemented (for example, using alternative libraries, custom code, or external services).
      
-   * The creation of modifications or derivative works that allow the use of third-party libraries or frameworks that provide similar capabilities to the Licensor’s libraries is **prohibited**, whether or not these third-party tools are used directly or indirectly through abstraction layers, wrappers, or any other method.
+   * The modifications or derivative works that allow the use of third-party software libraries or frameworks that provide similar capabilities to the Licensor’s software libraries or frameworks (such as DataPredict, DataPredict Neural, MatrixL, and TensorL) is **prohibited**, whether or not these third-party tools are used directly or indirectly through abstraction layers, wrappers, or any other method.
 
 4. **Commercial Use**:
 
-   * You may use the Software in commercial projects, provided you adhere to the terms of this license. Redistribution of the Software's libraries or frameworks, or any portions thereof, is prohibited.
+   * You may use the Software in commercial projects, provided you adhere to the terms of this license. Redistribution of the software libraries or frameworks used in the Software is prohibited.
 
 5. **No Trademark Claims**:
 
