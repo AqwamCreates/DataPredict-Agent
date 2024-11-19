@@ -2,7 +2,7 @@
 
 Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
-1. **Original License Compliance**: The use of Software does **not** override the original licensing terms of those APIs or the associated software libraries or frameworks.
+1. **Original License Compliance**: The use of Software does **not** override the original licensing terms of the software libraries or frameworks used by the Software.
 
 2. **Attribution**: You must include this original license in all copies or substantial portions of the Software.
 
