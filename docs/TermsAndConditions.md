@@ -1,4 +1,4 @@
-### Terms And Conditions
+# Terms And Conditions
 
 Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
 
