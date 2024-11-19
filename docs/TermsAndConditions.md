@@ -1,29 +1,25 @@
-# Terms And Conditions
+# Terms and Conditions
 
-Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:
+**Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:**
 
-2. **Original License Compliance**: The use of Software does **not** override the original licensing terms of the software libraries or frameworks used by the Software.
+1. **Original License Compliance**: The use of Software does **not** override the original licensing terms of any third-party software libraries or frameworks included in the Software. Users must comply with the licensing terms of any external libraries or frameworks integrated with the Software.
 
-3. **Attribution**: You must include this original license in all copies or substantial portions of the Software.
+2. **Attribution**: You must include this original license in all copies or substantial portions of the Software, providing clear attribution to the Licensor.
 
-4. **Modification**: Any modifications or derivative works of the Software must only include the external APIs provided by the software libraries or frameworks that are solely copyrighted by the Licensor. The software libraries or frameworks that do not meet this condition are prohibited from being used in these modifications or derivative works. The modification and derivatives that allows access to software libraries or frameworks that have similar functionalities to DataPredict, DataPredict Neural, MatrixL and TensorL software libraries are prohibited.
+3. **Modification Restrictions**:
+   - Modifications or derivative works of the Software may only include external APIs that are **solely copyrighted by the Licensor**.
+   - Modifications that replicate or provide similar functionality to the Licensor’s libraries or frameworks (such as DataPredict, DataPredict Neural, MatrixL, and TensorL) **are strictly prohibited**, regardless of how such functionality is implemented (e.g., using alternative libraries, custom code, or external services).
+   - The creation of modifications or derivative works that allow the use of third-party libraries or frameworks that provide similar capabilities to the Licensor’s libraries is **prohibited**, whether or not these third-party tools are used directly or indirectly through abstraction layers, wrappers, or any other method.
 
-5. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and integrate only with the external APIs of the Licensor's libraries. Redistribution of the software libraries or frameworks used by the Software is prohibited.
+4. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license. Redistribution of the Software's libraries or frameworks, or any portions thereof, is prohibited.
 
-6. **No Trademark Claims**: You **are strictly prohibited** from using any trademarks, service marks, or trade names associated with the Software (including, but not limited to, "DataPredict Agent") in any form or manner that may suggest ownership, affiliation, or endorsement by the Licensor, **without prior, explicit, written consent**. Any attempt to claim such rights or use these marks in a manner that could confuse or mislead the public is **forbidden**.
+5. **No Trademark Claims**: You **are strictly prohibited** from using any trademarks, service marks, or trade names associated with the Software (including, but not limited to, "DataPredict Agent") in any way that may suggest ownership, affiliation, or endorsement by the Licensor, **without prior, explicit, written consent**. Any attempt to claim such rights or use these marks in a misleading or confusing manner is **forbidden**.
 
-7. **Ownership and Credit**: You acknowledge that the Licensor retains all rights, title, and interest in and to the Software, and you shall not claim ownership of the Library or any part thereof. You shall provide proper attribution to the Licensor in all publications, presentations, or projects that use the Library. The attribution must be placed in areas commonly viewed by the general public and must include one of the following combinations of materials:  
-   
-   - The Software's icon and the Software's name.
-      
-   - The Software's name and the Software's source.
-       
-   - The Software's icon and the Software's source.
-      
-   - The Licensor's full name and the Software's source.
-       
-   - The Licensor's full name and the Software's name.
+6. **Ownership and Credit**: You acknowledge that the Licensor retains all rights, title, and interest in and to the Software. You may not claim ownership of the Software or any part of it. In any publication, presentation, or project that uses the Software, you must provide proper attribution to the Licensor. The attribution must be visible in all publicly accessible materials and must include one of the following combinations of materials:
+   - The Software’s icon and the Software’s name.
+   - The Software’s name and the Software’s source.
+   - The Software’s icon and the Software’s source.
+   - The Licensor’s full name and the Software’s source.
+   - The Licensor’s full name and the Software’s name.
 
-8. **No Warranty**: The Software is provided “AS IS,” without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
-
-By using the Software, you agree to follow the terms outlined above.
+7. **No Warranty**: The Software is provided “AS IS,” without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the authors or copyright holders be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the Software or the use or other dealings in the Software.
