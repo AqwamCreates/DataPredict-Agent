@@ -2,7 +2,7 @@
 
 **Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licensor"), to use, copy, and modify the software and associated documentation files (the "Software") under the following conditions:**
 
-1. **Exclusive External Software**: 
+1. **Exclusive External Software Definition**: 
 
    * Exclusive External Software are defined as a collection of software libraries and frameworks containing DataPredict, DataPredict Neural, MatrixL, and TensorL.
 
