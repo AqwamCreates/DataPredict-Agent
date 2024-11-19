@@ -8,7 +8,7 @@ Permission is hereby granted, free of charge, by Aqwam Harish Aiman (the "Licens
 
 3. **Modification**: Any modifications or derivative works of the Software must only include the external APIs provided by the software libraries or frameworks that are solely copyrighted by the Licensor. The software libraries or frameworks that do not meet this condition are prohibited from being used in these modifications or derivative works.
 
-4. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and integrate only with the external APIs of the Licensor's libraries. Redistribution of the Licensor's libraries or frameworks is prohibited.
+4. **Commercial Use**: You may use the Software in commercial projects, provided you adhere to the terms of this license and integrate only with the external APIs of the Licensor's libraries. Redistribution of the software libraries or frameworks used by the Software is prohibited.
 
 5. **No Trademark Claims**: You **are strictly prohibited** from using any trademarks, service marks, or trade names associated with the Software (including, but not limited to, "DataPredict Agent") in any form or manner that may suggest ownership, affiliation, or endorsement by the Licensor, **without prior, explicit, written consent**. Any attempt to claim such rights or use these marks in a manner that could confuse or mislead the public is **forbidden**.
 
