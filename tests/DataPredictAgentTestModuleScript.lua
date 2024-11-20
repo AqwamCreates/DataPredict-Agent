@@ -46,7 +46,7 @@ local serverDictionary = {}
 
 for actionName, content in DictionaryOfAgentActionDictionary do
 
-	DataPredictAgent:addAgentActionDictionary(actionName, content)
+	DataPredictAgent:addAgentActionArray(actionName, content)
 
 	table.insert(agentActionArray, actionName)
 
