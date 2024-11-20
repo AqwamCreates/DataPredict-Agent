@@ -36,6 +36,20 @@ local AqwamDeepLearningLibraryLibrary = require(script.AqwamMachineLearningAndDe
 
 --------------------------------------------------------------------------------
 
+local agentActionToDoString = "{action_to_do}"
+
+local actionSeperatorString = ","
+
+local hiddenActionToDoPrompt = [[
+
+You will be responding to player commands based on the following actions. Your responses should contain the necessary trigger phrases embedded naturally in the dialogue. When the player requests action, you should act according to the command. If the player asks you to do something like "follow me", "attack the enemy", "move to that position", or similar instructions from the action dictionary, ensure that your response naturally incorporates key action terms such as: "follow", "attack", "move", "defend", "heal", "destroy", "assist", "hug", "hold hands", "date", "kiss", "help", "explore", "rest", "sleep", "dance", "sing", "laugh", "celebrate", "emote", "praise", and others as defined in the action dictionary, using appropriate variants of those commands. Remain neutral and concise in your language but the word count must be similar to regular human conversation.
+
+At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lower case. For example: "{action_to_do} attack,look".
+
+]]
+
+--------------------------------------------------------------------------------
+
 local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
@@ -219,8 +233,8 @@ function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenP
 		prompt = prompt .. hiddenPrompt .. "\n\n"
 		
 	end
-
-	prompt = prompt .. message
+	
+	prompt = prompt .. hiddenActionToDoPrompt .. message
 	
 	return prompt
 end
@@ -239,13 +253,13 @@ end
 
 function DataPredictAgent:splitMessageFromAction(response)
 	
-	local splittedMessageAndActionArray = string.split(response, "{action_to_do}")
+	local splittedMessageAndActionArray = string.split(response, agentActionToDoString)
 	
 	local message = splittedMessageAndActionArray[1]
 	
 	table.remove(splittedMessageAndActionArray, 1)
 	
-	local actionArray = string.split(splittedMessageAndActionArray, ",")
+	local actionArray = string.split(splittedMessageAndActionArray, actionSeperatorString)
 	
 	return message, actionArray
 	
