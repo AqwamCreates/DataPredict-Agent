@@ -40,6 +40,8 @@ local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
 
+local agentActionToDoString = "{action_to_do}"
+
 local DataPredictAgent = {}
 
 DataPredictAgent.__index = DataPredictAgent
@@ -60,7 +62,7 @@ function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot de
 	
 	NewDataPredictAgentInstance.dictionaryOfInteractorDictionary = {}
 	
-	NewDataPredictAgentInstance.dictionaryOfAgentActionDictionary = {}
+	NewDataPredictAgentInstance.dictionaryOfAgentActionArray = {}
 	
 	if (isGlobalInstance) then
 		
@@ -176,29 +178,29 @@ function DataPredictAgent:getInteractorDictionary(interactorName)
 	
 end
 
-function DataPredictAgent:addAgentActionDictionary(agentActionName, agentActionDictionary)
+function DataPredictAgent:addAgentActionArray(agentActionName, agentActionArray)
 
-	local dictionaryOfAgentActionDictionary = self.dictionaryOfAgentActionDictionary
+	local dictionaryOfAgentActionArray = self.dictionaryOfAgentActionArray
 
 	if (type(agentActionName) ~= "string") then error("The agent action name must be a string.") end
 
-	if (dictionaryOfAgentActionDictionary[agentActionName]) then error("The agent action " .. agentActionName .. " already exists.") end
+	if (dictionaryOfAgentActionArray[agentActionName]) then error("The agent action " .. agentActionName .. " already exists.") end
 	
-	if (type(agentActionDictionary.regularExpressionTrigger) ~= "string") then error("The regular expression trigger must be a string.") end
+	if (type(agentActionArray) ~= "table") then error("The agent action array must be a string.") end
 
-	dictionaryOfAgentActionDictionary[agentActionName] = agentActionDictionary or {}
-
-end
-
-function DataPredictAgent:removeAgentActionDictionary(agentActionName)
-
-	self.dictionaryOfAgentActionDictionary[agentActionName] = nil
+	dictionaryOfAgentActionArray[agentActionName] = agentActionArray or {}
 
 end
 
-function DataPredictAgent:getAgentActionDictionary(agentActionName)
+function DataPredictAgent:removeAgentActionArray(agentActionName)
 
-	return self.dictionaryOfAgentActionDictionary[agentActionName]
+	self.dictionaryOfAgentActionArray[agentActionName] = nil
+
+end
+
+function DataPredictAgent:getAgentActionArray(agentActionName)
+
+	return self.dictionaryOfAgentActionArray[agentActionName]
 
 end
 
@@ -241,17 +243,31 @@ function DataPredictAgent:sendServerRequest(serverName, message)
 	
 end
 
-function DataPredictAgent:act(agentName, response)
+function DataPredictAgent:splitMessageFromAction(response)
+	
+	local actionArray = string.split(response, agentActionToDoString)
+	
+	local message = actionArray[1]
+	
+	print(actionArray)
+	
+	table.remove(actionArray, 1)
+	
+	return message, actionArray
+	
+end
+
+function DataPredictAgent:act(agentName, action)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
 	for _, agentActionName in ipairs(agentDictionary.agentActionArray) do
 		
-		local agentActionDictionary = self:getAgentActionDictionary(agentActionName)
+		local agentActionArray = self:getAgentActionArray(agentActionName)
 		
-		if (agentActionDictionary) then
+		if (agentActionArray) then
 			
-			if (string.find(response, agentActionDictionary.regularExpressionTrigger)) then table.insert(agentDictionary.agentActionToDoArray, agentActionName) end
+			if (table.find(agentActionArray, action)) then table.insert(agentDictionary.agentActionToDoArray, action) end
 			
 		end
 		
@@ -275,11 +291,13 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 	
+	local message, actionArray = self:splitMessageFromAction(response)
+	
 	interactorDictionary[agentName].chatCount = chatCount + 1
+	
+	for _, action in actionArray do self:act(agentName, action) end
 
-	self:act(agentName, response)
-
-	return response
+	return message
 	
 end
 
@@ -382,8 +400,10 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 				local prompt = self:createAgentPrompt(agentName, freeWillMessage)
 
 				local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
+				
+				local _, actionArray = self:splitMessageFromAction(response)
 
-				self:act(agentName, response)
+				for _, action in actionArray do self:act(agentName, action) end
 				
 			end
 			
