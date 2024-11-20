@@ -42,7 +42,7 @@ DictionaryOfAgentActionDictionary["destroy"] = {}
 
 DictionaryOfAgentActionDictionary["wait"] = {}
 
-DictionaryOfAgentActionDictionary["build"] = {}
+DictionaryOfAgentActionDictionary["create"] = {}
 
 DictionaryOfAgentActionDictionary["gather"] = {}
 
