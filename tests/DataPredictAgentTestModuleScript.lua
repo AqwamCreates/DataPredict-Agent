@@ -34,7 +34,7 @@ local HiddenPromptDictionary = require(DataPredictAgentModuleScript.HiddenPrompt
 
 local PersonalityDictionary = require(DataPredictAgentModuleScript.PersonalityDictionary)
 
-local DictionaryOfAgentActionDictionary = require(DataPredictAgentModuleScript.DictionaryOfAgentActionDictionary)
+local DictionaryOfAgentActionArray = require(DataPredictAgentModuleScript.DictionaryOfAgentActionArray)
 
 local DataPredictAgent = DataPredictAgentRequiredModuleScript.new(true)
 
@@ -42,9 +42,13 @@ local agentDictionary = {}
 
 local agentActionArray = {}
 
-local serverDictionary = {}
+local serverDictionary = {
 
-for actionName, content in DictionaryOfAgentActionDictionary do
+	ipAddress = "https://internet.com:8000/messages",
+
+}
+
+for actionName, content in DictionaryOfAgentActionArray do
 
 	DataPredictAgent:addAgentActionArray(actionName, content)
 
@@ -68,19 +72,19 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "follow", function()
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, "follow", "player", function()
 	
 	warn("follow")
 	
 end)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "hug", function()
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, "hug", "player", function()
 
 	warn("hug")
 
 end)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "attack", function()
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, "attack", "player", function()
 
 	warn("attack")
 
