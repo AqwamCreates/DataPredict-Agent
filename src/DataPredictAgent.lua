@@ -253,13 +253,11 @@ end
 
 function DataPredictAgent:splitMessageFromAction(response)
 	
-	local splittedMessageAndActionArray = string.split(response, agentActionToDoString)
+	local splittedMessageAndActionsArray = string.split(response, agentActionToDoString)
 	
-	local message = splittedMessageAndActionArray[1]
+	local message, actions = splittedMessageAndActionsArray[1], splittedMessageAndActionsArray[2]
 	
-	table.remove(splittedMessageAndActionArray, 1)
-	
-	local actionArray = string.split(splittedMessageAndActionArray, actionSeperatorString)
+	local actionArray = string.split(actions, actionSeperatorString)
 	
 	return message, actionArray
 	
