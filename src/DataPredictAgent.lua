@@ -41,11 +41,9 @@ local agentActionToDoString = "{action_to_do}"
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
-
 You will be responding to player commands based on the following actions. Your responses should contain the necessary trigger phrases embedded naturally in the dialogue. When the player requests action, you should act according to the command. If the player asks you to do something like "follow me", "attack the enemy", "move to that position", or similar instructions from the action dictionary, ensure that your response naturally incorporates key action terms such as: "follow", "attack", "move", "defend", "heal", "destroy", "assist", "hug", "hold hands", "date", "kiss", "help", "explore", "rest", "sleep", "dance", "sing", "laugh", "celebrate", "emote", "praise", and others as defined in the action dictionary, using appropriate variants of those commands. Remain neutral and concise in your language but the word count must be similar to regular human conversation.
 
-At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lower case. For example: "{action_to_do} attack,look".
-
+At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. For example: "{action_to_do}attack,look"
 ]]
 
 --------------------------------------------------------------------------------
@@ -234,9 +232,10 @@ function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenP
 		
 	end
 	
-	prompt = prompt .. hiddenActionToDoPrompt .. message
+	prompt = prompt .. hiddenActionToDoPrompt .. "\n\n" .. message
 	
 	return prompt
+	
 end
 
 function DataPredictAgent:sendServerRequest(serverName, message)
@@ -275,9 +274,11 @@ function DataPredictAgent:act(agentName, action)
 	
 	for actionKey, agentActionSynonymArray in dictionaryOfAgentActionArray do
 		
+		print(actionKey, agentActionSynonymArray)
+		
 		if (table.find(agentActionSynonymArray, action)) then
 			
-			if (table.find(agentActionArray, actionKey)) then table.insert(agentActionToDoArray, actionKey) end
+			if (table.find(agentActionArray, actionKey)) then print("a") table.insert(agentActionToDoArray, actionKey) end
 			
 		end
 		
