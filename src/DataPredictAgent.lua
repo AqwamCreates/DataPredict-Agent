@@ -276,7 +276,7 @@ function DataPredictAgent:act(agentName, action)
 		
 		if (table.find(agentActionSynonymArray, action)) then
 			
-			if (table.find(agentActionArray, actionKey)) then print("a") table.insert(agentActionToDoArray, actionKey) end
+			if (table.find(agentActionArray, actionKey)) then table.insert(agentActionToDoArray, actionKey) end
 			
 		end
 		
