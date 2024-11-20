@@ -38,12 +38,16 @@ local AqwamDeepLearningLibraryLibrary = require(script.AqwamMachineLearningAndDe
 
 local agentActionToDoString = "{action_to_do}"
 
+local agentActionToDoTargetString = "{action_to_do_target}"
+
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
 You will be responding to player commands based on the following actions. Your responses should contain the necessary trigger phrases embedded naturally in the dialogue. When the player requests action, you should act according to the command. If the player asks you to do something like "follow me", "attack the enemy", "move to that position", or similar instructions from the action dictionary, ensure that your response naturally incorporates key action terms such as: "follow", "attack", "move", "defend", "heal", "destroy", "assist", "hug", "hold hands", "date", "kiss", "help", "explore", "rest", "sleep", "dance", "sing", "laugh", "celebrate", "emote", "praise", and others as defined in the action dictionary, using appropriate variants of those commands. Remain neutral and concise in your language but the word count must be similar to regular human conversation.
 
 At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. For example: "{action_to_do}attack,look"
+
+You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. Must only have one stem word with all letters in lowercase. No punctuations. No Spaces. If there is no target, then write "none". For example: "{action_to_do}attack{action_to_do_target}enemy,you"
 ]]
 
 --------------------------------------------------------------------------------
@@ -143,6 +147,8 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	agentDictionary.agentActionArray = agentDictionary.agentActionArray or {}
 	
 	agentDictionary.agentActionToDoArray = agentDictionary.agentActionToDoArray or {}
+	
+	agentDictionary.agentActionToDoTargetArray = agentDictionary.agentActionToDoTargetArray or {}
 	
 	dictionaryOfAgentDictionary[agentName] = agentDictionary
 	
@@ -254,15 +260,21 @@ function DataPredictAgent:splitMessageFromAction(response)
 	
 	local splittedMessageAndActionsArray = string.split(response, agentActionToDoString)
 	
-	local message, actions = splittedMessageAndActionsArray[1], splittedMessageAndActionsArray[2]
+	local message, actionsAndActionsTargetString = splittedMessageAndActionsArray[1], splittedMessageAndActionsArray[2]
+	
+	local splittedActionsAndActionTargetsArray = string.split(actionsAndActionsTargetString, agentActionToDoTargetString)
+	
+	local actions, actionTargets = splittedActionsAndActionTargetsArray[1], splittedActionsAndActionTargetsArray[2]
 	
 	local actionArray = string.split(actions, actionSeperatorString)
 	
-	return message, actionArray
+	local actionTargetArray = string.split(actionTargets, actionSeperatorString)
+	
+	return message, actionArray, actionTargetArray
 	
 end
 
-function DataPredictAgent:act(agentName, action)
+function DataPredictAgent:act(agentName, action, actionTarget)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -270,13 +282,31 @@ function DataPredictAgent:act(agentName, action)
 	
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 	
+	local agentActionToDoTargetArray = agentDictionary.agentActionToDoTargetArray
+	
 	local dictionaryOfAgentActionArray = self.dictionaryOfAgentActionArray
 	
 	for actionKey, agentActionSynonymArray in dictionaryOfAgentActionArray do
 		
 		if (table.find(agentActionSynonymArray, action)) then
 			
-			if (table.find(agentActionArray, actionKey)) then table.insert(agentActionToDoArray, actionKey) end
+			if (table.find(agentActionArray, actionKey)) then
+				
+				local actionToDoArrayIndex = table.find(agentActionToDoArray, actionKey)
+				
+				if (not actionToDoArrayIndex) then
+					
+					table.insert(agentActionToDoArray, actionKey) 
+					
+					table.insert(agentActionToDoTargetArray, actionTarget) 
+					
+				else
+					
+					agentActionToDoTargetArray[actionToDoArrayIndex] = actionTarget
+					
+				end	
+				
+			end
 			
 		end
 		
@@ -300,11 +330,11 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 	
-	local message, actionArray = self:splitMessageFromAction(response)
+	local message, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
 	
-	for _, action in actionArray do self:act(agentName, action) end
+	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 
 	return message
 	
@@ -320,6 +350,8 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 	
+	local agentActionToDoTargetArray = agentDictionary.agentActionToDoTargetArray
+	
 	thread = task.spawn(function()
 		
 		task.desynchronize()
@@ -328,9 +360,11 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 			
 			if (#agentActionToDoArray >= 1) then
 				
-				functionToRun(agentActionToDoArray[1])
+				functionToRun(agentActionToDoArray[1], agentActionToDoTargetArray[1])
 
 				table.remove(agentActionToDoArray, 1)
+				
+				table.remove(agentActionToDoTargetArray, 1)
 				
 			end
 			
@@ -346,7 +380,7 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 	
 end
 
-function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionName, functionToRun)
+function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionName, agentTarget, functionToRun)
 	
 	local thread
 
@@ -357,6 +391,8 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 	local agentDictionary = dictionaryOfAgentDictionary[agentName]
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+	
+	local agentActionToDoTargetArray = agentDictionary.agentActionToDoTargetArray
 
 	thread = task.spawn(function()
 		
@@ -367,10 +403,12 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
 
 			if (agentActionArrayIndex) then
+				
+				functionToRun()
 
 				table.remove(agentActionToDoArray, agentActionArrayIndex)
-
-				functionToRun() 
+				
+				table.remove(agentActionToDoTargetArray, agentActionArrayIndex)
 
 			end
 			
@@ -410,9 +448,9 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 
 				local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 				
-				local _, actionArray = self:splitMessageFromAction(response)
+				local _, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 
-				for _, action in actionArray do self:act(agentName, action) end
+				for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 				
 			end
 			
