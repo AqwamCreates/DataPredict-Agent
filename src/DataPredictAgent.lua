@@ -104,10 +104,6 @@ function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 	
 	if (type(serverDictionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
 	
-	if (type(serverDictionary.mode) ~= "string") then error("The mode must be a string.") end
-	
-	if (serverDictionary.mode ~= "Chat") and (serverDictionary.mode ~= "Instruct") then error("The mode must be either \"Chat\" or \"Instruct\" .") end
-	
 	dictionaryOfServerDictionary[serverName] = serverDictionary
 	
 end
