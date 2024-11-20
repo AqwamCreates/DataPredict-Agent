@@ -28,54 +28,54 @@
 
 local DictionaryOfAgentActionDictionary = {}
 
-DictionaryOfAgentActionDictionary["follow"] = {}
+DictionaryOfAgentActionDictionary["follow"] = {"follow", "pursue", "trail", "chase", "shadow"}
 
-DictionaryOfAgentActionDictionary["attack"] = {}
+DictionaryOfAgentActionDictionary["attack"] = {"attack", "assault", "strike", "hit", "pounce"}
 
-DictionaryOfAgentActionDictionary["move"] = {}
+DictionaryOfAgentActionDictionary["move"] = {"move", "advance", "travel", "shift", "relocate"}
 
-DictionaryOfAgentActionDictionary["defend"] = {}
+DictionaryOfAgentActionDictionary["defend"] = {"defend", "guard", "protect", "shield", "resist"}
 
-DictionaryOfAgentActionDictionary["heal"] = {}
+DictionaryOfAgentActionDictionary["heal"] = {"heal", "cure", "restore", "treat", "revive"}
 
-DictionaryOfAgentActionDictionary["destroy"] = {}
+DictionaryOfAgentActionDictionary["destroy"] = {"destroy", "demolish", "ruin", "obliterate", "wreck"}
 
-DictionaryOfAgentActionDictionary["wait"] = {}
+DictionaryOfAgentActionDictionary["wait"] = {"wait", "pause", "remain", "linger", "stay"}
 
-DictionaryOfAgentActionDictionary["create"] = {}
+DictionaryOfAgentActionDictionary["create"] = {"create", "make", "build", "construct", "produce"}
 
-DictionaryOfAgentActionDictionary["gather"] = {}
+DictionaryOfAgentActionDictionary["gather"] = {"gather", "collect", "amass", "assemble", "harvest"}
 
-DictionaryOfAgentActionDictionary["explore"] = {}
+DictionaryOfAgentActionDictionary["explore"] = {"explore", "search", "investigate", "discover", "survey"}
 
-DictionaryOfAgentActionDictionary["trade"] = {}
+DictionaryOfAgentActionDictionary["trade"] = {"trade", "exchange", "barter", "sell", "swap"}
 
-DictionaryOfAgentActionDictionary["evade"] = {}
+DictionaryOfAgentActionDictionary["evade"] = {"evade", "dodge", "escape", "elude", "avoid"}
 
-DictionaryOfAgentActionDictionary["equip"] = {}
+DictionaryOfAgentActionDictionary["equip"] = {"equip", "gear up", "arm", "outfit", "prepare"}
 
-DictionaryOfAgentActionDictionary["hug"] = {}
+DictionaryOfAgentActionDictionary["hug"] = {"hug", "embrace", "cuddle", "snuggle", "hold"}
 
-DictionaryOfAgentActionDictionary["hold_hand"] = {}
+DictionaryOfAgentActionDictionary["hold_hand"] = {"hold_hand", "grasp hand", "clasp hand", "take hand", "link hands"}
 
-DictionaryOfAgentActionDictionary["date"] = {}
+DictionaryOfAgentActionDictionary["date"] = {"date", "romance", "court", "meet", "see"}
 
-DictionaryOfAgentActionDictionary["kiss"] = {}
+DictionaryOfAgentActionDictionary["kiss"] = {"kiss", "peck", "smooch", "lock lips", "plant a kiss"}
 
-DictionaryOfAgentActionDictionary["rest"] = {}
+DictionaryOfAgentActionDictionary["rest"] = {"rest", "relax", "repose", "unwind", "chill"}
 
-DictionaryOfAgentActionDictionary["sleep"] = {}
+DictionaryOfAgentActionDictionary["sleep"] = {"sleep", "nap", "slumber", "snooze", "rest"}
 
-DictionaryOfAgentActionDictionary["dance"] = {}
+DictionaryOfAgentActionDictionary["dance"] = {"dance", "boogie", "groove", "jig", "shimmy"}
 
-DictionaryOfAgentActionDictionary["sing"] = {}
+DictionaryOfAgentActionDictionary["sing"] = {"sing", "chant", "croon", "hum", "vocalize"}
 
-DictionaryOfAgentActionDictionary["laugh"] = {}
+DictionaryOfAgentActionDictionary["laugh"] = {"laugh", "giggle", "chuckle", "snicker", "guffaw"}
 
-DictionaryOfAgentActionDictionary["celebrate"] = {}
+DictionaryOfAgentActionDictionary["celebrate"] = {"celebrate", "commemorate", "rejoice", "party", "honor"}
 
-DictionaryOfAgentActionDictionary["emote"] = {}
+DictionaryOfAgentActionDictionary["emote"] = {"emote", "express", "gesture", "show emotion", "display feelings"}
 
-DictionaryOfAgentActionDictionary["praise"] = {}
+DictionaryOfAgentActionDictionary["praise"] = {"praise", "commend", "laud", "celebrate", "honor"}
 
 return DictionaryOfAgentActionDictionary
