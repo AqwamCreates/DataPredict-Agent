@@ -46,7 +46,7 @@ local serverDictionary = {}
 
 for actionName, content in DictionaryOfAgentActionDictionary do
 	
-	DataPredictAgent:addAgentActionDictionary(actionName, content)
+	DataPredictAgent:addAgentActionArray(actionName, content)
 	
 	table.insert(agentActionArray, actionName)
 	
@@ -68,6 +68,6 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-local response = DataPredictAgent:chat(agentName, userName, "Respond to this: Hello! What's your name?")
+local message = DataPredictAgent:chat(agentName, userName, "Respond to this: Hello! What's your name?")
 
-print(response)
+print(message)
