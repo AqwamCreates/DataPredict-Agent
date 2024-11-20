@@ -40,8 +40,6 @@ local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
 
-local agentActionToDoString = "{action_to_do}"
-
 local DataPredictAgent = {}
 
 DataPredictAgent.__index = DataPredictAgent
@@ -241,13 +239,13 @@ end
 
 function DataPredictAgent:splitMessageFromAction(response)
 	
-	local actionArray = string.split(response, agentActionToDoString)
+	local splittedMessageAndActionArray = string.split(response, "{action_to_do}")
 	
-	local message = actionArray[1]
+	local message = splittedMessageAndActionArray[1]
 	
-	print(actionArray)
+	table.remove(splittedMessageAndActionArray, 1)
 	
-	table.remove(actionArray, 1)
+	local actionArray = string.split(splittedMessageAndActionArray, ",")
 	
 	return message, actionArray
 	
@@ -256,14 +254,18 @@ end
 function DataPredictAgent:act(agentName, action)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
-
-	for _, agentActionName in ipairs(agentDictionary.agentActionArray) do
+	
+	local agentActionArray = agentDictionary.agentActionArray
+	
+	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+	
+	local dictionaryOfAgentActionArray = self.dictionaryOfAgentActionArray
+	
+	for actionKey, agentActionSynonymArray in dictionaryOfAgentActionArray do
 		
-		local agentActionArray = self:getAgentActionArray(agentActionName)
-		
-		if (agentActionArray) then
+		if (table.find(agentActionSynonymArray, action)) then
 			
-			if (table.find(agentActionArray, action)) then table.insert(agentDictionary.agentActionToDoArray, action) end
+			if (table.find(agentActionArray, actionKey)) then table.insert(agentActionToDoArray, actionKey) end
 			
 		end
 		
