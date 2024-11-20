@@ -36,11 +36,21 @@ local AqwamDeepLearningLibraryLibrary = require(script.AqwamMachineLearningAndDe
 
 --------------------------------------------------------------------------------
 
+local agentActionToDoString = "{action_to_do}"
+
+local actionSeperatorString = ","
+
+local hiddenActionToDoPrompt = [[
+You will be responding to player commands based on the following actions. Your responses should contain the necessary trigger phrases embedded naturally in the dialogue. When the player requests action, you should act according to the command. If the player asks you to do something like "follow me", "attack the enemy", "move to that position", or similar instructions from the action dictionary, ensure that your response naturally incorporates key action terms such as: "follow", "attack", "move", "defend", "heal", "destroy", "assist", "hug", "hold hands", "date", "kiss", "help", "explore", "rest", "sleep", "dance", "sing", "laugh", "celebrate", "emote", "praise", and others as defined in the action dictionary, using appropriate variants of those commands. Remain neutral and concise in your language but the word count must be similar to regular human conversation.
+
+At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. For example: "{action_to_do}attack,look"
+]]
+
+--------------------------------------------------------------------------------
+
 local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
-
-local agentActionToDoString = "{action_to_do}"
 
 local DataPredictAgent = {}
 
@@ -103,10 +113,6 @@ function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 	if (dictionaryOfServerDictionary[serverName]) then error("The server " .. serverName .. " already exists.") end
 	
 	if (type(serverDictionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
-	
-	if (type(serverDictionary.mode) ~= "string") then error("The mode must be a string.") end
-	
-	if (serverDictionary.mode ~= "Chat") and (serverDictionary.mode ~= "Instruct") then error("The mode must be either \"Chat\" or \"Instruct\" .") end
 	
 	dictionaryOfServerDictionary[serverName] = serverDictionary
 	
@@ -225,10 +231,11 @@ function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenP
 		prompt = prompt .. hiddenPrompt .. "\n\n"
 		
 	end
-
-	prompt = prompt .. message
+	
+	prompt = prompt .. hiddenActionToDoPrompt .. "\n\n" .. message
 	
 	return prompt
+	
 end
 
 function DataPredictAgent:sendServerRequest(serverName, message)
@@ -245,13 +252,11 @@ end
 
 function DataPredictAgent:splitMessageFromAction(response)
 	
-	local actionArray = string.split(response, agentActionToDoString)
+	local splittedMessageAndActionsArray = string.split(response, agentActionToDoString)
 	
-	local message = actionArray[1]
+	local message, actions = splittedMessageAndActionsArray[1], splittedMessageAndActionsArray[2]
 	
-	print(actionArray)
-	
-	table.remove(actionArray, 1)
+	local actionArray = string.split(actions, actionSeperatorString)
 	
 	return message, actionArray
 	
@@ -260,14 +265,18 @@ end
 function DataPredictAgent:act(agentName, action)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
-
-	for _, agentActionName in ipairs(agentDictionary.agentActionArray) do
+	
+	local agentActionArray = agentDictionary.agentActionArray
+	
+	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+	
+	local dictionaryOfAgentActionArray = self.dictionaryOfAgentActionArray
+	
+	for actionKey, agentActionSynonymArray in dictionaryOfAgentActionArray do
 		
-		local agentActionArray = self:getAgentActionArray(agentActionName)
-		
-		if (agentActionArray) then
+		if (table.find(agentActionSynonymArray, action)) then
 			
-			if (table.find(agentActionArray, action)) then table.insert(agentDictionary.agentActionToDoArray, action) end
+			if (table.find(agentActionArray, actionKey)) then table.insert(agentActionToDoArray, actionKey) end
 			
 		end
 		
