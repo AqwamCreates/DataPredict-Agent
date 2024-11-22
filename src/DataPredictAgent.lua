@@ -470,7 +470,7 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
-	local promptToAdd = globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
+	local promptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
 	
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
@@ -598,7 +598,7 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 				
 				local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
 				
-				local promptToAdd = globalMemoryPrompt .. "\n\n" .. freeWillMessage
+				local promptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. freeWillMessage
 				
 				local prompt = self:createAgentPrompt(agentName, promptToAdd)
 
