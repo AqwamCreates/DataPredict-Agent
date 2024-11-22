@@ -150,6 +150,12 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.agentActionToDoTargetArray = agentDictionary.agentActionToDoTargetArray or {}
 	
+	agentDictionary.hasGlobalMemory = agentDictionary.hasGlobalMemory or true
+	
+	agentDictionary.hasLocalMemory = agentDictionary.hasLocalMemory or false
+	
+	agentDictionary.globalMemory = ""
+	
 	dictionaryOfAgentDictionary[agentName] = agentDictionary
 	
 end
@@ -174,7 +180,11 @@ function DataPredictAgent:addInteractorDictionary(interactorName, interactorDict
 
 	if (dictionaryOfInteractorDictionary[interactorName]) then error("The interactor " .. interactorName .. " already exists.") end
 	
-	dictionaryOfInteractorDictionary[interactorName] = interactorDictionary or {}
+	interactorDictionary = interactorDictionary or {}
+	
+	interactorDictionary.localMemory = interactorDictionary.localMemory or {}
+	
+	dictionaryOfInteractorDictionary[interactorName] = interactorDictionary
 	
 end
 
@@ -216,31 +226,67 @@ function DataPredictAgent:getAgentActionArray(agentActionName)
 
 end
 
-function DataPredictAgent:createAgentPrompt(agentName, message, isInitialHiddenPromptAdded)
+function DataPredictAgent:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
-	
+
 	local prompt = "You are " .. agentName .. ".\n\n"
-	
+
 	local initialHiddenPrompt = agentDictionary.initialHiddenPrompt
-	
+
 	local hiddenPrompt = agentDictionary.hiddenPrompt
 
 	if (initialHiddenPrompt) and (isInitialHiddenPromptAdded) then
-		
+
 		prompt = prompt .. initialHiddenPrompt .. "\n\n"
-		
+
 	end
 
 	if (hiddenPrompt) then
-		
+
 		prompt = prompt .. hiddenPrompt .. "\n\n"
-		
+
 	end
 	
-	prompt = prompt .. hiddenActionToDoPrompt .. "\n\n" .. message
-	
+	prompt = prompt .. hiddenActionToDoPrompt .. "\n\n" .. promptToAdd
+
 	return prompt
+	
+end
+
+function DataPredictAgent:createAgentGlobalMemoryPrompt(agentName)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	if (agentDictionary.hasGlobalMemory) then
+
+		return "--Start Of Your Memory With Everyone--" .. agentDictionary.globalMemory .. "\n\n--End Of Your Memory With Everyone--"
+		
+	else
+		
+		return ""
+
+	end
+	
+end
+
+function DataPredictAgent:createAgentLocalMemoryPrompt(agentName, interactorName)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local interactorDictionary 
+	
+	if (interactorName) then interactorDictionary = self:getInteractorDictionary(interactorName) end
+
+	if (agentDictionary.hasLocalMemory) and (interactorDictionary) then
+
+		return "--Start Of Your Memory With" .. interactorName .. "--" .. (interactorDictionary.localMemory[agentName] or "") .. "\n\n--End Of Your Memory With".. interactorName
+		
+	else
+		
+		return ""
+
+	end
 	
 end
 
@@ -314,7 +360,7 @@ function DataPredictAgent:act(agentName, action, actionTarget)
 	
 end
 
-function DataPredictAgent:chat(agentName, interactorName, message)
+function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -326,17 +372,39 @@ function DataPredictAgent:chat(agentName, interactorName, message)
 	
 	local isInitialHiddenPromptAdded = (chatCount == 0)
 	
-	local prompt = self:createAgentPrompt(agentName, message, isInitialHiddenPromptAdded)
+	local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
+	
+	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
+	
+	local promptToAdd = globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this:" .. interactorMessage
+	
+	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
 	local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 	
-	local message, actionArray, actionTargetArray = self:splitMessageFromAction(response)
+	local agentMessage, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 	
 	interactorDictionary[agentName].chatCount = chatCount + 1
 	
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
+	
+	if (agentDictionary.hasGlobalMemory) then
+		
+		local globalMemoryString = interactorName .. ": " .. interactorMessage .. "\n\nYou: " .. agentMessage
+		
+		agentDictionary.globalMemory = agentDictionary.globalMemory .. "\n\n" .. globalMemoryString	
+	
+	end
+	
+	if (agentDictionary.hasLocalMemory) then
+		
+		local localMemoryString = interactorName .. ": " .. interactorMessage .. "\n\nYou: " .. agentMessage
 
-	return message
+		interactorDictionary.localMemory = (interactorDictionary.localMemory[agentName] or "") .. "\n\n" .. localMemoryString	
+		
+	end
+
+	return agentMessage
 	
 end
 
@@ -444,7 +512,11 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 				
 				local freeWillMessage = freeWillMessageGeneratorFunction()
 				
-				local prompt = self:createAgentPrompt(agentName, freeWillMessage)
+				local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
+				
+				local promptToAdd = globalMemoryPrompt .. "\n\n" .. freeWillMessage
+				
+				local prompt = self:createAgentPrompt(agentName, promptToAdd)
 
 				local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
 				

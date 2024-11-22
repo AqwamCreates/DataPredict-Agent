@@ -94,7 +94,7 @@ local DataPredictAgentTest = {}
 
 function DataPredictAgentTest:chat(message)
 	
-	local response = DataPredictAgent:chat(agentName, userName, "Respond to this: " .. message)
+	local response = DataPredictAgent:chat(agentName, userName, message)
 	
 	print(response)
 	
