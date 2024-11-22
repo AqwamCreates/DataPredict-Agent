@@ -538,7 +538,7 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 	
 end
 
-function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionName, agentTarget, functionToRun)
+function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentAction, agentTarget, functionToRun)
 	
 	local thread
 
@@ -558,7 +558,7 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentActionN
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 
-			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
+			agentActionArrayIndex = table.find(agentActionToDoArray, agentAction)
 
 			if (agentActionArrayIndex) then
 				
