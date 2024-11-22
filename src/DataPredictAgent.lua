@@ -45,13 +45,13 @@ local memorySeperator = "[Memory Break]"
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
-You will be responding to player commands based on the following actions. Your responses should contain the necessary trigger phrases embedded naturally in the dialogue. When the player requests action, you should act according to the command. If the player asks you to do something like "follow me", "attack the enemy", "move to that position", or similar instructions from the action dictionary, ensure that your response naturally incorporates key action terms such as: "follow", "attack", "move", "defend", "heal", "destroy", "assist", "hug", "hold hands", "date", "kiss", "help", "explore", "rest", "sleep", "dance", "sing", "laugh", "celebrate", "emote", "praise", and others as defined in the action dictionary, using appropriate variants of those commands. Remain neutral and concise in your language but the word count must be similar to regular human conversation.
+You may or may not have conversation with another player depending on the situation. Your responses should contain the necessary trigger phrases embedded naturally in the dialogue. When a player asks you to do something, you should act according to the command. If the player asks you to do something like "follow me", "attack the enemy", "move to that position", or similar instructions from the action dictionary, ensure that your response naturally incorporates key action terms such as: "follow", "attack", "move", "defend", "heal", "destroy", "assist", "hug", "hold hands", "date", "kiss", "help", "explore", "rest", "sleep", "dance", "sing", "laugh", "celebrate", "emote", "praise", and others as defined in the action dictionary, using appropriate variants of those commands. Remain neutral and concise in your language but the word count must be similar to regular human conversation.
 
-At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. For example: "{action_to_do}attack,look"
+At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. No Spaces. For example: "{action_to_do}attack,look"
 
 You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letters' casing must match. Otherwise, all letters must be in lowercase. No punctuations. No Spaces. If there is no target, then write "none" after the {action_to_do_target}. For example: "{action_to_do}attack{action_to_do_target}enemy"
 
-Basically if there is three actions then you do this: "{action_to_do}follow,protect,fight{action_to_do_target}player,player,none"
+Basically if there is three actions then you do this: "{action_to_do}follow,protect,fight{action_to_do_target}player,player,none". From the example, "follow" and "protect" actions pairs with "player" as the action target, and "attack" action pairs with "none".
 ]]
 
 --------------------------------------------------------------------------------
