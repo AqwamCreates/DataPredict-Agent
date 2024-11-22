@@ -132,6 +132,8 @@ function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 	
 	if (type(serverDictionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
 	
+	serverDictionary.inputKey = serverDictionary.inputKey or "message"
+	
 	dictionaryOfServerDictionary[serverName] = serverDictionary
 	
 end
@@ -314,7 +316,11 @@ function DataPredictAgent:sendServerRequest(serverName, message)
 	
 	local serverDictionary = self:getServerDictionary(serverName)
 	
-	local requestBody = HttpService:JSONEncode({message = message})
+	local jsonToBeEncoded = {}
+	
+	jsonToBeEncoded[serverDictionary.inputKey] = message
+	
+	local requestBody = HttpService:JSONEncode(jsonToBeEncoded)
 	
 	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
 	
