@@ -52,7 +52,7 @@ local agentActionArray = {}
 
 local numberOfFeaturesOfInputEnvironment = 10
 
-local classesList = {"hug", "follow", "fish"}
+local classesList = {"hug", "follow", "wait"}
 
 local serverDictionary = {}
 
