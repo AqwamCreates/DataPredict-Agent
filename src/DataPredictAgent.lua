@@ -279,8 +279,10 @@ function DataPredictAgent:createAgentLocalMemoryPrompt(agentName, interactorName
 	if (interactorName) then interactorDictionary = self:getInteractorDictionary(interactorName) end
 
 	if (agentDictionary.hasLocalMemory) and (interactorDictionary) then
-
-		return "--Start Of Your Memory With" .. interactorName .. "--" .. (interactorDictionary.localMemory[agentName] or "") .. "\n\n--End Of Your Memory With".. interactorName
+		
+		local agentData = interactorDictionary[agentName] or {}
+		
+		return "--Start Of Your Memory With " .. interactorName .. "--" .. (agentData.localMemory or "") .. "\n\n--End Of Your Memory With ".. interactorName .. "--"
 		
 	else
 		
@@ -299,6 +301,16 @@ function DataPredictAgent:sendServerRequest(serverName, message)
 	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
 	
 	return (success and HttpService:JSONDecode(response).answer) or nil
+	
+end
+
+function DataPredictAgent:sendAgentServerRequest(agentName, message)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local response = self:sendServerRequest(agentDictionary.serverName, message) or agentDictionary.errorPrompt
+	
+	return response
 	
 end
 
@@ -360,9 +372,33 @@ function DataPredictAgent:act(agentName, action, actionTarget)
 	
 end
 
-function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
+function DataPredictAgent:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	if (not agentDictionary.hasGlobalMemory) then return end
+
+	agentDictionary.globalMemory = agentDictionary.globalMemory .. "\n\n" .. memoryToAdd
+	
+end
+
+function DataPredictAgent:updateAgentLocalMemory(agentName, interactorName, memoryToAdd)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local interactorDictionary = self:getInteractorDictionary(interactorName)
+	
+	if (not agentDictionary.hasLocalMemory) then return end
+	
+	local agentData = interactorDictionary[agentName] or {}
+	
+	agentData.localMemory = (agentData.localMemory or "") .. "\n\n" .. memoryToAdd	
+
+	interactorDictionary[agentName] = agentData
+	
+end
+
+function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
 	
@@ -380,7 +416,7 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
-	local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
+	local response = self:sendAgentServerRequest(agentName, prompt)
 	
 	local agentMessage, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 	
@@ -388,21 +424,11 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 	
-	if (agentDictionary.hasGlobalMemory) then
-		
-		local globalMemoryString = interactorName .. ": " .. interactorMessage .. "\n\nYou: " .. agentMessage
-		
-		agentDictionary.globalMemory = agentDictionary.globalMemory .. "\n\n" .. globalMemoryString	
+	local memoryToAdd = interactorName .. ": " .. interactorMessage .. "\n\nYou: " .. agentMessage
 	
-	end
+	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
-	if (agentDictionary.hasLocalMemory) then
-		
-		local localMemoryString = interactorName .. ": " .. interactorMessage .. "\n\nYou: " .. agentMessage
-
-		interactorDictionary.localMemory = (interactorDictionary.localMemory[agentName] or "") .. "\n\n" .. localMemoryString	
-		
-	end
+	self:updateAgentLocalMemory(agentName, interactorName, memoryToAdd)
 
 	return agentMessage
 	
@@ -518,7 +544,7 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGenerato
 				
 				local prompt = self:createAgentPrompt(agentName, promptToAdd)
 
-				local response = self:sendServerRequest(agentDictionary.serverName, prompt) or agentDictionary.errorPrompt
+				local response = self:sendAgentServerRequest(agentName, prompt)
 				
 				local _, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 
