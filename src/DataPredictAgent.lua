@@ -176,6 +176,8 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.globalMemory = ""
 	
+	agentDictionary.model = agentDictionary.model
+	
 	dictionaryOfAgentDictionary[agentName] = agentDictionary
 	
 end
@@ -582,29 +584,63 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentAction,
 
 end
 
-function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillMessageGeneratorFunction)
+function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
 	
 	local thread
+	
+	local model 
+
+	local classesList
+	
+	local reinforcementLearningPrompt
 
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 
 	local agentDictionary = dictionaryOfAgentDictionary[agentName]
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
+	
+	local initialPromptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: "
+	
+	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing the actions with its respective scores, where the higher the value, the better: "
+	
+	local reinforcementLearningEndingPrompt = "\n\nEnsure that your actions are consistent with your personality."
+	
+	if (agentDictionary.model) then
+		
+		model = agentDictionary.model
+		
+		classesList = model:getClassesList()
+		
+	end
 
 	thread = task.spawn(function()
-		
-		task.desynchronize()
 		
 		while (dictionaryOfAgentDictionary[agentName]) do
 			
 			if (#agentActionToDoArray == 0) then
 				
-				local freeWillMessage = freeWillMessageGeneratorFunction()
+				local freeWillMessage, environmentVector, reward = freeWillFunction()
+				
+				if (model) then
+					
+					reinforcementLearningPrompt = reinforcementLearningInitialPrompt
+					
+					local reinforcementLearningActionVector = model:reinforce(environmentVector, reward, true)
+					
+					for i, actionValue in reinforcementLearningActionVector[1] do reinforcementLearningPrompt = reinforcementLearningPrompt .. "\n\n" .. classesList[i] .. ": " .. actionValue end
+
+					reinforcementLearningPrompt = reinforcementLearningPrompt .. reinforcementLearningEndingPrompt
+					
+				end
 				
 				local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
 				
-				local promptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. freeWillMessage
+				local promptToAdd = initialPromptToAdd .. math.random()
+				
+				if (reinforcementLearningPrompt) then promptToAdd = promptToAdd .. "\n\n" .. reinforcementLearningPrompt end
+				
+				promptToAdd = promptToAdd .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. freeWillMessage
 				
 				local prompt = self:createAgentPrompt(agentName, promptToAdd)
 
