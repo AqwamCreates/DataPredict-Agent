@@ -112,7 +112,9 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, warn)
+DataPredictAgent:bindAgentChat(agentName, print)
+
+DataPredictAgent:bindAgentActionToAgentSequential(agentName, warn)
 
 DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
 
@@ -120,9 +122,7 @@ local DataPredictAgentTest = {}
 
 function DataPredictAgentTest:chat(message)
 	
-	local response = DataPredictAgent:chat(agentName, userName, message)
-	
-	print(response)
+	DataPredictAgent:chat(agentName, userName, message)
 	
 end
 

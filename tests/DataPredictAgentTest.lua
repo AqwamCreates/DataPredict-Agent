@@ -56,11 +56,13 @@ agentDictionary.agentActionArray = agentActionArray
 
 agentDictionary.serverName = "default"
 
-agentDictionary.hiddenPrompt =  HiddenPromptDictionary["default"] .. PersonalityDictionary["empathetic"] 
+agentDictionary.hiddenPrompt =  HiddenPromptDictionary["default"] .. PersonalityDictionary["empathetic"]
 
 local userName = "User"
 
 local agentName = "Lilith"
+
+DataPredictAgent:bindAgentChat(agentName, print)
 
 DataPredictAgent:addServerDictionary("default", serverDictionary)
 
@@ -68,6 +70,4 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-local response = DataPredictAgent:chat(agentName, userName, "Hello! What's your name?")
-
-print(message)
+DataPredictAgent:chat(agentName, userName, "Hello! What's your name?")

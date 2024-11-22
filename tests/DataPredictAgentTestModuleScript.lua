@@ -70,6 +70,8 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
+DataPredictAgent:bindAgentChat(agentName, print)
+
 DataPredictAgent:bindAgentActionToAgentParallel(agentName, "follow", "player", function()
 	
 	warn("follow")
@@ -92,9 +94,7 @@ local DataPredictAgentTest = {}
 
 function DataPredictAgentTest:chat(message)
 	
-	local response = DataPredictAgent:chat(agentName, userName, message)
-	
-	print(response)
+	DataPredictAgent:chat(agentName, userName, message)
 	
 end
 
