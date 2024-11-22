@@ -648,7 +648,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 	
 	local initialPromptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: "
 	
-	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing one of the actions based on its respective scores, where the higher the value means a better choice: "
+	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing one or more actions based on its respective scores, but it is strictly not necessary. Actions with higher scores are generally more effective for the current state."
 	
 	local reinforcementLearningEndingPrompt = "\n\nEnsure that your actions are consistent with your personality."
 	
@@ -674,7 +674,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 					
 					local reinforcementLearningActionVector = model:reinforce(environmentVector, reward, true)
 					
-					for i, actionValue in reinforcementLearningActionVector[1] do reinforcementLearningPrompt = reinforcementLearningPrompt .. "\n\n" .. classesList[i] .. ": " .. actionValue end
+					for i, actionValue in reinforcementLearningActionVector[1] do reinforcementLearningPrompt = reinforcementLearningPrompt .. "\n\n" .. classesList[i] .. " - Score: " .. actionValue end
 
 					reinforcementLearningPrompt = reinforcementLearningPrompt .. reinforcementLearningEndingPrompt
 					
