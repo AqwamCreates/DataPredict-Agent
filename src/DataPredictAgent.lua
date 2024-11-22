@@ -47,7 +47,7 @@ You will be responding to player commands based on the following actions. Your r
 
 At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. For example: "{action_to_do}attack,look"
 
-You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. Must only have one stem word with all letters in lowercase. No punctuations. No Spaces. If there is no target, then write "none". For example: "{action_to_do}attack{action_to_do_target}enemy,you"
+You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letters' casing must match. Otherwise, all letters must be in lowercase. No punctuations. No Spaces. If there is no target, then write "none". For example: "{action_to_do}attack{action_to_do_target}enemy,you"
 ]]
 
 --------------------------------------------------------------------------------
