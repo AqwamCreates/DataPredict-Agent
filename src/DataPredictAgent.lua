@@ -60,9 +60,9 @@ local DataPredictAgentGlobalInstance
 
 local isLockedToGlobalInstance = false
 
-local DataPredictAgent = {}
+local AqwamAgentLibrary = {}
 
-DataPredictAgent.__index = DataPredictAgent
+AqwamAgentLibrary.__index = AqwamAgentLibrary
 
 --------------------------------------------------------------------------------
 
@@ -76,13 +76,13 @@ end
 
 --------------------------------------------------------------------------------
 
-function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed.
+function AqwamAgentLibrary.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed.
 	
 	if (DataPredictAgentGlobalInstance) and (isLockedToGlobalInstance) then return DataPredictAgentGlobalInstance end
 
 	local NewDataPredictAgentInstance = {}
 	
-	setmetatable(NewDataPredictAgentInstance, DataPredictAgent)
+	setmetatable(NewDataPredictAgentInstance, AqwamAgentLibrary)
 	
 	NewDataPredictAgentInstance.dictionaryOfServerDictionary = {}
 	
@@ -104,7 +104,7 @@ function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot de
 
 end
 
-function DataPredictAgent:destroy()
+function AqwamAgentLibrary:destroy()
 	
 	if (isLockedToGlobalInstance) and (self == DataPredictAgentGlobalInstance) then -- Ensuring that if this instance is not a global instance, then the global instance must not be destroyed. This can happen if the global instance is created after creating the local instances.
 		
@@ -122,7 +122,7 @@ function DataPredictAgent:destroy()
 	
 end
 
-function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
+function AqwamAgentLibrary:addServerDictionary(serverName, serverDictionary)
 	
 	local dictionaryOfServerDictionary = self.dictionaryOfServerDictionary
 	
@@ -138,19 +138,19 @@ function DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 	
 end
 
-function DataPredictAgent:removeServerDictionary(serverName)
+function AqwamAgentLibrary:removeServerDictionary(serverName)
 	
 	self.dictionaryOfServerDictionary[serverName] = nil
 	
 end
 
-function DataPredictAgent:getServerDictionary(serverName)
+function AqwamAgentLibrary:getServerDictionary(serverName)
 	
 	return self.dictionaryOfServerDictionary[serverName]
 		
 end
 
-function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
+function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 	
@@ -184,19 +184,19 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 end
 
-function DataPredictAgent:removeAgentDictionary(agentName)
+function AqwamAgentLibrary:removeAgentDictionary(agentName)
 
 	self.dictionaryOfAgentDictionary[agentName] = nil
 	
 end
 
-function DataPredictAgent:getAgentDictionary(agentName)
+function AqwamAgentLibrary:getAgentDictionary(agentName)
 	
 	return self.dictionaryOfAgentDictionary[agentName]
 	
 end
 
-function DataPredictAgent:addInteractorDictionary(interactorName, interactorDictionary)
+function AqwamAgentLibrary:addInteractorDictionary(interactorName, interactorDictionary)
 	
 	local dictionaryOfInteractorDictionary = self.dictionaryOfInteractorDictionary
 	
@@ -212,19 +212,19 @@ function DataPredictAgent:addInteractorDictionary(interactorName, interactorDict
 	
 end
 
-function DataPredictAgent:removeInteractorDictionary(interactorName)
+function AqwamAgentLibrary:removeInteractorDictionary(interactorName)
 
 	self.dictionaryOfInteractorDictionary[interactorName] = nil
 	
 end
 
-function DataPredictAgent:getInteractorDictionary(interactorName)
+function AqwamAgentLibrary:getInteractorDictionary(interactorName)
 	
 	return self.dictionaryOfInteractorDictionary[interactorName]
 	
 end
 
-function DataPredictAgent:addAgentActionArray(agentActionName, agentActionArray)
+function AqwamAgentLibrary:addAgentActionArray(agentActionName, agentActionArray)
 
 	local dictionaryOfAgentActionArray = self.dictionaryOfAgentActionArray
 
@@ -238,19 +238,19 @@ function DataPredictAgent:addAgentActionArray(agentActionName, agentActionArray)
 
 end
 
-function DataPredictAgent:removeAgentActionArray(agentActionName)
+function AqwamAgentLibrary:removeAgentActionArray(agentActionName)
 
 	self.dictionaryOfAgentActionArray[agentActionName] = nil
 
 end
 
-function DataPredictAgent:getAgentActionArray(agentActionName)
+function AqwamAgentLibrary:getAgentActionArray(agentActionName)
 
 	return self.dictionaryOfAgentActionArray[agentActionName]
 
 end
 
-function DataPredictAgent:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
+function AqwamAgentLibrary:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 
@@ -278,7 +278,7 @@ function DataPredictAgent:createAgentPrompt(agentName, promptToAdd, isInitialHid
 	
 end
 
-function DataPredictAgent:createAgentGlobalMemoryPrompt(agentName)
+function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -294,7 +294,7 @@ function DataPredictAgent:createAgentGlobalMemoryPrompt(agentName)
 	
 end
 
-function DataPredictAgent:createAgentLocalMemoryPrompt(agentName, interactorName)
+function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -316,7 +316,7 @@ function DataPredictAgent:createAgentLocalMemoryPrompt(agentName, interactorName
 	
 end
 
-function DataPredictAgent:sendServerRequest(serverName, message)
+function AqwamAgentLibrary:sendServerRequest(serverName, message)
 	
 	local serverDictionary = self:getServerDictionary(serverName)
 	
@@ -332,7 +332,7 @@ function DataPredictAgent:sendServerRequest(serverName, message)
 	
 end
 
-function DataPredictAgent:sendAgentServerRequest(agentName, message)
+function AqwamAgentLibrary:sendAgentServerRequest(agentName, message)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -342,7 +342,7 @@ function DataPredictAgent:sendAgentServerRequest(agentName, message)
 	
 end
 
-function DataPredictAgent:splitMessageFromAction(response)
+function AqwamAgentLibrary:splitMessageFromAction(response)
 	
 	local splittedMessageAndActionsArray = string.split(response, agentActionToDoString)
 	
@@ -364,7 +364,7 @@ function DataPredictAgent:splitMessageFromAction(response)
 	
 end
 
-function DataPredictAgent:act(agentName, action, actionTarget)
+function AqwamAgentLibrary:act(agentName, action, actionTarget)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -404,7 +404,7 @@ function DataPredictAgent:act(agentName, action, actionTarget)
 	
 end
 
-function DataPredictAgent:updateAgentGlobalMemory(agentName, memoryToAdd)
+function AqwamAgentLibrary:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -432,7 +432,7 @@ function DataPredictAgent:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
 end
 
-function DataPredictAgent:updateAgentLocalMemory(agentName, interactorName, memoryToAdd)
+function AqwamAgentLibrary:updateAgentLocalMemory(agentName, interactorName, memoryToAdd)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -466,7 +466,7 @@ function DataPredictAgent:updateAgentLocalMemory(agentName, interactorName, memo
 	
 end
 
-function DataPredictAgent:queueAgentChat(agentName, message)
+function AqwamAgentLibrary:queueAgentChat(agentName, message)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -474,7 +474,7 @@ function DataPredictAgent:queueAgentChat(agentName, message)
 	
 end
 
-function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
+function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
 	
@@ -510,7 +510,7 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 end
 
-function DataPredictAgent:bindChatToAgent(agentName, functionToRun)
+function AqwamAgentLibrary:bindChatToAgent(agentName, functionToRun)
 	
 	local thread
 
@@ -546,7 +546,7 @@ function DataPredictAgent:bindChatToAgent(agentName, functionToRun)
 	
 end
 
-function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionToRun)
+function AqwamAgentLibrary:bindAgentActionToAgentSequential(agentName, functionToRun)
 	
 	local thread
 	
@@ -586,7 +586,7 @@ function DataPredictAgent:bindAgentActionToAgentSequential(agentName, functionTo
 	
 end
 
-function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentAction, agentTarget, functionToRun)
+function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction, agentTarget, functionToRun)
 	
 	local thread
 
@@ -630,7 +630,7 @@ function DataPredictAgent:bindAgentActionToAgentParallel(agentName, agentAction,
 
 end
 
-function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
+function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 	
 	local thread
 	
@@ -712,4 +712,4 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
 
 end
 
-return DataPredictAgent
+return AqwamAgentLibrary
