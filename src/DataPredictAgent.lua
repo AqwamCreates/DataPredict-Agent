@@ -278,7 +278,7 @@ function DataPredictAgent:createAgentGlobalMemoryPrompt(agentName)
 	
 	if (agentDictionary.hasGlobalMemory) then
 
-		return "--Start Of Your Memory With Everyone--" .. agentDictionary.globalMemory .. "\n\n--End Of Your Memory With Everyone--"
+		return "--Start Of Your Memory With Everyone--\n\n" .. agentDictionary.globalMemory .. "\n\n--End Of Your Memory With Everyone--"
 		
 	else
 		
@@ -300,7 +300,7 @@ function DataPredictAgent:createAgentLocalMemoryPrompt(agentName, interactorName
 		
 		local agentData = interactorDictionary[agentName] or {}
 		
-		return "--Start Of Your Memory With " .. interactorName .. "--" .. (agentData.localMemory or "") .. "\n\n--End Of Your Memory With ".. interactorName .. "--"
+		return "--Start Of Your Memory With " .. interactorName .. "--\n\n" .. (agentData.localMemory or "") .. "\n\n--End Of Your Memory With ".. interactorName .. "--"
 		
 	else
 		
