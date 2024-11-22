@@ -66,6 +66,16 @@ DataPredictAgent.__index = DataPredictAgent
 
 --------------------------------------------------------------------------------
 
+local function returnDefaultValueIfNil(value, defaultValue)
+	
+	if (type(value) == "nil") then return defaultValue end
+	
+	return value
+	
+end
+
+--------------------------------------------------------------------------------
+
 function DataPredictAgent.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed.
 	
 	if (DataPredictAgentGlobalInstance) and (isLockedToGlobalInstance) then return DataPredictAgentGlobalInstance end
@@ -154,9 +164,9 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.agentActionToDoTargetArray = agentDictionary.agentActionToDoTargetArray or {}
 	
-	agentDictionary.hasGlobalMemory = agentDictionary.hasGlobalMemory or true
+	agentDictionary.hasGlobalMemory = returnDefaultValueIfNil(agentDictionary.hasGlobalMemory, true)
 	
-	agentDictionary.hasLocalMemory = agentDictionary.hasLocalMemory or false
+	agentDictionary.hasLocalMemory = returnDefaultValueIfNil(agentDictionary.hasLocalMemory, true)
 	
 	agentDictionary.globalMemoryCapacity = agentDictionary.globalMemoryCapacity or 100
 	
