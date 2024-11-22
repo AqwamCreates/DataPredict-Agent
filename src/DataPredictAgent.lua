@@ -40,6 +40,8 @@ local agentActionToDoString = "{action_to_do}"
 
 local agentActionToDoTargetString = "{action_to_do_target}"
 
+local memorySeperator = "[Memory Break]"
+
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
@@ -47,7 +49,9 @@ You will be responding to player commands based on the following actions. Your r
 
 At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. For example: "{action_to_do}attack,look"
 
-You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letters' casing must match. Otherwise, all letters must be in lowercase. No punctuations. No Spaces. If there is no target, then write "none". For example: "{action_to_do}attack{action_to_do_target}enemy,you"
+You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letters' casing must match. Otherwise, all letters must be in lowercase. No punctuations. No Spaces. If there is no target, then write "none" after the {action_to_do_target}. For example: "{action_to_do}attack{action_to_do_target}enemy"
+
+Basically if there is three actions then you do this: "{action_to_do}follow,protect,fight{action_to_do_target}player,player,none"
 ]]
 
 --------------------------------------------------------------------------------
@@ -153,6 +157,10 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	agentDictionary.hasGlobalMemory = agentDictionary.hasGlobalMemory or true
 	
 	agentDictionary.hasLocalMemory = agentDictionary.hasLocalMemory or false
+	
+	agentDictionary.globalMemoryCapacity = agentDictionary.globalMemoryCapacity or 100
+	
+	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
 	
 	agentDictionary.globalMemory = ""
 	
@@ -377,8 +385,26 @@ function DataPredictAgent:updateAgentGlobalMemory(agentName, memoryToAdd)
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
 	if (not agentDictionary.hasGlobalMemory) then return end
+	
+	local globalMemory = agentDictionary.globalMemory or ""
+	
+	local globalMemoryArray = string.split(globalMemory, memorySeperator)
+	
+	local newGlobalMemory
+	
+	if (agentDictionary.localMemoryCapacity > #globalMemoryArray) then
 
-	agentDictionary.globalMemory = agentDictionary.globalMemory .. "\n\n" .. memoryToAdd
+		table.remove(globalMemoryArray, 1)
+
+		newGlobalMemory = table.concat(globalMemoryArray)
+
+	else
+
+		newGlobalMemory = globalMemory
+
+	end 
+
+	agentDictionary.globalMemory = newGlobalMemory .. "\n\n" .. memorySeperator .. "\n\n" .. memoryToAdd
 	
 end
 
@@ -392,7 +418,25 @@ function DataPredictAgent:updateAgentLocalMemory(agentName, interactorName, memo
 	
 	local agentData = interactorDictionary[agentName] or {}
 	
-	agentData.localMemory = (agentData.localMemory or "") .. "\n\n" .. memoryToAdd	
+	local localMemory = agentData.localMemory or ""
+	
+	local localMemoryArray = string.split(localMemory, memorySeperator)
+	
+	local newLocalMemory
+	
+	if (agentDictionary.localMemoryCapacity > #localMemoryArray) then
+		
+		table.remove(localMemoryArray, 1)
+		
+		newLocalMemory = table.concat(localMemoryArray)
+		
+	else
+		
+		newLocalMemory = localMemory
+		
+	end 
+	
+	agentData.localMemory = newLocalMemory .. "\n\n" .. memorySeperator .. "\n\n" .. memoryToAdd	
 
 	interactorDictionary[agentName] = agentData
 	
