@@ -40,12 +40,12 @@ local agentActionToDoString = "{action_to_do}"
 
 local agentActionToDoTargetString = "{action_to_do_target}"
 
-local memorySeperator = "[Memory Break]"
+local memorySeperator = "[Memory Divider]"
 
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
-You may or may not have a conversation with an another player depending on the situation. When a player asks you to do something, you should act according to the command. Speak like a regular human.
+Speak like a regular human. You may or may not have a conversation with an another player depending on the situation.
 
 At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. No spaces. For example: "{action_to_do}attack,look"
 
