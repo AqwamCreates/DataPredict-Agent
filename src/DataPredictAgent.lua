@@ -376,7 +376,7 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
-	local promptToAdd = globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this:" .. interactorMessage
+	local promptToAdd = globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this from " .. interactorName ..": " .. interactorMessage
 	
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
