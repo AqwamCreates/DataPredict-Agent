@@ -160,6 +160,8 @@ function DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.errorPrompt = agentDictionary.errorPrompt or "Something went wrong. Please try again later."
 	
+	agentDictionary.chatArray = agentDictionary.chatArray or {}
+	
 	agentDictionary.agentActionArray = agentDictionary.agentActionArray or {}
 	
 	agentDictionary.agentActionToDoArray = agentDictionary.agentActionToDoArray or {}
@@ -464,6 +466,14 @@ function DataPredictAgent:updateAgentLocalMemory(agentName, interactorName, memo
 	
 end
 
+function DataPredictAgent:queueAgentChat(agentName, message)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	table.insert(agentDictionary.chatArray, message)
+	
+end
+
 function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
@@ -495,8 +505,44 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
 	self:updateAgentLocalMemory(agentName, interactorName, memoryToAdd)
+	
+	self:queueAgentChat(agentName, agentMessage)
+	
+end
 
-	return agentMessage
+function DataPredictAgent:bindAgentChat(agentName, functionToRun)
+	
+	local thread
+
+	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
+
+	local agentDictionary = dictionaryOfAgentDictionary[agentName]
+
+	local chatArray = agentDictionary.chatArray
+
+	thread = task.spawn(function()
+
+		task.desynchronize()
+
+		while (dictionaryOfAgentDictionary[agentName]) do
+
+			if (#chatArray >= 1) then
+
+				functionToRun(chatArray[1])
+
+				table.remove(chatArray, 1)
+
+			end
+
+			task.wait()
+
+		end
+
+		task.cancel(thread)
+
+	end)
+
+	return thread
 	
 end
 
@@ -602,7 +648,7 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
 	
 	local initialPromptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: "
 	
-	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing the actions with its respective scores, where the higher the value, the better: "
+	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing one of the actions based on its respective scores, where the higher the value means a better choice: "
 	
 	local reinforcementLearningEndingPrompt = "\n\nEnsure that your actions are consistent with your personality."
 	
@@ -646,9 +692,11 @@ function DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
 
 				local response = self:sendAgentServerRequest(agentName, prompt)
 				
-				local _, actionArray, actionTargetArray = self:splitMessageFromAction(response)
+				local agentMessage, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 
 				for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
+				
+				self:queueAgentChat(agentName, agentMessage)
 				
 			end
 			
