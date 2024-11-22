@@ -112,7 +112,7 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-DataPredictAgent:bindAgentChat(agentName, print)
+DataPredictAgent:bindChatToAgent(agentName, print)
 
 DataPredictAgent:bindAgentActionToAgentSequential(agentName, warn)
 

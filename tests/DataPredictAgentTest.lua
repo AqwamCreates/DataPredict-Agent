@@ -62,7 +62,7 @@ local userName = "User"
 
 local agentName = "Lilith"
 
-DataPredictAgent:bindAgentChat(agentName, print)
+DataPredictAgent:bindChatToAgent(agentName, print)
 
 DataPredictAgent:addServerDictionary("default", serverDictionary)
 

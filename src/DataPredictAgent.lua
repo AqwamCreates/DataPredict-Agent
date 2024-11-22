@@ -510,7 +510,7 @@ function DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 	
 end
 
-function DataPredictAgent:bindAgentChat(agentName, functionToRun)
+function DataPredictAgent:bindChatToAgent(agentName, functionToRun)
 	
 	local thread
 
