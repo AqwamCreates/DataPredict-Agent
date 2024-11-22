@@ -98,7 +98,7 @@ local function freeWillFunction()
 	
 	local environmentFeatureVector = MatrixL:createRandomNormalMatrix(1, numberOfFeaturesOfInputEnvironment + 1)
 	
-	return "Hug", environmentFeatureVector, math.random()
+	return "", environmentFeatureVector, math.random()
 	
 end
 
