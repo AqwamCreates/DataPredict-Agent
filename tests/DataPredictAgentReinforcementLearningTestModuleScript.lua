@@ -28,6 +28,10 @@
 
 local ServerScriptService = game:GetService("ServerScriptService")
 
+local DataPredict = require(ServerScriptService.AqwamMachineAndDeepLearningLibrary)
+
+local MatrixL = require(ServerScriptService.AqwamMatrixLibrary)
+
 local DataPredictAgentModuleScript = ServerScriptService.DataPredictAgent
 
 local DataPredictAgentRequiredModuleScript = require(DataPredictAgentModuleScript)
@@ -38,13 +42,41 @@ local PersonalityDictionary = require(DataPredictAgentModuleScript.PersonalityDi
 
 local DictionaryOfAgentActionArray = require(DataPredictAgentModuleScript.DictionaryOfAgentActionArray)
 
+local DataPredictLibrary = require(DataPredictAgentModuleScript)
+
 local DataPredictAgent = DataPredictAgentRequiredModuleScript.new(true)
 
 local agentDictionary = {}
 
 local agentActionArray = {}
 
+local numberOfFeaturesOfInputEnvironment = 10
+
+local classesList = {"hug", "follow", "fish"}
+
 local serverDictionary = {}
+
+local NeuralNetwork = DataPredict.Models.NeuralNetwork.new()
+
+local DeepDoubleQLearningV2 = DataPredict.Models.DeepDoubleQLearningV2.new()
+
+local CategoricalPolicyQuickSetup = DataPredict.QuickSetups.CategoricalPolicy.new()
+
+NeuralNetwork:setClassesList(classesList)
+
+CategoricalPolicyQuickSetup:setClassesList(classesList)
+
+CategoricalPolicyQuickSetup:setPrintOutput(false)
+
+NeuralNetwork:addLayer(numberOfFeaturesOfInputEnvironment, true, "None")
+
+NeuralNetwork:addLayer(5, true, "LeakyReLU")
+
+NeuralNetwork:addLayer(#classesList, false, "LeakyReLU")
+
+DeepDoubleQLearningV2:setModel(NeuralNetwork)
+
+CategoricalPolicyQuickSetup:setModel(DeepDoubleQLearningV2)
 
 for actionName, content in DictionaryOfAgentActionArray do
 
@@ -60,6 +92,16 @@ agentDictionary.serverName = "default"
 
 agentDictionary.hiddenPrompt =  HiddenPromptDictionary["default"] .. PersonalityDictionary["empathetic"]
 
+agentDictionary.model = CategoricalPolicyQuickSetup
+
+local function freeWillFunction()
+	
+	local environmentFeatureVector = MatrixL:createRandomNormalMatrix(1, numberOfFeaturesOfInputEnvironment + 1)
+	
+	return "Hug", environmentFeatureVector, math.random()
+	
+end
+
 local userName = "User"
 
 local agentName = "Lilith"
@@ -70,23 +112,9 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "follow", "player", function()
-	
-	warn("follow")
-	
-end)
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, warn)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "hug", "player", function()
-
-	warn("hug")
-
-end)
-
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "attack", "player", function()
-
-	warn("attack")
-
-end)
+DataPredictAgent:bindFreeWillToAgent(agentName, freeWillFunction)
 
 local DataPredictAgentTest = {}
 
