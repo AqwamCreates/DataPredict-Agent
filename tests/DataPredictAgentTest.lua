@@ -68,6 +68,6 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 DataPredictAgent:addInteractorDictionary(userName)
 
-local message = DataPredictAgent:chat(agentName, userName, "Respond to this: Hello! What's your name?")
+local response = DataPredictAgent:chat(agentName, userName, "Hello! What's your name?")
 
 print(message)
