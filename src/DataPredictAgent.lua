@@ -278,7 +278,7 @@ function DataPredictAgent:createAgentGlobalMemoryPrompt(agentName)
 	
 	if (agentDictionary.hasGlobalMemory) then
 
-		return "--Start Of Your Memory With Everyone--\n\n" .. agentDictionary.globalMemory .. "\n\n--End Of Your Memory With Everyone--"
+		return "--Start Of Your Memory With The World--\n\n" .. agentDictionary.globalMemory .. "\n\n--End Of Your Memory With The World--"
 		
 	else
 		
