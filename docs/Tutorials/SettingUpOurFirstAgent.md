@@ -14,11 +14,13 @@ By default, when creating another DataPredictAgentInstance by DataPredictAgent.n
 
 This means that your data is shared globally and you do not need to setup individual DataPredict Agent instances all over again.
 
-## Setting Up Our Server Dictionary
+## Connecting To Our Servers
 
 In order to connect to the servers that are hosting large language models, we first need to create a server dictionary that stores all the server's information into the DataPredict Agent instance.
 
 ```lua
+
+local serverName = "defaultServer"
 
 local serverDictionary = {
 
@@ -31,5 +33,25 @@ local serverDictionary = {
 }
 
 DataPredictAgentInstance:addServerDictionary(serverName, serverDictionary)
+
+```
+
+## Creating Our Agents
+
+All agents are required to have a single server associated with it. This allows our agents to be able to chat with other players and have their own free will.
+
+```lua
+
+local agentName = "defaultAgent"
+
+local agentDictionary = {
+
+  serverName = "defaultServer" -- 
+
+  
+
+}
+
+
 
 ```
