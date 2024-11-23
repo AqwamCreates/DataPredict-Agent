@@ -12,7 +12,7 @@ By using or possessing any copies of this library or its assets (including the i
 |---------|------------------------|
 | Release | 1.0                    |
 
-DataPredict Agent is an AI Agent library powered by large language models (LLMs).
+DataPredict Agent is an AI agent library powered by large language models (LLMs).
 
 If there are any suggestions or issues for this library, don't be afraid to reach out to me at my [Discord](https://discord.gg/BAZsynkede) server, [DevForum](https://devforum.roblox.com/t/datapredict-neural-version-beta-zero-pytorch-like-deep-learning-library-meets-roblox/3010845) thread or my [LinkedIn](https://www.linkedin.com/in/aqwam-harish-aiman/).
 
