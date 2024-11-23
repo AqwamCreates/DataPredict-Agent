@@ -46,7 +46,7 @@ local agentName = "defaultAgent"
 
 local agentDictionary = {
 
-  serverName = "defaultServer" -- 
+  serverName = "defaultServer" -- The server's name must be one of the servers that you have added to the DataPredict Agent instance.
 
   
 
