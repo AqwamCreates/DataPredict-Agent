@@ -1,8 +1,8 @@
 # Getting Started
 
-| Version                | AI Agent Library (DataPredict Agent)                                                                                                                                    |
-|------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Release (Package)      | [DataPredict Agent (Release Version 1.0)](https://github.com/AqwamCreates/DataPredict-Agent/blob/main/module_scripts/DataPredict%20%20-%20Release%20Version%201.21.rbxm)|
+| Version                | AI Agent Library (DataPredict Agent)                                                                                                        |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
+| Release (Package)      | [DataPredict Agent (Release Version 1.0)](https://github.com/AqwamCreates/DataPredict-Agent/blob/main/module_scripts/DataPredictAgent.rbxm) |
 
 To download the files from GitHub, you must click on the download button highlighted in the red box.
 
