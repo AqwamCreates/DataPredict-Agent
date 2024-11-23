@@ -82,7 +82,7 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 ```
 
-### Adding Free Will To The Agent
+### Enabling the Free Will With Deep Reinforcement Learning For The Agent
 
 ```lua
 
