@@ -24,7 +24,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Agents can learn from their environments, and enchance this capability further with deep reinforcement learning from [DataPredict](https://aqwamcreates.github.io/DataPredict/) and [DataPredict Neural](https://aqwamcreates.github.io/DataPredict-Neural/).
 
-* Agents can have initial hidden prompts as well as regular hidden prompts for custom personalities and identities.
+* Agents can have add-on hidden prompts as well as regular hidden prompts for custom personalities and identities.
 
 * Agents can have global memories so that agents can remember conversations between the player, the agents, and the rest of the group.
 
@@ -40,7 +40,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 [Setting Up Our First Agent](Tutorials/SettingUpOurFirstAgent.md)
 
-[Enabling Free Will To Our Agent](Tutorials/EnablingFreeWillToOurAgent.md)
+[Enabling Free Will To Our Agents](Tutorials/EnablingFreeWillToOurAgents.md)
 
 ## API
 
