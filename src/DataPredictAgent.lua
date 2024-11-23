@@ -252,19 +252,19 @@ function AqwamAgentLibrary:getAgentActionArray(agentActionName)
 
 end
 
-function AqwamAgentLibrary:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
+function AqwamAgentLibrary:createAgentPrompt(agentName, promptToAdd, isAddOnHiddenPromptAdded)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 
 	local prompt = "You are " .. agentName .. ".\n\n"
 
-	local initialHiddenPrompt = agentDictionary.initialHiddenPrompt
+	local addOnHiddenPrompt = agentDictionary.addOnHiddenPrompt
 
 	local hiddenPrompt = agentDictionary.hiddenPrompt
 
-	if (initialHiddenPrompt) and (isInitialHiddenPromptAdded) then
+	if (addOnHiddenPrompt) and (isAddOnHiddenPromptAdded) then
 
-		prompt = prompt .. initialHiddenPrompt .. "\n\n"
+		prompt = prompt .. addOnHiddenPrompt .. "\n\n"
 
 	end
 
@@ -482,7 +482,7 @@ function AqwamAgentLibrary:queueAgentChat(agentName, message)
 	
 end
 
-function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, isInitialHiddenPromptAdded)
+function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, isAddOnHiddenPromptAdded)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -506,7 +506,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 	promptToAdd = promptToAdd .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
 	
-	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
+	local prompt = self:createAgentPrompt(agentName, promptToAdd, isAddOnHiddenPromptAdded)
 	
 	local response = self:sendAgentServerRequest(agentName, prompt)
 	
@@ -646,7 +646,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction
 
 end
 
-function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
+function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 	
 	local thread
 	
@@ -682,7 +682,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 			
 			if (#agentActionToDoArray == 0) then
 				
-				local freeWillMessage, environmentVector, reward = freeWillFunction()
+				local freeWillMessage, environmentVector, reward = functionToRun()
 				
 				if (model) then
 					
