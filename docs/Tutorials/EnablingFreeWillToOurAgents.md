@@ -88,13 +88,13 @@ DataPredictAgent:addAgentDictionary(agentName, agentDictionary)
 
 local thread = DataPredictAgentInstance:bindFreeWillToAgent(agentName, function()
 
-  local freeWillString -- Your code here that detects the surroundings.
+ local freeWillString -- Your code here that detects the surroundings.
 
  local environmentFeatureVector -- Your agent's observed environment feature vector to be passed into the deep reinforcement learning model.
 
-local reward -- Your agent's reward as a result of performing certain actions.
+ local reward -- Your agent's reward as a result of performing certain actions.
 
-  return freeWillString, environmentFeatureVector, reward
+ return freeWillString, environmentFeatureVector, reward
   
 end)
 
