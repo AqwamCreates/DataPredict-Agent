@@ -36,7 +36,7 @@ DataPredictAgentInstance:addServerDictionary(serverName, serverDictionary)
 
 ```
 
-## Adding Our Agents' Actions.
+## Adding Our Agents' Actions
 
 Different action names often have the same meanings, which could make some parts of our code become repetitive. Fortunately, we can define the synoynms so that we don't have to write all the functions for different actions that have the same meanings.
 
