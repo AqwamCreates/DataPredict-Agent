@@ -112,7 +112,7 @@ end)
 
 ```
 
-## Chatting with Our Agents
+## Chatting With Our Agents
 
 This code pretty much explain itself. However, do note that if you do not setup the bindChatToAgent() function, you will not receive any outputs.
 
@@ -121,4 +121,40 @@ This code pretty much explain itself. However, do note that if you do not setup 
 DataPredictAgent:chat(agentName, interactorName, message)
 
 ```
+
+## Enabling Custom Actions For Our Agents
+
+The agents have multiple ways on how to execute the actions. They can do the actions in sequential or parallel.
+
+For sequential, the actions are performed based on first in, first out basis. Below, we will look into on how to setup sequential actions.
+
+```lua
+
+DataPredict:bindAgentActionToAgentSequential(agentName, function(action, actionTarget)
+
+  print(action, actionTarget) -- Our action is the top-level action here.
+
+end)
+
+```
+
+For parallel, the actions are performed based on the selected actions. Below, we will look into on how to setup parallel actions.
+
+```lua
+
+DataPredict:bindAgentActionToAgentSequential(agentName, action, function(actionTarget) -- This function only runs when the "action" is requested. Also, our action is the top-level action here.
+
+  print(actionTarget) 
+
+end)
+
+```
+
+## In Conclusion
+
+Although the agent setup can be quite long, it allows us to have greater flexibility, power and control in the agents' actions, dialogues and so on.
+
+With this knowledge in place, you can now create your very own agents!
+
+I look forward on what will you create with them.
 
