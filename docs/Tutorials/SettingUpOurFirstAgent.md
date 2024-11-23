@@ -114,7 +114,7 @@ end)
 
 ## Chatting with Our Agents
 
-This code is pretty much explain itself. However, do make note that if you do not setup the bindChatToAgent() function, you will not receive any outputs.
+This code pretty much explain itself. However, do make note that if you do not setup the bindChatToAgent() function, you will not receive any outputs.
 
 ```lua
 
