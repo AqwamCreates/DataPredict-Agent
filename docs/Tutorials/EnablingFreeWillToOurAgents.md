@@ -36,11 +36,11 @@ That is all you need to do to give agents the regular free wills.
 
 The difference between the regular free will and this one is that it allows our agents to learn from its mistakes and its environments.
 
-However, this requires the [DataPredict](https://aqwamcreates.github.io/DataPredict/) library, which could make the setup more complicated. It is strictly not neccesary to do this, but the agents will be limited in their capabilities.
+However, this requires the [DataPredict](https://aqwamcreates.github.io/DataPredict/) library, which could make the setup more complicated. It is strictly not neccesary to do this, but the agents will be limited in their capabilities related to their free will.
 
 I recommend you on reading on how to create neural networks as well as creating learning AIs using quick setup to fully understand the DataPredict library.
 
-For now, I will be skipping the explanation and go straight to coding.
+For now, we will be skipping the explanation and go straight to coding as it will be less confusing to follow. 
 
 ### Creating The Deep Reinforcement Learning Model
 
