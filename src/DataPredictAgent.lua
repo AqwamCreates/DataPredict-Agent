@@ -484,7 +484,7 @@ end
 
 function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, isInitialHiddenPromptAdded)
 	
-	local agentDictionary = self:getInteractorDictionary(agentName)
+	local agentDictionary = self:getAgentDictionary(agentName)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
 	
@@ -602,7 +602,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentSequential(agentName, functionT
 	
 end
 
-function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction, agentTarget, functionToRun)
+function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction, functionToRun)
 	
 	local thread
 
@@ -626,7 +626,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction
 
 			if (agentActionArrayIndex) then
 				
-				functionToRun()
+				functionToRun(agentActionToDoTargetArray[agentActionArrayIndex])
 
 				table.remove(agentActionToDoArray, agentActionArrayIndex)
 				
