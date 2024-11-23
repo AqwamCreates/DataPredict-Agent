@@ -88,7 +88,7 @@ It usually stores:
 
   * The local memory between the interactor and the individual agents, provided that the "hasLocalMemory" is set to true.
 
-```
+```lua
 
 local interactorName = "player"
 
@@ -98,4 +98,23 @@ DataPredictAgent:addInteractorDictionary(interactorName, interactorDictionary)
 
 ```
 
-## 
+## Enabling Our Agents To Chat
+
+In order for our agents to chat with us, they need a way to output their messages. We can do that with bindChatToAgent() function.
+
+```lua
+
+local thread = DataPredictAgent:bindChatToAgent(agentName, print) -- You can replace print with any other functions.
+
+```
+
+## Chatting with Our Agents
+
+This code is pretty much explain itself. However, do make note that if you do not setup the bindChatToAgent() function, you will not receive any outputs.
+
+```
+
+DataPredictAgent:chat(agentName, interactorName, message)
+
+```
+
