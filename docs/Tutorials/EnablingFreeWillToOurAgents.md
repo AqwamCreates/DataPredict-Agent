@@ -54,6 +54,10 @@ local DeepDoubleQLearningV2 = DataPredict.Models.DeepDoubleQLearningV2.new()
 
 local CategoricalPolicyQuickSetup = DataPredict.QuickSetups.CategoricalPolicy.new()
 
+local numberOfFeaturesOfInputEnvironment = 10
+
+local classesList = {"hug", "follow", "wait"}
+
 NeuralNetwork:setClassesList(classesList)
 
 CategoricalPolicyQuickSetup:setClassesList(classesList)
