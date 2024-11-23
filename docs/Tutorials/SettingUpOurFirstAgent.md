@@ -22,7 +22,7 @@ In order to connect to the servers that are hosting large language models, we fi
 
 local serverDictionary = {
 
-  ipAddress = "https:\\127.0.0.1:8000\" -- Your server's IP address
+  ipAddress = "https:\\127.0.0.1:8000" -- Your server's IP address
 
   inputKey = "message" -- The key that tells our computer where to store our input message before sending the input message to the server.
 
