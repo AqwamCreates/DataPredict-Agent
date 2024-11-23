@@ -56,6 +56,8 @@ Fortunately, I already have added list of actions directly under "dictionaryOfAc
 
 All agents are required to have a single server associated with it. This allows our agents to be able to chat with other players and have their own free will.
 
+In addition, there are a lot of things you can control for your agents. For example, using the "hiddenPrompt" to add personality to your agents.
+
 ```lua
 
 local agentName = "defaultAgent"
