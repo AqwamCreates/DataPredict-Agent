@@ -158,5 +158,4 @@ Although the agent setup can be quite long, it allows us to have greater flexibi
 
 With this knowledge in place, you can now create your very own agents!
 
-I look forward on what will you create with them.
-
+I look forward on what you will create with them!
