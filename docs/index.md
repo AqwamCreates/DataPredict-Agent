@@ -26,9 +26,9 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Agents can have initial hidden prompts as well as regular hidden prompts for custom personalities and identities.
 
-* Agents can have global memories so that agents can remember conversations as well as between you, the agent, and the rest of the group.
+* Agents can have global memories so that agents can remember conversations between player, the agents, and the rest of the group.
 
-* Agents can have local memories so that your agents can remember conversations between you and the agent
+* Agents can have local memories so that your agents can remember conversations between player and the agents.
 
 * Agents can have free will.
 
