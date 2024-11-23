@@ -112,7 +112,7 @@ local thread = DataPredictAgent:bindChatToAgent(agentName, print) -- You can rep
 
 This code is pretty much explain itself. However, do make note that if you do not setup the bindChatToAgent() function, you will not receive any outputs.
 
-```
+```lua
 
 DataPredictAgent:chat(agentName, interactorName, message)
 
