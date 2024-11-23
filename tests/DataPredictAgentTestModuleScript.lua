@@ -72,21 +72,21 @@ DataPredictAgent:addInteractorDictionary(userName)
 
 DataPredictAgent:bindChatToAgent(agentName, print)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "follow", "player", function()
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, "follow", function(actionTarget)
 	
-	warn("follow")
+	warn("follow", actionTarget)
 	
 end)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "hug", "player", function()
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, "hug", function(actionTarget)
 
-	warn("hug")
+	warn("hug", actionTarget)
 
 end)
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName, "attack", "player", function()
+DataPredictAgent:bindAgentActionToAgentParallel(agentName, "attack", function(actionTarget)
 
-	warn("attack")
+	warn("attack", actionTarget)
 
 end)
 
