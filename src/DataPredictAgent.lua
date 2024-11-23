@@ -696,6 +696,8 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 
 				for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 				
+				self:updateAgentGlobalMemory(agentName, freeWillMessage)
+				
 				self:queueAgentChat(agentName, agentMessage)
 				
 			end
