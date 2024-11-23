@@ -104,7 +104,11 @@ In order for our agents to chat with us, they need a way to output their message
 
 ```lua
 
-local thread = DataPredictAgent:bindChatToAgent(agentName, print) -- You can replace print with any other functions.
+local thread = DataPredictAgent:bindChatToAgent(agentName, function(outputMessage)
+
+  print(outputMessage) -- You can replace print with any other functions.
+
+end) 
 
 ```
 
