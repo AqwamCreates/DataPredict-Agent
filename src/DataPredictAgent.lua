@@ -496,7 +496,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage)
 	
 	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
-	local promptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
+	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
 	
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
@@ -508,7 +508,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage)
 	
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 	
-	local memoryToAdd = interactorName .. ": " .. interactorMessage .. "\n\nYou: " .. agentMessage
+	local memoryToAdd = interactorName .. ": \n\n" .. interactorMessage .. "\n\nYou: \n\n" .. response
 	
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
@@ -654,7 +654,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 	
-	local initialPromptToAdd = "This is a random number for random response generation. Here is a number, but ignore it: "
+	local initialPromptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: "
 	
 	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing one or more actions based on its respective scores, but it is strictly not necessary. Actions with higher scores are generally more effective for the current state."
 	
@@ -704,7 +704,9 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, freeWillFunction)
 
 				for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 				
-				self:updateAgentGlobalMemory(agentName, freeWillMessage)
+				local memoryToAdd = "Your Free Will: \n\n" .. freeWillMessage .. "\n\nYou: \n\n" .. response
+				
+				self:updateAgentGlobalMemory(agentName, memoryToAdd)
 				
 				self:queueAgentChat(agentName, agentMessage)
 				
