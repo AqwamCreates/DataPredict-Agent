@@ -22,7 +22,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Custom AI NPC actions through the use of regular expressions to detect actions inside of LLM-generated messages.
 
-* Learn from their environments, and enchance it further with deep reinforcement learning from [DataPredict](https://aqwamcreates.github.io/DataPredict/).
+* Agents can learn from their environments, and enchance it further with deep reinforcement learning from [DataPredict](https://aqwamcreates.github.io/DataPredict/).
 
 * Agents can have initial hidden prompts as well as regular hidden prompts for custom personalities and identities.
 
