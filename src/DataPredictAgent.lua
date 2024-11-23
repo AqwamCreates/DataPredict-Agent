@@ -482,7 +482,9 @@ function AqwamAgentLibrary:queueAgentChat(agentName, message)
 	
 end
 
-function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage)
+function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, isInitialHiddenPromptAdded)
+	
+	local agentDictionary = self:getInteractorDictionary(agentName)
 	
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
 	
@@ -490,13 +492,19 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage)
 
 	local chatCount = interactorDictionary[agentName].chatCount or 0
 	
-	local isInitialHiddenPromptAdded = (chatCount == 0)
+	local isFirstChat = (chatCount == 0)
 	
 	local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
 	
 	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
-	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
+	local initialChatPrompt = agentDictionary.initialChatPrompt
+	
+	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt 
+	
+	if (isFirstChat and initialChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialChatPrompt end
+	
+	promptToAdd = promptToAdd .. "\n\nRespond to this from " .. interactorName ..":\n\n" .. interactorMessage
 	
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isInitialHiddenPromptAdded)
 	
