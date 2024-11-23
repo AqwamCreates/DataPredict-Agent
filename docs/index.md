@@ -20,7 +20,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 ## Features
 
-* Custom AI NPC actions through the use of regular expressions to detect actions inside of LLM-generated messages.
+* Custom actions through the use of regular expressions to detect actions inside of LLM-generated messages.
 
 * Agents can learn from their environments, and enchance it further with deep reinforcement learning from [DataPredict](https://aqwamcreates.github.io/DataPredict/) and [DataPredict Neural](https://aqwamcreates.github.io/DataPredict-Neural/).
 
