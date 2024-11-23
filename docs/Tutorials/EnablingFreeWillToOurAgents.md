@@ -8,7 +8,7 @@ There are two different types of free will that we can add to the agents:
 
   * Regular Free Will
 
-  * Free Will With Deep Reinforcement Learning (Requires DataPredict Library)
+  * Free Will With Deep Reinforcement Learning (Requires The DataPredict Library)
 
 We will look at how we can add the free will to the agents below.
 
