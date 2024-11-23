@@ -28,7 +28,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Agents can have global memories so that agents can remember conversations between the player, the agents, and the rest of the group.
 
-* Agents can have local memories so that your agents can remember conversations between the player and the agents.
+* Agents can have local memories so that the agents can remember conversations between the player and the agents.
 
 * Agents can have free will.
 
