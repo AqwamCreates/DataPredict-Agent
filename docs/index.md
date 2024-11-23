@@ -38,6 +38,8 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 ## Tutorials
 
+[Installation For Roblox](Tutorials/InstallationForRoblox.md)
+
 [Setting Up Our First Agent](Tutorials/SettingUpOurFirstAgent.md)
 
 [Enabling Free Will To Our Agents](Tutorials/EnablingFreeWillToOurAgents.md)
