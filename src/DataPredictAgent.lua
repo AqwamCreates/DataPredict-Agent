@@ -134,6 +134,8 @@ function AqwamAgentLibrary:addServerDictionary(serverName, serverDictionary)
 	
 	serverDictionary.inputKey = serverDictionary.inputKey or "message"
 	
+	serverDictionary.outputKey = serverDictionary.outputKey or "answer"
+	
 	dictionaryOfServerDictionary[serverName] = serverDictionary
 	
 end
@@ -316,29 +318,35 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 	
 end
 
-function AqwamAgentLibrary:sendServerRequest(serverName, message)
+function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage)
 	
 	local serverDictionary = self:getServerDictionary(serverName)
 	
-	local jsonToBeEncoded = {}
+	local messageDictionary = {}
 	
-	jsonToBeEncoded[serverDictionary.inputKey] = message
+	messageDictionary[serverDictionary.inputKey] = inputMessage
 	
-	local requestBody = HttpService:JSONEncode(jsonToBeEncoded)
+	local requestBody = HttpService:JSONEncode(messageDictionary)
 	
 	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
 	
-	return (success and HttpService:JSONDecode(response).answer) or nil
+	if (not success) then return end
+	
+	local responseDictionary = HttpService:JSONDecode(response)
+	
+	local outputMessage = responseDictionary[serverDictionary.outputKey]
+	
+	return outputMessage
 	
 end
 
-function AqwamAgentLibrary:sendAgentServerRequest(agentName, message)
+function AqwamAgentLibrary:sendAgentServerRequest(agentName, inputMessage)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
-	local response = self:sendServerRequest(agentDictionary.serverName, message) or agentDictionary.errorPrompt
+	local outputMessage = self:sendServerRequest(agentDictionary.serverName, inputMessage) or agentDictionary.errorPrompt
 	
-	return response
+	return outputMessage
 	
 end
 
