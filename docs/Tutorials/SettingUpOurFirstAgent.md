@@ -118,7 +118,7 @@ This code pretty much explain itself. However, do note that if you do not setup 
 
 ```lua
 
-DataPredictAgent:chat(agentName, interactorName, message)
+DataPredictAgent:chat(agentName, interactorName, interactorMessage)
 
 ```
 
