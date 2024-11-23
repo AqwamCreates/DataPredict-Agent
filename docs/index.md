@@ -40,7 +40,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 [Setting Up Our First Agent](Tutorials/SettingUpOurFirstAgent.md)
 
-[Enabling Free Will To Our Agent](Tutorials/EnablingFreeWillToOurAgent.md)
+[Enabling Free Will To Our Agents](Tutorials/EnablingFreeWillToOurAgents.md)
 
 ## API
 
