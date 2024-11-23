@@ -36,6 +36,22 @@ DataPredictAgentInstance:addServerDictionary(serverName, serverDictionary)
 
 ```
 
+## Adding Our Agents' Actions.
+
+Different action names often have the same meanings, which could make some parts of our code become repetitive. Fortunately, we can define the synoynms so that we don't have to write all the functions for different actions that have the same meanings.
+
+```lua
+
+local actionName = "follow"
+
+local actionArray = {"follow", "stalk", "shadow"} -- You must include its own actions as well for this to work.
+
+DataPredictAgent:addAgentActionArray(actionName, actionArray)
+
+```
+
+Fortunately, I already have added list of actions directly under "dictionaryOfActionArray" to save your time.
+
 ## Creating Our Agents
 
 All agents are required to have a single server associated with it. This allows our agents to be able to chat with other players and have their own free will.
@@ -48,10 +64,38 @@ local agentDictionary = {
 
   serverName = "defaultServer" -- The server's name must be one of the servers that you have added to the DataPredict Agent instance.
 
-  
+  agentActionArray = {"follow"} -- You must add the top-level actions into this list. For example, we already set "shadow" as part of "follow", so we need to use "follow" as the top level action.
+
+  hiddenPrompt = "You are sweet and funny." -- This is the hidden prompt that you want to add to the players' messages.
+
+  initialChatPrompt = "Say that they are new here." -- This is when the player interacts with this agent for the first time.
+
+  hasGlobalMemory = true -- This allows your agent to remember all of its interations. By default, it is set to true.
+
+  hasLocalMemory = true -- This allows your agent to remember interactions between the player and the agent. By default, it is set to true.
 
 }
 
+```
 
+## Creating Our Interactors
+
+Once those have been created, we need to add a place to save the interactions with these agents. These interactors are often the players.
+
+It usually stores:
+
+  * The chat count between the interactor and the individual agents.
+
+  * The local memory between the interactor and the individual agents, provided that the "hasLocalMemory" is set to true.
 
 ```
+
+local interactorName = "player"
+
+local interactorDictionary = {} -- You can load this data from somewhere else as well if you want to keep the interactor's memories.
+
+DataPredictAgent:addInteractorDictionary(interactorName, interactorDictionary)
+
+```
+
+## 
