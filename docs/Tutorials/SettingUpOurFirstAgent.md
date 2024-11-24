@@ -12,7 +12,7 @@ local DataPredictAgentInstance = DataPredictAgent.new()
 
 By default, when creating another DataPredictAgentInstance by DataPredictAgent.new(), it will always return the very first instance you had created before.
 
-This means that your data is shared globally and you do not need to setup individual DataPredict Agent instances all over again.
+This means that your data is shared globally and we do not need to setup individual DataPredict Agent instances all over again.
 
 ## Connecting To Our Servers
 
