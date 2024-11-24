@@ -372,7 +372,7 @@ function AqwamAgentLibrary:splitMessageFromAction(response)
 	
 end
 
-function AqwamAgentLibrary:act(agentName, actionName, actionTarget)
+function AqwamAgentLibrary:act(agentName, agentActionName, agentActionTarget)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
@@ -386,7 +386,7 @@ function AqwamAgentLibrary:act(agentName, actionName, actionTarget)
 	
 	for actionKey, agentActionSynonymArray in dictionaryOfAgentActionArray do
 		
-		if (table.find(agentActionSynonymArray, actionName)) then
+		if (table.find(agentActionSynonymArray, agentActionName)) then
 			
 			if (table.find(agentActionArray, actionKey)) then
 				
@@ -396,11 +396,11 @@ function AqwamAgentLibrary:act(agentName, actionName, actionTarget)
 					
 					table.insert(agentActionToDoArray, actionKey) 
 					
-					table.insert(agentActionToDoTargetArray, actionTarget) 
+					table.insert(agentActionToDoTargetArray, agentActionTarget) 
 					
 				else
 					
-					agentActionToDoTargetArray[actionToDoArrayIndex] = actionTarget
+					agentActionToDoTargetArray[actionToDoArrayIndex] = agentActionTarget
 					
 				end	
 				
