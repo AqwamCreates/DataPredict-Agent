@@ -174,7 +174,7 @@ DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function)
 
 ```lua
 
-DataPredictAgent:bindFreeWillToAgent(agentName: string, functionToRun: function)
+DataPredictAgent:bindFreeWillToAgent(agentName: string, functionToRun: function): thread
 
 ```
 
@@ -186,13 +186,13 @@ DataPredictAgent:bindFreeWillToAgent(agentName: string, functionToRun: function)
 
 #### Returns:
 
-* thread: The thread that controls the agent's free will.
+* freeWillThread: The thread that controls the agent's free will.
 
 ### bindAgentActionToAgentSequential()
 
 ```lua
 
-DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToRun: function)
+DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToRun: function): thread
 
 ```
 
@@ -204,13 +204,13 @@ DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToR
 
 #### Returns:
 
-* thread: The thread that controls the agent's action.
+* actionThread: The thread that controls the agent's action.
 
 ### bindAgentActionToAgentParallel()
 
 ```lua
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentActionName: string, functionToRun: function)
+DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentActionName: string, functionToRun: function): thread
 
 ```
 
@@ -224,4 +224,4 @@ DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentActionNa
 
 #### Returns:
 
-* thread: The thread that controls the agent's action.
+* actionThread: The thread that controls the agent's action.
