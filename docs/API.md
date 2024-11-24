@@ -116,7 +116,7 @@ DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToR
 
 ```lua
 
-DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentAction: string, functionToRun: function)
+DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentActionName: string, functionToRun: function)
 
 ```
 
