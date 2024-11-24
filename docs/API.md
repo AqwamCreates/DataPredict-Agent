@@ -344,6 +344,24 @@ DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function): th
 
 * chatThread: The thread that controls the agent's chatting ability.
 
+### bindChatToAgent()
+
+```lua
+
+DataPredictAgent:bindSenseoAgent(agentName: string, functionToRun: function): thread
+
+```
+
+#### Parameters:
+
+* agentName: The name of the agent to give the sensing ability to.
+
+* functionToRun: The function to be called when the agent senses.
+
+#### Returns:
+
+* senseThread: The thread that controls the agent's sensing ability.
+
 ### bindFreeWillToAgent()
 
 ```lua
