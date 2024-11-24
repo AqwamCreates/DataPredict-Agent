@@ -598,7 +598,7 @@ function AqwamAgentLibrary:bindSenseToAgent(agentName, functionToRun)
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 			
-			agentDictionary.senseMemory = functionToRun()
+			agentDictionary.senseMemory = functionToRun() or ""
 
 			task.wait()
 
