@@ -47,13 +47,13 @@ local actionSeperatorString = ","
 local hiddenActionToDoPrompt = [[
 Speak like a regular human. You may or may not have a conversation with an another player depending on the situation.
 
-At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lowercase. No punctuations. No spaces. For example: "{action_to_do}attack,look"
+At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lower case. No punctuations. No spaces. For example: "{action_to_do}attack,look"
 
-You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letters' casing must match. Otherwise, all letters must be in lowercase. No punctuations. No spaces. If there is no target, then write "none" after the {action_to_do_target}. For example: "{action_to_do}attack{action_to_do_target}enemy"
+You also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letter cases, punctuations and spaces must match. Otherwise, all letters must be in lower case, as well as no punctuations and no spaces. If there is no target, then write "none" after the {action_to_do_target}. For example: "{action_to_do}attack{action_to_do_target}enemy"
 
 Basically if there is three actions then you do this: "{action_to_do}follow,protect,fight{action_to_do_target}player,player,none". From the example, "follow" and "protect" actions pairs with "player" as the action target, and "attack" action pairs with "none".
 
-When it comes to your regular dialogue that comes before the {action_to_do} and {action_to_do_target}, use proper punctuations and letter cases unless stated otherwise.
+When it comes to your regular dialogue that comes before the {action_to_do} and {action_to_do_target}, use proper letter cases, punctuations and spaces unless stated otherwise.
 ]]
 
 --------------------------------------------------------------------------------
