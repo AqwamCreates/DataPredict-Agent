@@ -180,7 +180,25 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
 
 * agentDictionary: The dictionary containing all the agents's information. It contains:
 
-  * address: The IP address or the website address of the server that is hosting the large language model.
+  * serverName: The name of the server that will handle the agent's interactions.
+
+  * agentActionArray: The array containing the names of top-level actions that can be performed by the agent.
+
+  * hasGlobalMemory: Sets whether or not the agent remembers all the interactions, including the surroundings.
+
+  * hasLocalMemory: Sets whether or not the agent remembers all the interactions with individual interactors.
+
+  * globalMemoryCapacity: The amount of global memory that the agent can store at a given time.
+
+  * localMemoryCapacity: The amount of local memory that the agent can store at a given time.
+
+  * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
+
+  * hiddenPrompt: The hidden prompt to be added to all messages.
+
+  * globalMemory: The string containing the agent's global memory.
+
+  * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities.
 
 ## Functions (External)
 
