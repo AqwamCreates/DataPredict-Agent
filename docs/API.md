@@ -144,6 +144,8 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
 
   * localMemoryCapacity: The amount of local memory that the agent can store at a given time. (Default: 25)
 
+  * initialHiddenChatPrompt: The initial hidden chat prompt to be added to all messages. (Default: nil)
+
   * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
 
   * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
