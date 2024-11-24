@@ -1,4 +1,4 @@
-# DataPredict API Reference
+# API Reference
 
 ## Constructors
 
