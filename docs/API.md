@@ -156,7 +156,7 @@ DataPredictAgent:act(agentName: string, agentActionName: string, agentActionTarg
 
 ```lua
 
-DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function)
+DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function): thread
 
 ```
 
@@ -168,7 +168,7 @@ DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function)
 
 #### Returns:
 
-* thread: The thread that controls the agent's chatting ability.
+* chatThread: The thread that controls the agent's chatting ability.
 
 ### bindFreeWillToAgent()
 
