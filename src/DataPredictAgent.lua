@@ -40,7 +40,7 @@ local agentActionToDoString = "{action_to_do}"
 
 local agentActionToDoTargetString = "{action_to_do_target}"
 
-local memorySeperator = "[Memory Divider]"
+local memorySeperator = "[Memory Seperator]"
 
 local actionSeperatorString = ","
 
@@ -55,7 +55,7 @@ Basically if there is three actions then you do this: "{action_to_do}follow,prot
 
 When it comes to your regular dialogue that comes before the {action_to_do} and {action_to_do_target}, use proper letter cases, punctuations and spaces unless stated otherwise.
 
-Also, in your regular dialogue that comes before the {action_to_do} and {action_to_do_target}, you may include actions that you are performing provided that they are between the asterisks, but make sure the additions of the actions depends on the situation. For example "*kisses you*", "*is drinking coffee", "*has hugged you*" and "*will be waiting for you*"
+Also, in your regular dialogue that comes before the {action_to_do} and {action_to_do_target}, you may include actions that you are performing provided that they are between the asterisks, but make sure the additions of the actions depends on the situation. For example, "*smiles*", "*kisses you*", "*is drinking coffee", "*has hugged you*" and "*will be waiting for you*"
 ]]
 
 --------------------------------------------------------------------------------
@@ -182,7 +182,7 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
 	
-	agentDictionary.globalMemory = agentDictionary.globalMemory or ""
+	agentDictionary.globalMemoryArray = agentDictionary.globalMemoryArray or {}
 	
 	agentDictionary.senseMemory = agentDictionary.senseMemory or ""
 	
@@ -290,15 +290,25 @@ function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
-	if (agentDictionary.hasGlobalMemory) then
+	if not (agentDictionary.hasGlobalMemory) then return "" end
+	
+	local globalMemoryArray = agentDictionary.globalMemoryArray
 
-		return "--Start Of Your Memory With The World--\n\n" .. (agentDictionary.globalMemory or "") .. "\n\n--End Of Your Memory With The World--"
-		
-	else
-		
-		return ""
+	local globalMemoryPrompt = "--Start Of Your Memory With The World--\n\n"
+
+	local numberOfGlobalMemories = #globalMemoryPrompt
+
+	for i, globalMemory in ipairs(globalMemoryArray) do
+
+		globalMemoryPrompt = globalMemoryPrompt .. globalMemory
+
+		if (i < numberOfGlobalMemories) then globalMemoryPrompt = globalMemoryPrompt .. "\n\n" .. memorySeperator end
 
 	end
+	
+	globalMemoryPrompt = globalMemoryPrompt .. "\n\n--End Of Your Memory With The World--"
+
+	return globalMemoryPrompt
 	
 end
 
@@ -308,19 +318,29 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 	
 	local interactorDictionary 
 	
-	if (interactorName) then interactorDictionary = self:getInteractorDictionary(interactorName) end
+	if (interactorName) then interactorDictionary = self:getInteractorDictionary(interactorName) end 
 
-	if (agentDictionary.hasLocalMemory) and (interactorDictionary) then
-		
-		local agentData = interactorDictionary[agentName] or {}
-		
-		return "--Start Of Your Memory With " .. interactorName .. "--\n\n" .. (agentData.localMemory or "") .. "\n\n--End Of Your Memory With ".. interactorName .. "--"
-		
-	else
-		
-		return ""
+	if not (agentDictionary.hasLocalMemory) or not (interactorDictionary) then return "" end
+	
+	local agentData = interactorDictionary[agentName] or {}
 
+	local localMemoryArray = agentData.localMemoryArray or {}
+
+	local localMemoryPrompt = "--Start Of Your Memory With " .. interactorName .. "--\n\n"
+	
+	local numberOfLocalMemories = #localMemoryArray
+	
+	for i, localMemory in ipairs(localMemoryArray) do
+		
+		localMemoryPrompt = localMemoryPrompt .. localMemory
+		
+		if (i < numberOfLocalMemories) then localMemoryPrompt = localMemoryPrompt .. "\n\n" .. memorySeperator end
+		
 	end
+	
+	localMemoryPrompt = localMemoryPrompt .. "\n\n--End Of Your Memory With ".. interactorName .. "--"
+
+	return localMemoryPrompt
 	
 end
 
@@ -442,25 +462,13 @@ function AqwamAgentLibrary:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
 	if (not agentDictionary.hasGlobalMemory) then return end
 	
-	local globalMemory = agentDictionary.globalMemory or ""
+	local globalMemoryArray = agentDictionary.globalMemoryArray
 	
-	local globalMemoryArray = string.split(globalMemory, memorySeperator)
+	table.insert(globalMemoryArray, memoryToAdd)
 	
-	local newGlobalMemory
-	
-	if (agentDictionary.localMemoryCapacity > #globalMemoryArray) then
+	if (#globalMemoryArray <= agentDictionary.globalMemoryCapacity) then return end
 
-		table.remove(globalMemoryArray, 1)
-
-		newGlobalMemory = table.concat(globalMemoryArray)
-
-	else
-
-		newGlobalMemory = globalMemory
-
-	end 
-
-	agentDictionary.globalMemory = newGlobalMemory .. "\n\n" .. memorySeperator .. "\n\n" .. memoryToAdd
+	table.remove(globalMemoryArray, 1)
 	
 end
 
@@ -474,27 +482,15 @@ function AqwamAgentLibrary:updateAgentLocalMemory(agentName, interactorName, mem
 	
 	local agentData = interactorDictionary[agentName] or {}
 	
-	local localMemory = agentData.localMemory or ""
+	local localMemoryArray = agentData.localMemoryArray or {}
 	
-	local localMemoryArray = string.split(localMemory, memorySeperator)
+	agentData.localMemoryArray = localMemoryArray
 	
-	local newLocalMemory
+	table.insert(localMemoryArray, memoryToAdd)
 	
-	if (agentDictionary.localMemoryCapacity > #localMemoryArray) then
+	if (#localMemoryArray <= agentDictionary.localMemoryCapacity) then return end
 		
-		table.remove(localMemoryArray, 1)
-		
-		newLocalMemory = table.concat(localMemoryArray)
-		
-	else
-		
-		newLocalMemory = localMemory
-		
-	end 
-	
-	agentData.localMemory = newLocalMemory .. "\n\n" .. memorySeperator .. "\n\n" .. memoryToAdd	
-
-	interactorDictionary[agentName] = agentData
+	table.remove(localMemoryArray, 1)
 	
 end
 
