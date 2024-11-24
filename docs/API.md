@@ -150,6 +150,20 @@ DataPredictAgent:act(agentName: string, agentActionName: string, agentActionTarg
 
 * agentActionTarget: The target of the selected agent's action.
 
+### queueAgentChat()
+
+```lua
+
+DataPredictAgent:queueAgentChat(agentName: string, agentMessage: string)
+
+```
+
+#### Parameters:
+
+* agentName: The name of the agent that will queue the message.
+
+* agentMessage: The message content inside of the agent's message.
+
 ## Events
 
 ### bindChatToAgent()
