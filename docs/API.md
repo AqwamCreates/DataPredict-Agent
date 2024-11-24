@@ -76,6 +76,24 @@ DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
 ## Events
 
+### bindChatToAgent()
+
+```lua
+
+DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function)
+
+```
+
+#### Parameters:
+
+ * agentName: The name of the agent to give the chatting ability to.
+
+ * functionToRun: The function to be called when the agent chats.
+
+#### Returns:
+
+ * thread: The thread that controls the agent's chatting ability.
+
 ### bindFreeWillToAgent()
 
 ```lua
