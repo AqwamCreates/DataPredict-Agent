@@ -548,7 +548,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 	
-	local memoryToAdd = interactorName .. ": \n\n" .. interactorMessage .. "\n\nYou: \n\n" .. response
+	local memoryToAdd = senseMemoryPrompt .. "\n\n" .. interactorName .. ": \n\n" .. interactorMessage .. "\n\nYou: \n\n" .. response
 	
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
@@ -774,7 +774,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 
 				for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 				
-				local memoryToAdd = "Your Free Will: \n\n" .. freeWillMessage .. "\n\nYou: \n\n" .. response
+				local memoryToAdd = senseMemoryPrompt .. "\n\n" .. "Your Free Will: \n\n" .. freeWillMessage .. "\n\nYou: \n\n" .. response
 				
 				self:updateAgentGlobalMemory(agentName, memoryToAdd)
 				
