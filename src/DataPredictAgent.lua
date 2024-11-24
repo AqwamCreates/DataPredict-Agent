@@ -294,19 +294,19 @@ function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
 	
 	local globalMemoryArray = agentDictionary.globalMemoryArray
 
-	local globalMemoryPrompt = "--Start Of Your Memory With The World--\n\n"
+	local globalMemoryPrompt = "-- Start Of Your Memory With The World --\n\n"
 
-	local numberOfGlobalMemories = #globalMemoryPrompt
+	local numberOfGlobalMemories = #globalMemoryArray
 
 	for i, globalMemory in ipairs(globalMemoryArray) do
 
 		globalMemoryPrompt = globalMemoryPrompt .. globalMemory
 
-		if (i < numberOfGlobalMemories) then globalMemoryPrompt = globalMemoryPrompt .. "\n\n" .. memorySeperator end
+		if (i < numberOfGlobalMemories) then globalMemoryPrompt = globalMemoryPrompt .. "\n\n" .. memorySeperator .. "\n\n" end
 
 	end
 	
-	globalMemoryPrompt = globalMemoryPrompt .. "\n\n--End Of Your Memory With The World--"
+	globalMemoryPrompt = globalMemoryPrompt .. "\n\n-- End Of Your Memory With The World --"
 
 	return globalMemoryPrompt
 	
@@ -326,7 +326,7 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 
 	local localMemoryArray = agentData.localMemoryArray or {}
 
-	local localMemoryPrompt = "--Start Of Your Memory With " .. interactorName .. "--\n\n"
+	local localMemoryPrompt = "-- Start Of Your Memory With " .. interactorName .. " --\n\n"
 	
 	local numberOfLocalMemories = #localMemoryArray
 	
@@ -334,11 +334,11 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 		
 		localMemoryPrompt = localMemoryPrompt .. localMemory
 		
-		if (i < numberOfLocalMemories) then localMemoryPrompt = localMemoryPrompt .. "\n\n" .. memorySeperator end
+		if (i < numberOfLocalMemories) then localMemoryPrompt = localMemoryPrompt .. "\n\n" .. memorySeperator .. "\n\n" end
 		
 	end
 	
-	localMemoryPrompt = localMemoryPrompt .. "\n\n--End Of Your Memory With ".. interactorName .. "--"
+	localMemoryPrompt = localMemoryPrompt .. "\n\n-- End Of Your Memory With ".. interactorName .. " --"
 
 	return localMemoryPrompt
 	
@@ -352,7 +352,7 @@ function AqwamAgentLibrary:createAgentSenseMemoryPrompt(agentName)
 
 	if (senseMemory) then
 
-		return "--Start Of Your Memory With Your Senses--\n\n" .. senseMemory .. "\n\n--End Of Your Memory With Your Senses--"
+		return "-- Start Of Your Memory With Your Senses --\n\n" .. senseMemory .. "\n\n-- End Of Your Memory With Your Senses --"
 
 	else
 
