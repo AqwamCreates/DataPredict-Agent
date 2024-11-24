@@ -424,7 +424,7 @@ DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentActionNa
 
 * agentName: The name of the agent to bind the agent's action to.
 
-* agentAction: The name of the agent action so only that particular action a particular function.
+* agentActionName: The name of the agent action so only that particular action a particular function.
 
 * functionToRun: The function to be called when the agent's action is called by the agent.
 
