@@ -56,7 +56,7 @@ DataPredictAgent:removeServerDictionary(serverName: string)
 
 ```lua
 
-DataPredictAgent:getServerDictionary(serverName: string)
+DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
 ```
 
