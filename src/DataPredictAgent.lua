@@ -178,7 +178,7 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
 	
-	agentDictionary.globalMemory = ""
+	agentDictionary.globalMemory = agentDictionary.globalMemory or ""
 	
 	agentDictionary.model = agentDictionary.model
 	
