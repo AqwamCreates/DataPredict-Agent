@@ -192,6 +192,8 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
 
   * localMemoryCapacity: The amount of local memory that the agent can store at a given time.
 
+  * initialHiddenChatPrompt: The initial hidden chat prompt to be added to all messages.
+
   * initialHiddenPrompt: The initial hidden prompt to be added to all messages.
 
   * hiddenPrompt: The hidden prompt to be added to all messages.
@@ -199,6 +201,48 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
   * globalMemory: The string containing the agent's global memory.
 
   * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities.
+
+### addInteractorDictionary()
+
+```lua
+
+DataPredictAgent:addInteractorDictionary(interactorName: string, interactorDictionary: dictionary)
+
+```
+
+#### Parameters:
+
+* interactorName: The name of the agent to be added to the DataPredict Agent instance.
+
+* interactorDictionary: The dictionary containing all the information related to individual agents that has been interacted by the interactor.
+
+### removeAgentDictionary()
+
+```lua
+
+DataPredictAgent:removeInteractorDictionary(interactorName: string)
+
+```
+
+#### Parameters:
+
+* interactorName: The name of the interactor to be removed from the DataPredict Agent instance.
+
+### getInteractorDictionary()
+
+```lua
+
+DataPredictAgent:getInteractorDictionary(interactorName: string): dictionary
+
+```
+
+#### Parameters:
+
+* interactorName: The name of the interactor to get the interactor dictionary from the DataPredict Agent instance.
+
+#### Returns:
+
+* interactorDictionary: The dictionary containing all the information related to individual agents that has been interacted by the interactor.
 
 ## Functions (External)
 
