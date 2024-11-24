@@ -134,6 +134,8 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
 
   * serverName: The name of the server that will handle the agent's interactions.
 
+  * agentActionArray: The array containing the names of top-level actions that can be performed by the agent. (Default: {})
+
   * hasGlobalMemory: Sets whether or not the agent remembers all the interactions, including the surroundings. (Default: true)
 
   * hasLocalMemory: Sets whether or not the agent remembers all the interactions with individual interactors. (Default: true)
@@ -145,6 +147,8 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
   * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
 
   * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
+
+  * globalMemory: The string containing the agent's global memory. (Default: nil)
 
   * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities. (Default: nil)
 
