@@ -74,7 +74,7 @@ DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
   * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding.
 
-### addServerArray()
+### addAgentActionArray()
 
 ```lua
 
@@ -84,15 +84,9 @@ DataPredictAgent:addAgentActionArray(agentActionName: string, agentActionArray: 
 
 #### Parameters:
 
-* serverName: The name of the server to be added to the DataPredict Agent instance.
+* agentActionName: The name of the agent's action to be added to the DataPredict Agent instance.
 
-* serverDictionary: The dictionary containing all the server's information. It contains:
-
-  * address: The IP address or the website address of the server that is hosting the large language model.
-
-  * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding. (Default: message)
-
-  * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding. (Default: answer)
+* agentActionArray: The array containing all of the synonyms related to the given agent's action name.
 
 ### removeAgentActionArray()
 
@@ -104,7 +98,7 @@ DataPredictAgent:removeAgentActionArray(agentActionName: string)
 
 #### Parameters:
 
-* serverName: The name of the server to be removed from the DataPredict Agent instance.
+* agentActionName: The name of the agent's action to be removed from the DataPredict Agent instance.
 
 ### getAgentActionArray()
 
@@ -116,17 +110,11 @@ DataPredictAgent:getAgentActionArray(agentActionName: string): array
 
 #### Parameters:
 
-* serverName: The name of the server to get the server dictionary from the DataPredict Agent instance.
+* agentActionName: The name of the agent's action to get the agent action array from the DataPredict Agent instance.
 
 #### Returns:
 
-* serverDictionary: The dictionary containing all the server's information. It contains:
-
-  * address: The IP address or the website address of the server that is hosting the large language model.
-
-  * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding.
-
-  * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding.
+* agentActionArray: The array containing all of the synonyms related to the given agent's action name.
 
 ## Functions (External)
 
@@ -160,7 +148,7 @@ DataPredictAgent:act(agentName: string, agentActionName: string, agentActionTarg
 
 * agentActionName: The name of the agent's action to be performed.
 
-* agentActionTarget: The agentActionTarget
+* agentActionTarget: The target of the selected agent's action.
 
 ## Events
 
