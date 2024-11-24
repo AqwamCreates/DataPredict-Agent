@@ -36,11 +36,11 @@ DataPredictAgent:addServerDictionary(serverName: string, serverDictionary: dicti
 
 * serverDictionary: The dictionary containing all the server's information. It contains:
 
- * address: The IP address or the website address of the server that is hosting the large language model.
+  * address: The IP address or the website address of the server that is hosting the large language model.
 
- * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding. (Default: "message")
+  * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding. (Default: "message")
 
- * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding. (Default: "answer")
+  * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding. (Default: "answer")
 
 ### removeServerDictionary()
 
@@ -70,11 +70,11 @@ DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
 * serverDictionary: The dictionary containing all the server's information. It contains:
 
- * address: The IP address or the website address of the server that is hosting the large language model.
+  * address: The IP address or the website address of the server that is hosting the large language model.
 
- * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding.
+  * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding.
 
- * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding.
+  * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding.
 
 ### addAgentActionArray()
 
@@ -132,19 +132,19 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
 
 * agentDictionary: The dictionary containing all the agents's information. It contains:
 
- * serverName: The name of the server that will handle the agent's interactions.
+  * serverName: The name of the server that will handle the agent's interactions.
 
- * hasGlobalMemory: Sets whether or not the agent remembers all the interactions, including the surroundings. (Default: true)
+  * hasGlobalMemory: Sets whether or not the agent remembers all the interactions, including the surroundings. (Default: true)
 
- * hasLocalMemory: Sets whether or not the agent remembers all the interactions with individual interactors. (Default: true)
+  * hasLocalMemory: Sets whether or not the agent remembers all the interactions with individual interactors. (Default: true)
 
- * globalMemoryCapacity: The amount of global memory that the agent can store at a given time. (Default: 100)
+  * globalMemoryCapacity: The amount of global memory that the agent can store at a given time. (Default: 100)
 
- * localMemoryCapacity: The amount of local memory that the agent can store at a given time. (Default: 25)
+  * localMemoryCapacity: The amount of local memory that the agent can store at a given time. (Default: 25)
 
- * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
+  * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
 
- * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
+  * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
 
 ### removeAgentDictionary()
 
