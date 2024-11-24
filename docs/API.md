@@ -74,7 +74,7 @@ DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
   * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding.
 
-## Functions
+## Functions (External)
 
 ### chat()
 
@@ -91,6 +91,14 @@ DataPredictAgent:bindChatToAgent(agentName: string, interactorName: string, inte
 * interactorName: The name of the interactor that will send the interactor's message.
 
 * interactorMessage: The message content inside of the interactor's message.
+
+### act()
+
+```lua
+
+DataPredictAgent:act(agentName: string, agentAction: string, agentTarget: string)
+
+```
 
 ## Events
 
