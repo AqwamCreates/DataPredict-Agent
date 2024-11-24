@@ -24,7 +24,7 @@ DataPredictAgent.new(isGlobalInstance: boolean): DataPredictAgentInstance
 
 ```lua
 
-addServerDictionary(serverName: string, serverDictionary: dictionary)
+DataPredictAgent:addServerDictionary(serverName: string, serverDictionary: dictionary)
 
 ```
 
@@ -44,7 +44,7 @@ addServerDictionary(serverName: string, serverDictionary: dictionary)
 
 ```lua
 
-removeServerDictionary(serverName: string)
+DataPredictAgent:removeServerDictionary(serverName: string)
 
 ```
 
