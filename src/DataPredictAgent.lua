@@ -602,7 +602,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentSequential(agentName, functionT
 	
 end
 
-function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction, functionToRun)
+function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentActionName, functionToRun)
 	
 	local thread
 
@@ -622,7 +622,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 
-			agentActionArrayIndex = table.find(agentActionToDoArray, agentAction)
+			agentActionArrayIndex = table.find(agentActionToDoArray, agentActionName)
 
 			if (agentActionArrayIndex) then
 				
