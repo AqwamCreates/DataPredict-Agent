@@ -76,3 +76,58 @@ DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
 ## Events
 
+### bindFreeWillToAgent()
+
+```lua
+
+DataPredictAgent:bindFreeWillToAgent(agentName: string, functionToRun: function)
+
+```
+
+#### Parameters:
+
+ * agentName: The name of the agent to give free will to.
+
+ * functionToRun: The function to be called when agent's free will is activated.
+
+#### Returns:
+
+ * thread: The thread that controls the agent's free will.
+
+### bindAgentActionToAgentSequential()
+
+```lua
+
+DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToRun: function)
+
+```
+
+#### Parameters:
+
+ * agentName: The name of the agent to bind agent's action to.
+
+ * functionToRun: The function to be called when agent's action is called by the agent.
+
+#### Returns:
+
+ * thread: The thread that controls the agent's action.
+
+### bindAgentActionToAgentParallel()
+
+```lua
+
+DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentAction: string, functionToRun: function)
+
+```
+
+#### Parameters:
+
+ * agentName: The name of the agent to bind agent's action to.
+
+* agentAction: The name of the agent action so only that particular action a particular function.
+
+ * functionToRun: The function to be called when agent's action is called by the agent.
+
+#### Returns:
+
+ * thread: The thread that controls the agent's action.
