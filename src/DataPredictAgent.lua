@@ -288,7 +288,7 @@ function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
 	
 	if (agentDictionary.hasGlobalMemory) then
 
-		return "--Start Of Your Memory With The World--\n\n" .. agentDictionary.globalMemory .. "\n\n--End Of Your Memory With The World--"
+		return "--Start Of Your Memory With The World--\n\n" .. (agentDictionary.globalMemory or "") .. "\n\n--End Of Your Memory With The World--"
 		
 	else
 		
