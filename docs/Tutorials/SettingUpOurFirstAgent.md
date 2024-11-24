@@ -158,7 +158,7 @@ The agents can also sense its surroundings. For this to happen, you need to call
 
 ```lua
 
-DataPredict:bindAgentActionToAgentSequential(agentName, function() 
+DataPredict:bindSenseToAgent(agentName, function() 
 
   local sense -- Your code that converts the surroundings into a string.
 
