@@ -494,6 +494,15 @@ function AqwamAgentLibrary:updateAgentLocalMemory(agentName, interactorName, mem
 	
 end
 
+function AqwamAgentLibrary:updateAgentSenseMemory(agentName, memoryToAdd)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	agentDictionary.senseMemory = memoryToAdd
+
+end
+
+
 function AqwamAgentLibrary:queueAgentChat(agentName, message)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
