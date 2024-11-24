@@ -140,7 +140,7 @@ DataPredictAgent:bindChatToAgent(agentName: string, interactorName: string, inte
 
 #### Parameters:
 
- * agentName: The name of the agent that will receive the interactor's message.
+* agentName: The name of the agent that will receive the interactor's message.
 
 * interactorName: The name of the interactor that will send the interactor's message.
 
@@ -150,9 +150,17 @@ DataPredictAgent:bindChatToAgent(agentName: string, interactorName: string, inte
 
 ```lua
 
-DataPredictAgent:act(agentName: string, agentAction: string, agentTarget: string)
+DataPredictAgent:act(agentName: string, agentActionName: string, agentActionTarget: string)
 
 ```
+
+### Parameters:
+
+* agentName: The name of the agent that will perform the action.
+
+* agentActionName: The name of the agent's action to be performed.
+
+* agentActionTarget: The agentActionTarget
 
 ## Events
 
@@ -166,13 +174,13 @@ DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function)
 
 #### Parameters:
 
- * agentName: The name of the agent to give the chatting ability to.
+* agentName: The name of the agent to give the chatting ability to.
 
- * functionToRun: The function to be called when the agent chats.
+* functionToRun: The function to be called when the agent chats.
 
 #### Returns:
 
- * thread: The thread that controls the agent's chatting ability.
+* thread: The thread that controls the agent's chatting ability.
 
 ### bindFreeWillToAgent()
 
@@ -184,13 +192,13 @@ DataPredictAgent:bindFreeWillToAgent(agentName: string, functionToRun: function)
 
 #### Parameters:
 
- * agentName: The name of the agent to give the free will to.
+* agentName: The name of the agent to give the free will to.
 
- * functionToRun: The function to be called when agent's free will is activated.
+* functionToRun: The function to be called when agent's free will is activated.
 
 #### Returns:
 
- * thread: The thread that controls the agent's free will.
+* thread: The thread that controls the agent's free will.
 
 ### bindAgentActionToAgentSequential()
 
@@ -202,13 +210,13 @@ DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToR
 
 #### Parameters:
 
- * agentName: The name of the agent to bind the agent's action to.
+* agentName: The name of the agent to bind the agent's action to.
 
- * functionToRun: The function to be called when the agent's action is called by the agent.
+* functionToRun: The function to be called when the agent's action is called by the agent.
 
 #### Returns:
 
- * thread: The thread that controls the agent's action.
+* thread: The thread that controls the agent's action.
 
 ### bindAgentActionToAgentParallel()
 
@@ -220,12 +228,12 @@ DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentActionNa
 
 #### Parameters:
 
- * agentName: The name of the agent to bind the agent's action to.
+* agentName: The name of the agent to bind the agent's action to.
 
 * agentAction: The name of the agent action so only that particular action a particular function.
 
- * functionToRun: The function to be called when the agent's action is called by the agent.
+* functionToRun: The function to be called when the agent's action is called by the agent.
 
 #### Returns:
 
- * thread: The thread that controls the agent's action.
+* thread: The thread that controls the agent's action.
