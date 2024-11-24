@@ -52,6 +52,8 @@ At the end of your message, you must append {action_to_do} and list of action yo
 You will also must append {action_to_do_target} right after the list of actions and list the targets for that particular action that was stated in {action_to_do}. For proper nouns, all letters' casing must match. Otherwise, all letters must be in lowercase. No punctuations. No spaces. If there is no target, then write "none" after the {action_to_do_target}. For example: "{action_to_do}attack{action_to_do_target}enemy"
 
 Basically if there is three actions then you do this: "{action_to_do}follow,protect,fight{action_to_do_target}player,player,none". From the example, "follow" and "protect" actions pairs with "player" as the action target, and "attack" action pairs with "none".
+
+When it comes to your regular dialogue that comes before the {action_to_do} and {action_to_do_target}, use proper punctuations and casing unless stated otherwise.
 ]]
 
 --------------------------------------------------------------------------------
