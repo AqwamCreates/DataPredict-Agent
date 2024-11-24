@@ -122,7 +122,7 @@ DataPredictAgent:getAgentActionArray(agentActionName: string): array
 
 ```lua
 
-DataPredictAgent:bindChatToAgent(agentName: string, interactorName: string, interactorMessage: string)
+DataPredictAgent:chat(agentName: string, interactorName: string, interactorMessage: string)
 
 ```
 
