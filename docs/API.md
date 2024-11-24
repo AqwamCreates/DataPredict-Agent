@@ -76,7 +76,7 @@ DataPredictAgent:getServerDictionary(serverName: string): dictionary
 
 ## Functions
 
-## chat()
+### chat()
 
 ```lua
 
