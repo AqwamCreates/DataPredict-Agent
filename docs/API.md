@@ -146,7 +146,7 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
 
   * initialHiddenChatPrompt: The initial hidden chat prompt to be added to all messages. (Default: nil)
 
-  * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
+  * addOnHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
 
   * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
 
@@ -196,7 +196,7 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
 
   * initialHiddenChatPrompt: The initial hidden chat prompt to be added to all messages.
 
-  * initialHiddenPrompt: The initial hidden prompt to be added to all messages.
+  * addOnHiddenPrompt: The add on hidden prompt to be added to all messages.
 
   * hiddenPrompt: The hidden prompt to be added to all messages.
 
@@ -293,6 +293,36 @@ DataPredictAgent:queueAgentChat(agentName: string, agentMessage: string)
 * agentName: The name of the agent that will queue the message.
 
 * agentMessage: The message content inside of the agent's message.
+
+### updateAgentGlobalMemory()
+
+```lua
+
+DataPredictAgent:updateAgentGlobalMemory(agentName: string, memoryToAdd: string)
+
+```
+
+#### Parameters:
+
+* agentName: The name of the agent that will queue the message.
+
+* memoryToAdd: The memory to add to the agent's global memory.
+
+### updateAgentLocalMemory()
+
+```lua
+
+DataPredictAgent:updateAgentLocalMemory(agentName: string, interactorName: string, memoryToAdd: string)
+
+```
+
+#### Parameters:
+
+* agentName: The name of the agent that will queue the message.
+
+* interactorName: The name of the interactor that the agent interacted with inside the memory that will be added.
+
+* memoryToAdd: The memory to add to the agent's local memory.
 
 ## Events
 
