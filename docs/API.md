@@ -294,6 +294,20 @@ DataPredictAgent:queueAgentChat(agentName: string, agentMessage: string)
 
 * agentMessage: The message content inside of the agent's message.
 
+### updateAgentSenseMemory()
+
+```lua
+
+DataPredictAgent:updateAgentSenseMemory(agentName: string, memoryToAdd: string)
+
+```
+
+#### Parameters:
+
+* agentName: The name of the agent that will store the sense memory.
+
+* memoryToAdd: The memory to add to the agent's sense memory.
+
 ### updateAgentGlobalMemory()
 
 ```lua
@@ -304,7 +318,7 @@ DataPredictAgent:updateAgentGlobalMemory(agentName: string, memoryToAdd: string)
 
 #### Parameters:
 
-* agentName: The name of the agent that will queue the message.
+* agentName: The name of the agent that will store the global memory.
 
 * memoryToAdd: The memory to add to the agent's global memory.
 
@@ -318,7 +332,7 @@ DataPredictAgent:updateAgentLocalMemory(agentName: string, interactorName: strin
 
 #### Parameters:
 
-* agentName: The name of the agent that will queue the message.
+* agentName: The name of the agent that will store the local memory.
 
 * interactorName: The name of the interactor that the agent interacted with inside the memory that will be added.
 
