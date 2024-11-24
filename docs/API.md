@@ -86,7 +86,7 @@ DataPredictAgent:bindFreeWillToAgent(agentName: string, functionToRun: function)
 
 #### Parameters:
 
- * agentName: The name of the agent to give free will to.
+ * agentName: The name of the agent to give the free will to.
 
  * functionToRun: The function to be called when agent's free will is activated.
 
@@ -104,9 +104,9 @@ DataPredictAgent:bindAgentActionToAgentSequential(agentName: string, functionToR
 
 #### Parameters:
 
- * agentName: The name of the agent to bind agent's action to.
+ * agentName: The name of the agent to bind the agent's action to.
 
- * functionToRun: The function to be called when agent's action is called by the agent.
+ * functionToRun: The function to be called when the agent's action is called by the agent.
 
 #### Returns:
 
@@ -122,11 +122,11 @@ DataPredictAgent:bindAgentActionToAgentParallel(agentName: string, agentAction: 
 
 #### Parameters:
 
- * agentName: The name of the agent to bind agent's action to.
+ * agentName: The name of the agent to bind the agent's action to.
 
 * agentAction: The name of the agent action so only that particular action a particular function.
 
- * functionToRun: The function to be called when agent's action is called by the agent.
+ * functionToRun: The function to be called when the agent's action is called by the agent.
 
 #### Returns:
 
