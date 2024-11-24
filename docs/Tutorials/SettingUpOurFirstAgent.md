@@ -152,6 +152,22 @@ end)
 
 ```
 
+## Enabling Our Agent Ability To Sense Its Surroundings
+
+The agents can also sense its surroundings. For this to happen, you need to call the bindSenseToAgent() function.
+
+```lua
+
+DataPredict:bindAgentActionToAgentSequential(agentName, function() 
+
+  local sense -- Your code that converts the surroundings into a string.
+
+  return sense
+
+end)
+
+```
+
 ## In Conclusion
 
 Although the agent setup can be quite long, it allows us to have greater flexibility, power and control in the agents' actions, dialogues and so on.
