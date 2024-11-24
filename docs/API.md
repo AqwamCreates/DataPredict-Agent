@@ -146,6 +146,8 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
 
   * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
 
+  * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities. (Default: nil)
+
 ### removeAgentDictionary()
 
 ```lua
