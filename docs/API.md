@@ -204,7 +204,7 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
 
   * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities.
 
-### addInteractorDictionary()
+### removeInteractorDictionary()
 
 ```lua
 
