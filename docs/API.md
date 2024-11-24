@@ -192,7 +192,7 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
 
   * localMemoryCapacity: The amount of local memory that the agent can store at a given time.
 
-  * initialHiddenPrompt: The initial hidden prompt to be added to all messages. (Default: nil)
+  * initialHiddenPrompt: The initial hidden prompt to be added to all messages.
 
   * hiddenPrompt: The hidden prompt to be added to all messages.
 
