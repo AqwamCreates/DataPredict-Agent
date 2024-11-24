@@ -1,11 +1,5 @@
 ## DataPredict API Reference
 
-# Quick Links
-
-* [Constructors](##Constructors)
-
- * [new()](###new()) 
-
 ## Constructors
 
 ### new()
