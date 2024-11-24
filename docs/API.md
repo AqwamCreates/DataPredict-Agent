@@ -18,7 +18,7 @@ DataPredictAgent.new(isGlobalInstance: boolean): DataPredictAgentInstance
 
 * DataPredictAgentInstance: The created DataPredict Agent instance.
 
-## Dictionary Control Functions
+## Functions (Dictionary-Related)
 
 ### addServerDictionary()
 
