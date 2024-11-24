@@ -130,7 +130,7 @@ function AqwamAgentLibrary:addServerDictionary(serverName, serverDictionary)
 	
 	if (dictionaryOfServerDictionary[serverName]) then error("The server " .. serverName .. " already exists.") end
 	
-	if (type(serverDictionary.ipAddress) ~= "string") then error("The IP address must be a string.") end
+	if (type(serverDictionary.address) ~= "string") then error("The address must be a string.") end
 	
 	serverDictionary.inputKey = serverDictionary.inputKey or "message"
 	
@@ -328,7 +328,7 @@ function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage)
 	
 	local requestBody = HttpService:JSONEncode(messageDictionary)
 	
-	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.ipAddress, requestBody, Enum.HttpContentType.ApplicationJson) end)
+	local success, response = pcall(function() return HttpService:PostAsync(serverDictionary.address, requestBody, Enum.HttpContentType.ApplicationJson) end)
 	
 	if (not success) then return end
 	
