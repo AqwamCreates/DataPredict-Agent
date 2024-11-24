@@ -90,6 +90,8 @@ DataPredictAgent:bindAgentActionToAgentParallel(agentName, "attack", function(ac
 
 end)
 
+DataPredictAgent:updateAgentSenseMemory("Lilith", "You see flower.")
+
 local DataPredictAgentTest = {}
 
 function DataPredictAgentTest:chat(message)
