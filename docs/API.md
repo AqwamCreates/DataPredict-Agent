@@ -36,9 +36,9 @@ DataPredictAgent:addServerDictionary(serverName: string, serverDictionary: dicti
 
   * address: The IP address or the website address of the server that is hosting the large language model.
 
-  * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding.
+  * inputKey: The name of the input key that is responsible of inputting the message to the server during JSON encoding. (Default: message)
 
-  * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding.
+  * outputKey: The name of the output key that is responsible of outputting the message from the server during JSON decoding. (Default: answer)
 
 ### removeServerDictionary()
 
