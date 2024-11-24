@@ -246,7 +246,7 @@ DataPredictAgent:getInteractorDictionary(interactorName: string): dictionary
 
 * interactorDictionary: The dictionary containing all the information related to individual agents that has been interacted by the interactor.
 
-## Functions (External)
+## Functions (Agent-Related)
 
 ### chat()
 
