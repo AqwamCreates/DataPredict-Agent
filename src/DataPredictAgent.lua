@@ -180,6 +180,8 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.globalMemory = agentDictionary.globalMemory or ""
 	
+	agentDictionary.senseMemory = agentDictionary.senseMemory or ""
+	
 	agentDictionary.model = agentDictionary.model
 	
 	dictionaryOfAgentDictionary[agentName] = agentDictionary
@@ -316,6 +318,24 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 
 	end
 	
+end
+
+function AqwamAgentLibrary:createAgentSenseMemoryPrompt(agentName)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local senseMemory = agentDictionary.senseMemory 
+
+	if (senseMemory) then
+
+		return "--Start Of Your Memory With Your Senses--\n\n" .. senseMemory .. "\n\n--End Of Your Memory With Your Senses--"
+
+	else
+
+		return ""
+
+	end
+
 end
 
 function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage)
@@ -498,9 +518,11 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
+	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
+	
 	local initialHiddenChatPrompt = agentDictionary.initialHiddenChatPrompt
 	
-	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt 
+	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\n" .. senseMemoryPrompt
 	
 	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialHiddenChatPrompt end
 	
@@ -560,6 +582,34 @@ function AqwamAgentLibrary:bindChatToAgent(agentName, functionToRun)
 
 	return thread
 	
+end
+
+function AqwamAgentLibrary:bindSenseToAgent(agentName, functionToRun)
+
+	local thread
+
+	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
+
+	local agentDictionary = dictionaryOfAgentDictionary[agentName]
+
+	thread = task.spawn(function()
+
+		task.desynchronize()
+
+		while (dictionaryOfAgentDictionary[agentName]) do
+			
+			agentDictionary.senseMemory = functionToRun()
+
+			task.wait()
+
+		end
+
+		task.cancel(thread)
+
+	end)
+
+	return thread
+
 end
 
 function AqwamAgentLibrary:bindAgentActionToAgentSequential(agentName, functionToRun)
@@ -698,11 +748,13 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 				
 				local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
 				
+				local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
+				
 				local promptToAdd = initialPromptToAdd .. math.random()
 				
 				if (reinforcementLearningPrompt) then promptToAdd = promptToAdd .. "\n\n" .. reinforcementLearningPrompt end
 				
-				promptToAdd = promptToAdd .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. freeWillMessage
+				promptToAdd = promptToAdd .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. freeWillMessage
 				
 				local prompt = self:createAgentPrompt(agentName, promptToAdd)
 
