@@ -150,8 +150,6 @@ DataPredictAgent:addAgentDictionary(agentName: string, agentDictionary: dictiona
 
   * hiddenPrompt: The hidden prompt to be added to all messages. (Default: nil)
 
-  * globalMemory: The string containing the agent's global memory. (Default: nil)
-
   * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities. (Default: nil)
 
 ### removeAgentDictionary()
@@ -199,8 +197,6 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
   * addOnHiddenPrompt: The add on hidden prompt to be added to all messages.
 
   * hiddenPrompt: The hidden prompt to be added to all messages.
-
-  * globalMemory: The string containing the agent's global memory.
 
   * model: The deep reinforcement learning model from DataPredict to improve the agent's free will capabilities.
 
