@@ -22,7 +22,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Custom actions through the use of regular expressions to detect actions inside of LLM-generated messages.
 
-* Agents can learn from their environments, and enchance this capability further with deep reinforcement learning from [DataPredict](https://aqwamcreates.github.io/DataPredict/) and [DataPredict Neural](https://aqwamcreates.github.io/DataPredict-Neural/).
+* Agents can learn from their environments, and enhance this capability further with deep reinforcement learning from [DataPredict](https://aqwamcreates.github.io/DataPredict/) and [DataPredict Neural](https://aqwamcreates.github.io/DataPredict-Neural/).
 
 * Agents can have add-on hidden prompts as well as regular hidden prompts for custom personalities and identities.
 
@@ -31,6 +31,8 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 * Agents can have local memories so that the agents can remember conversations between the player and the agents.
 
 * Agents can have free will.
+
+* Agents can sense its environments.
 
 * Connect to any number of servers that hosts large language models.
 
