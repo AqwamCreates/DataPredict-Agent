@@ -152,15 +152,15 @@ end)
 
 ```
 
-## Enabling Our Agent Ability To Sense Its Surroundings
+## Enabling Our Agent Ability To Sense Its Environments
 
-The agents can also sense its surroundings. For this to happen, you need to call the bindSenseToAgent() function.
+The agents can also sense its environments. For this to happen, you need to call the bindSenseToAgent() function.
 
 ```lua
 
 DataPredict:bindSenseToAgent(agentName, function() 
 
-  local sense -- Your code that converts the surroundings into a string.
+  local sense -- Your code that converts the environment into a string.
 
   return sense
 
