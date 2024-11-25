@@ -24,7 +24,7 @@ local serverName = "defaultServer"
 
 local serverDictionary = {
 
-  ipAddress = "https:\\127.0.0.1:8000" -- Your server's IP address or website address.
+  address = "https:\\127.0.0.1:8000" -- Your server's IP address or website address.
 
   inputKey = "message" -- The key that tells our computer where to store our input message before sending the input message to the server.
 
