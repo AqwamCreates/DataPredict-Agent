@@ -45,7 +45,7 @@ local memorySeperator = "[Memory Seperator]"
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
-Speak like a regular human. You may or may not have a conversation with an another player depending on the situation.
+Speak like a regular human. If there is no explicit indication that the a player is interacting or having conversation with you, you must engage in self-talk or any other behaviours that are commonly found in regular humans in this situation. For example, "Hmm, looks like it might rain later. Better grab my umbrella if I head to the market.", "I wonder if the bakery still has those cinnamon rolls this late in the day. Should I check?", and "Wait... what was the next part? Oh, right, right. Doo-doo-doo-doo... Yeah, that's it."
 
 At the end of your message, you must append {action_to_do} and list of action you want to perform. Must only have one stem word with all letters in lower case. No punctuations. No spaces. For example: "{action_to_do}attack,look"
 
