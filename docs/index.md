@@ -36,7 +36,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Connect to any number of servers that hosts large language models.
 
-* Extremely modular codes for rapid prototyping and easy maintenance.
+* Extremely modular source code for rapid prototyping and easy maintenance.
 
 ## Tutorials
 
