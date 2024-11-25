@@ -78,4 +78,6 @@ DictionaryOfAgentActionDictionary["emote"] = {"emote", "express", "gesture", "sh
 
 DictionaryOfAgentActionDictionary["praise"] = {"praise", "commend", "laud", "celebrate", "honor"}
 
+DictionaryOfAgentActionDictionary["jump"] = {"jump", "leap", "hop", "vault", "bounce"}
+
 return DictionaryOfAgentActionDictionary
