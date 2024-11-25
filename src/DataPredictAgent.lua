@@ -707,12 +707,6 @@ end
 function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 	
 	local thread
-	
-	local model 
-
-	local classesList
-	
-	local reinforcementLearningPrompt
 
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 
@@ -725,14 +719,6 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 	local reinforcementLearningInitialPrompt = "Based on the environment, you might consider doing one or more actions based on its respective scores, but it is strictly not necessary. Actions with higher scores are generally more effective for the current state."
 	
 	local reinforcementLearningEndingPrompt = "\n\nEnsure that your actions are consistent with your personality."
-	
-	if (agentDictionary.model) then
-		
-		model = agentDictionary.model
-		
-		classesList = model:getClassesList()
-		
-	end
 
 	thread = task.spawn(function()
 		
@@ -740,9 +726,15 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 			
 			if (#agentActionToDoArray == 0) then
 				
+				local reinforcementLearningPrompt
+				
+				local model = agentDictionary.model
+				
 				local freeWillMessage, environmentVector, reward = functionToRun()
 				
 				if (model) then
+					
+					local classesList = model:getClassesList()
 					
 					reinforcementLearningPrompt = reinforcementLearningInitialPrompt
 					
@@ -760,7 +752,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 				
 				local promptToAdd = initialPromptToAdd .. math.random()
 				
-				if (reinforcementLearningPrompt) then promptToAdd = promptToAdd .. "\n\n" .. reinforcementLearningPrompt end
+				if (model) then promptToAdd = promptToAdd .. "\n\n" .. reinforcementLearningPrompt end
 				
 				promptToAdd = promptToAdd .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. freeWillMessage
 				
