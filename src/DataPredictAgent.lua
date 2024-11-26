@@ -96,7 +96,7 @@ function AqwamAgentLibrary.new(id)
 	
 	NewDataPredictAgentInstance.dictionaryOfAgentActionArray = {}
 	
-	DataPredictAgentGlobalInstanceArray[id] = DataPredictAgentGlobalInstance
+	DataPredictAgentGlobalInstanceArray[id] = NewDataPredictAgentInstance
 	
 	return NewDataPredictAgentInstance
 
