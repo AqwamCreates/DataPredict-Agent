@@ -30,9 +30,9 @@ local HttpService = game:GetService("HttpService")
 
 --------------------------------------------------------------------------------
 
-local AqwamMachineLearningAndDeepLearningLibrary = require(script.AqwamDeepLearningLibraryLinker.Value)
+--local AqwamMachineLearningAndDeepLearningLibrary = require(script.AqwamDeepLearningLibraryLinker.Value)
 
-local AqwamDeepLearningLibraryLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value)
+--local AqwamDeepLearningLibraryLibrary = require(script.AqwamMachineLearningAndDeepLearningLibraryLinker.Value)
 
 --------------------------------------------------------------------------------
 
@@ -60,9 +60,7 @@ Also, in your regular dialogue that comes before the {action_to_do} and {action_
 
 --------------------------------------------------------------------------------
 
-local DataPredictAgentGlobalInstance
-
-local isLockedToGlobalInstance = false
+local DataPredictAgentGlobalInstanceArray = {}
 
 local AqwamAgentLibrary = {}
 
@@ -80,9 +78,11 @@ end
 
 --------------------------------------------------------------------------------
 
-function AqwamAgentLibrary.new(isGlobalInstance) -- Once activated, you cannot deactivate it until the global instance is destroyed.
+function AqwamAgentLibrary.new(id)
 	
-	if (DataPredictAgentGlobalInstance) and (isLockedToGlobalInstance) then return DataPredictAgentGlobalInstance end
+	local DataPredictAgentGlobalInstance = DataPredictAgentGlobalInstanceArray[id]
+	
+	if (DataPredictAgentGlobalInstance) then return DataPredictAgentGlobalInstance end
 
 	local NewDataPredictAgentInstance = {}
 	
@@ -96,13 +96,7 @@ function AqwamAgentLibrary.new(isGlobalInstance) -- Once activated, you cannot d
 	
 	NewDataPredictAgentInstance.dictionaryOfAgentActionArray = {}
 	
-	if (isGlobalInstance) then
-		
-		DataPredictAgentGlobalInstance = NewDataPredictAgentInstance
-		
-		isLockedToGlobalInstance = true
-		
-	end
+	DataPredictAgentGlobalInstanceArray[id] = DataPredictAgentGlobalInstance
 	
 	return NewDataPredictAgentInstance
 
@@ -110,13 +104,9 @@ end
 
 function AqwamAgentLibrary:destroy()
 	
-	if (isLockedToGlobalInstance) and (self == DataPredictAgentGlobalInstance) then -- Ensuring that if this instance is not a global instance, then the global instance must not be destroyed. This can happen if the global instance is created after creating the local instances.
-		
-		isLockedToGlobalInstance = false
-		
-		DataPredictAgentGlobalInstance = nil
-		
-	end
+	local id = table.find(DataPredictAgentGlobalInstanceArray, self)
+	
+	if (id) then table.remove(DataPredictAgentGlobalInstanceArray, id) end
 	
 	setmetatable(self, nil)
 	
@@ -568,7 +558,7 @@ function AqwamAgentLibrary:bindChatToAgent(agentName, functionToRun)
 
 	thread = task.spawn(function()
 
-		task.desynchronize()
+		--task.desynchronize()
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 
@@ -602,7 +592,7 @@ function AqwamAgentLibrary:bindSenseToAgent(agentName, functionToRun)
 
 	thread = task.spawn(function()
 
-		task.desynchronize()
+		--task.desynchronize()
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 			
@@ -634,7 +624,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentSequential(agentName, functionT
 	
 	thread = task.spawn(function()
 		
-		task.desynchronize()
+		--task.desynchronize()
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 			
@@ -676,7 +666,7 @@ function AqwamAgentLibrary:bindAgentActionToAgentParallel(agentName, agentAction
 
 	thread = task.spawn(function()
 		
-		task.desynchronize()
+		--task.desynchronize()
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 
