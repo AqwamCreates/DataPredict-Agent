@@ -80,6 +80,12 @@ end
 
 function AqwamAgentLibrary.new(id)
 	
+	id = id or 1
+	
+	if (type(id) ~= "number") then error("The ID must be a number.") end
+	
+	if ((id % 1) ~= 0) or (id <= 0) then error("The ID must be a positive integer.") end
+	
 	local DataPredictAgentGlobalInstance = DataPredictAgentGlobalInstanceArray[id]
 	
 	if (DataPredictAgentGlobalInstance) then return DataPredictAgentGlobalInstance end
