@@ -8,13 +8,13 @@ Creates a new DataPredict instance
 
 ```lua
 
-DataPredictAgent.new(isGlobalInstance: boolean): DataPredictAgentInstance
+DataPredictAgent.new(id: number): DataPredictAgentInstance
 
 ```
 
 #### Parameters:
 
-* isGlobalInstance: If set to true, everytime you call new() constructor, it will return the current instance you have created. (Default: true)
+* id: The id of the instance. If the instance of the id already exists, it will return that instance (Default: 1)
 
 ### Returns
 
