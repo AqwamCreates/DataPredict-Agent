@@ -38,6 +38,10 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Extremely modular source code for rapid prototyping and easy maintenance.
 
+## Notes:
+
+* Only compatible with “Instruct” models.
+
 ## Tutorials
 
 [Installation For Roblox](Tutorials/InstallationForRoblox.md)
