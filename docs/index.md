@@ -40,7 +40,7 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 ## Notes:
 
-* Only compatible with "Instuct" models.
+* Only compatible with “Instruct” models.
 
 ## Tutorials
 
