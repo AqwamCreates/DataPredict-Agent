@@ -8,7 +8,7 @@ LLamaFile is a software that allows us to run the large language model extremely
 
 In order to download it, you can download it from [here](https://github.com/Mozilla-Ocho/llamafile).
 
-## Downloading the Large Languaage Model
+## Downloading the Large Language Model
 
 In order to run models inside the LLamaFile, you are required to download the model in .gguf extension format.
 
