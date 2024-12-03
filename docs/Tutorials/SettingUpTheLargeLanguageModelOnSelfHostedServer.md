@@ -36,13 +36,13 @@ With this in place, you can connect with your server that is hosting the large l
 
 ## Connecting With DataPredict Agent API
 
-Once everything has been set up, you now need to set the address in the server dictionary. You must put the address of your server and combine it with "\completion".
+Once everything has been set up, you now need to set the address in the server dictionary. You must put the address of your server and combine it with "/completion".
 
 ```
 
 local serverDictionary = {
 
-  address = "http:\\127.0.01:8080\completion"
+  address = "http://127.0.01:8080/completion"
 
 }
 
