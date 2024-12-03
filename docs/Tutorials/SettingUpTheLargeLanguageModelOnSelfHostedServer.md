@@ -49,3 +49,5 @@ local serverDictionary = {
 DataPredictAgent:addServerDictionary(serverName, serverDictionary)
 
 ```
+
+That's all for this tutorial. Hopefully, you can lower the cost as you aren't stuck with using models that are hosted by third-party servers.
