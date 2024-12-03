@@ -144,7 +144,7 @@ For parallel, the actions are performed based on the selected actions. Below, we
 
 ```lua
 
-DataPredict:bindAgentActionToAgentSequential(agentName, action, function(actionTarget) -- This function only runs when the "action" is requested. Also, our action is the top-level action here.
+DataPredict:bindAgentActionToAgentParallel(agentName, action, function(actionTarget) -- This function only runs when the "action" is requested. Also, our action is the top-level action here.
 
   print(actionTarget) 
 
