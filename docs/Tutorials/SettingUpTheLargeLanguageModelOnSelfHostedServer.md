@@ -12,13 +12,13 @@ In order to download it, you can download it from [here](https://github.com/Mozi
 
 In order to run models inside the LLamaFile, you are required to download the model in .gguf extension format.
 
-You can have a look at a list of model [here](https://huggingface.co/models?sort=trending&search=gguf). Note taht I have added gguf as one of the key word to the search bar.
+You can have a look at a list of model [here](https://huggingface.co/models?sort=trending&search=gguf). Note that I have added gguf as one of the key word to the search bar.
 
 Make sure your model can run on your computer, otherwise it can slow your computer down. Generally:
 
-* The higher the number next to the letter "B", the more computational power it needs.
+* The higher the number next to the letter "B", the more computational power it needs. The letter "B" represents the number of parameters in that model.
 
-* The higher the number next to the letter "Q", the more computational power it needs.
+* The higher the number next to the letter "Q", the more computational power it needs. The letter "Q" represents the number of bits that was used to store values in that model.
 
 My recommendation is to use models that are around 2B-8B and Q3-Q5.
 
