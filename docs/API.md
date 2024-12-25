@@ -276,6 +276,20 @@ DataPredictAgent:act(agentName: string, agentActionName: string, agentActionTarg
 
 * agentActionTarget: The target of the selected agent's action.
 
+### sense()
+
+```lua
+
+DataPredictAgent:sense(agentName: string, senseString: string)
+
+```
+
+### Parameters:
+
+* agentName: The name of the agent that will perform the action.
+
+* senseString: The sense string to be added to the sense memory.
+
 ### queueAgentChat()
 
 ```lua
