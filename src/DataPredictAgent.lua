@@ -182,6 +182,8 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	
 	agentDictionary.globalMemoryArray = agentDictionary.globalMemoryArray or {}
 	
+	agentDictionary.taskMemoryArray = agentDictionary.taskMemoryArray or {}
+	
 	agentDictionary.senseMemory = agentDictionary.senseMemory or ""
 	
 	agentDictionary.model = agentDictionary.model
@@ -298,7 +300,7 @@ function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
 
 	for i, globalMemory in ipairs(globalMemoryArray) do
 
-		globalMemoryPrompt = globalMemoryPrompt .. globalMemory
+		globalMemoryPrompt = globalMemoryPrompt .. i .. ") " .. globalMemory
 
 		if (i < numberOfGlobalMemories) then globalMemoryPrompt = globalMemoryPrompt .. "\n\n" .. memorySeperator .. "\n\n" end
 
@@ -330,7 +332,7 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 	
 	for i, localMemory in ipairs(localMemoryArray) do
 		
-		localMemoryPrompt = localMemoryPrompt .. localMemory
+		localMemoryPrompt = localMemoryPrompt .. i .. ") " .. localMemory
 		
 		if (i < numberOfLocalMemories) then localMemoryPrompt = localMemoryPrompt .. "\n\n" .. memorySeperator .. "\n\n" end
 		
@@ -339,6 +341,32 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 	localMemoryPrompt = localMemoryPrompt .. "\n\n-- End Of Your Memory With ".. interactorName .. " --"
 
 	return localMemoryPrompt
+	
+end
+
+function AqwamAgentLibrary:createAgentTaskMemoryPrompt(agentName)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local taskMemoryArray = agentDictionary.taskMemoryArray
+	
+	if (#taskMemoryArray == 0) then return "" end
+
+	local taskMemoryPrompt = "-- Start Of Your Task To Do Memory --\n\n"
+
+	local numberOfGlobalMemories = #taskMemoryArray
+
+	for i, taskMemory in ipairs(taskMemoryArray) do
+
+		taskMemoryPrompt = taskMemoryPrompt .. i .. ") " .. taskMemory
+
+		if (i < numberOfGlobalMemories) then taskMemoryPrompt = taskMemoryPrompt .. "\n\n" .. memorySeperator .. "\n\n" end
+
+	end
+
+	taskMemoryPrompt = taskMemoryPrompt .. "\n\n-- End Of Your Task To Do Memory --"
+
+	return taskMemoryPrompt
 	
 end
 
@@ -456,6 +484,36 @@ function AqwamAgentLibrary:act(agentName, agentActionName, agentActionTarget)
 	
 end
 
+function AqwamAgentLibrary:addToAgentGlobalMemory(agentName, memoryToAdd)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local globalMemoryArray = agentDictionary.globalMemoryArray
+
+	table.insert(globalMemoryArray, memoryToAdd)
+
+end
+
+function AqwamAgentLibrary:getFromAgentGlobalMemory(agentName, index)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local globalMemoryArray = agentDictionary.globalMemoryArray
+
+	return globalMemoryArray[index]
+
+end
+
+function AqwamAgentLibrary:removeFromAgentGlobalMemory(agentName, index)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local globalMemoryArray = agentDictionary.globalMemoryArray
+
+	table.remove(globalMemoryArray, index)
+
+end
+
 function AqwamAgentLibrary:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
@@ -470,6 +528,36 @@ function AqwamAgentLibrary:updateAgentGlobalMemory(agentName, memoryToAdd)
 
 	table.remove(globalMemoryArray, 1)
 	
+end
+
+function AqwamAgentLibrary:addToAgentLocalMemory(agentName, memoryToAdd)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local localMemoryArray = agentDictionary.localMemoryArray
+
+	table.insert(localMemoryArray, memoryToAdd)
+
+end
+
+function AqwamAgentLibrary:getFromAgentLocalMemory(agentName, index)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local localMemoryArray = agentDictionary.localMemoryArray
+
+	return localMemoryArray[index]
+
+end
+
+function AqwamAgentLibrary:removeFromAgentLocalMemory(agentName, index)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local localMemoryArray = agentDictionary.localMemoryArray
+
+	table.remove(localMemoryArray, index)
+
 end
 
 function AqwamAgentLibrary:updateAgentLocalMemory(agentName, interactorName, memoryToAdd)
@@ -502,6 +590,36 @@ function AqwamAgentLibrary:updateAgentSenseMemory(agentName, memoryToAdd)
 
 end
 
+function AqwamAgentLibrary:addToAgentTaskMemory(agentName, memoryToAdd)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local taskMemoryArray = agentDictionary.tasksMemoryArray
+
+	table.insert(taskMemoryArray, memoryToAdd)
+
+end
+
+function AqwamAgentLibrary:getFromAgentTaskMemory(agentName, index)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local tasksMemoryArray = agentDictionary.tasksMemoryArray
+
+	return tasksMemoryArray[index]
+
+end
+
+function AqwamAgentLibrary:removeFromAgentTaskMemory(agentName, index)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local taskMemoryArray = agentDictionary.tasksMemoryArray
+
+	table.remove(taskMemoryArray, index)
+
+end
+
 function AqwamAgentLibrary:queueAgentChat(agentName, message)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
@@ -526,6 +644,8 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 	local localMemoryPrompt = self:createAgentLocalMemoryPrompt(agentName, interactorName)
 	
+	local taskMemoryPrompt = self:createAgentTaskMemoryPrompt(agentName)
+	
 	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 	
 	local initialHiddenChatPrompt = agentDictionary.initialHiddenChatPrompt
@@ -546,7 +666,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 	
-	local memoryToAdd = senseMemoryPrompt .. "\n\n" .. interactorName .. ": \n\n" .. interactorMessage .. "\n\nYou: \n\n" .. response
+	local memoryToAdd = taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. interactorName .. ": \n\n" .. interactorMessage .. "\n\nYou: \n\n" .. response
 	
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 	
@@ -561,10 +681,12 @@ function AqwamAgentLibrary:selfChat(agentName, isAddOnHiddenPromptAdded)
 	local agentDictionary = self:getAgentDictionary(agentName)
 
 	local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
+	
+	local taskMemoryPrompt = self:createAgentTaskMemoryPrompt(agentName)
 
 	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 
-	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. senseMemoryPrompt
+	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
 
 	promptToAdd = promptToAdd .. "\n\nTalk to yourself based on the information that has been given above."
 
@@ -776,13 +898,15 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 				
 				local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
 				
+				local taskMemoryPrompt = self:createAgentTaskMemoryPrompt(agentName)
+				
 				local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 				
 				local promptToAdd = initialPromptToAdd .. math.random()
 				
 				if (model) then promptToAdd = promptToAdd .. "\n\n" .. reinforcementLearningPrompt end
 				
-				promptToAdd = promptToAdd .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. freeWillMessage
+				promptToAdd = promptToAdd .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. freeWillMessage
 				
 				local prompt = self:createAgentPrompt(agentName, promptToAdd)
 
