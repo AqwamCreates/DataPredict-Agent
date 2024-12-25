@@ -650,7 +650,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 	local initialHiddenChatPrompt = agentDictionary.initialHiddenChatPrompt
 	
-	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\n" .. senseMemoryPrompt
+	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
 	
 	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialHiddenChatPrompt end
 	
@@ -916,7 +916,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 
 				for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 				
-				local memoryToAdd = senseMemoryPrompt .. "\n\n" .. "Your Free Will: \n\n" .. freeWillMessage .. "\n\nYou: \n\n" .. response
+				local memoryToAdd = taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. "Your Free Will: \n\n" .. freeWillMessage .. "\n\nYou: \n\n" .. response
 				
 				self:updateAgentGlobalMemory(agentName, memoryToAdd)
 				
