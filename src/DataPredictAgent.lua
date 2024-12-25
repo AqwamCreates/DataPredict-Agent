@@ -556,6 +556,42 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	
 end
 
+function AqwamAgentLibrary:selfChat(agentName, isAddOnHiddenPromptAdded)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
+
+	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
+
+	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. senseMemoryPrompt
+
+	promptToAdd = promptToAdd .. "\n\nTalk to yourself based on the information that has been given above."
+
+	local prompt = self:createAgentPrompt(agentName, promptToAdd, isAddOnHiddenPromptAdded)
+
+	local response = self:sendAgentServerRequest(agentName, prompt)
+
+	local agentMessage, actionArray, actionTargetArray = self:splitMessageFromAction(response)
+
+	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
+
+	local memoryToAdd = senseMemoryPrompt .. "\n\nYou: \n\n" .. response
+
+	self:updateAgentGlobalMemory(agentName, memoryToAdd)
+
+	self:queueAgentChat(agentName, agentMessage)
+
+end
+
+function AqwamAgentLibrary:sense(agentName, senseString)
+	
+	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	agentDictionary.senseMemory = senseString
+	
+end
+
 function AqwamAgentLibrary:bindChatToAgent(agentName, functionToRun)
 	
 	local thread
