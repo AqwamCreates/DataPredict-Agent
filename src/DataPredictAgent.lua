@@ -293,11 +293,11 @@ function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
 	if not (agentDictionary.hasGlobalMemory) then return "" end
 	
 	local globalMemoryArray = agentDictionary.globalMemoryArray
-
-	local globalMemoryPrompt = "-- Start Of Your Memory With The World --\n\n"
-
+	
 	local numberOfGlobalMemories = #globalMemoryArray
 
+	local globalMemoryPrompt = "-- Start Of Your Memory With The World --\n\n"
+	
 	for i, globalMemory in ipairs(globalMemoryArray) do
 
 		globalMemoryPrompt = globalMemoryPrompt .. i .. ") " .. globalMemory
@@ -325,10 +325,10 @@ function AqwamAgentLibrary:createAgentLocalMemoryPrompt(agentName, interactorNam
 	local agentData = interactorDictionary[agentName] or {}
 
 	local localMemoryArray = agentData.localMemoryArray or {}
-
-	local localMemoryPrompt = "-- Start Of Your Memory With " .. interactorName .. " --\n\n"
 	
 	local numberOfLocalMemories = #localMemoryArray
+
+	local localMemoryPrompt = "-- Start Of Your Memory With " .. interactorName .. " --\n\n"
 	
 	for i, localMemory in ipairs(localMemoryArray) do
 		
@@ -350,11 +350,9 @@ function AqwamAgentLibrary:createAgentTaskMemoryPrompt(agentName)
 	
 	local taskMemoryArray = agentDictionary.taskMemoryArray
 	
-	if (#taskMemoryArray == 0) then return "" end
+	local numberOfGlobalMemories = #taskMemoryArray
 
 	local taskMemoryPrompt = "-- Start Of Your Task To Do Memory --\n\n"
-
-	local numberOfGlobalMemories = #taskMemoryArray
 
 	for i, taskMemory in ipairs(taskMemoryArray) do
 
