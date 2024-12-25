@@ -248,7 +248,7 @@ DataPredictAgent:getInteractorDictionary(interactorName: string): dictionary
 
 ```lua
 
-DataPredictAgent:chat(agentName: string, interactorName: string, interactorMessage: string)
+DataPredictAgent:chat(agentName: string, interactorName: string, interactorMessage: string, isAddOnHiddenPromptAdded: boolean)
 
 ```
 
@@ -259,6 +259,22 @@ DataPredictAgent:chat(agentName: string, interactorName: string, interactorMessa
 * interactorName: The name of the interactor that will send the interactor's message.
 
 * interactorMessage: The message content inside of the interactor's message.
+
+* isAddOnHiddenPromptAdded: Set whether or not the add-on hidden prompt is added.
+
+### chat()
+
+```lua
+
+DataPredictAgent:chat(agentName: string, isAddOnHiddenPromptAdded: boolean)
+
+```
+
+#### Parameters:
+
+* agentName: The name of the agent that will perform self chat.
+
+* isAddOnHiddenPromptAdded: Set whether or not the add-on hidden prompt is added.
 
 ### act()
 
@@ -275,20 +291,6 @@ DataPredictAgent:act(agentName: string, agentActionName: string, agentActionTarg
 * agentActionName: The name of the agent's action to be performed.
 
 * agentActionTarget: The target of the selected agent's action.
-
-### sense()
-
-```lua
-
-DataPredictAgent:sense(agentName: string, senseString: string)
-
-```
-
-### Parameters:
-
-* agentName: The name of the agent that will perform the action.
-
-* senseString: The sense string to be added to the sense memory.
 
 ### queueAgentChat()
 

@@ -584,14 +584,6 @@ function AqwamAgentLibrary:selfChat(agentName, isAddOnHiddenPromptAdded)
 
 end
 
-function AqwamAgentLibrary:sense(agentName, senseString)
-	
-	local agentDictionary = self:getAgentDictionary(agentName)
-	
-	agentDictionary.senseMemory = senseString
-	
-end
-
 function AqwamAgentLibrary:bindChatToAgent(agentName, functionToRun)
 	
 	local thread
