@@ -136,8 +136,6 @@ function AqwamAgentLibrary:addServerDictionary(serverName, serverDictionary)
 	
 	serverDictionary.outputKey = serverDictionary.outputKey or "answer"
 	
-	serverDictionary.parameterDictionary = serverDictionary.parameterDictionary or {}
-	
 	dictionaryOfServerDictionary[serverName] = serverDictionary
 	
 end
@@ -179,6 +177,8 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	agentDictionary.globalMemoryCapacity = agentDictionary.globalMemoryCapacity or 100
 	
 	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
+	
+	agentDictionary.parameterDictionary = agentDictionary.parameterDictionary or {}
 	
 	agentDictionary.globalMemoryArray = agentDictionary.globalMemoryArray or {}
 	
@@ -386,7 +386,7 @@ function AqwamAgentLibrary:createAgentSenseMemoryPrompt(agentName)
 
 end
 
-function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage)
+function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage, parameterDictionary)
 	
 	local serverDictionary = self:getServerDictionary(serverName)
 	
@@ -394,7 +394,7 @@ function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage)
 	
 	requestDictionary[serverDictionary.inputKey] = inputMessage
 	
-	for parameter, value in serverDictionary.parameterDictionary do requestDictionary[parameter] = value end
+	for parameter, value in parameterDictionary do requestDictionary[parameter] = value end
 	
 	local requestBody = HttpService:JSONEncode(requestDictionary)
 	
@@ -414,7 +414,7 @@ function AqwamAgentLibrary:sendAgentServerRequest(agentName, inputMessage)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
 	
-	local outputMessage = self:sendServerRequest(agentDictionary.serverName, inputMessage) or agentDictionary.errorPrompt
+	local outputMessage = self:sendServerRequest(agentDictionary.serverName, inputMessage, agentDictionary.parameterDictionary) or agentDictionary.errorPrompt
 	
 	return outputMessage
 	
