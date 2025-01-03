@@ -1,5 +1,7 @@
 # DataPredict Agent
 
+![DataPredict Agent Icon](icons/DataPredictAgentIcon.png)
+
 --------------------------------------------------------------------
 
 Aqwam's AI Agent Library (Aqwam-AI-Agent)
