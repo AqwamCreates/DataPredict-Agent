@@ -200,7 +200,7 @@ DataPredictAgent:getAgentDictionary(agentName: string): dictionary
 
   * model: The deep reinforcement learning model from DataPredict library to improve the agent's free will capabilities.
 
-### removeInteractorDictionary()
+### addInteractorDictionary()
 
 ```lua
 
@@ -210,11 +210,11 @@ DataPredictAgent:addInteractorDictionary(interactorName: string, interactorDicti
 
 #### Parameters:
 
-* interactorName: The name of the agent to be added to the DataPredict Agent instance.
+* interactorName: The name of the interactor to be added to the DataPredict Agent instance.
 
 * interactorDictionary: The dictionary containing all the information related to individual agents that has been interacted by the interactor.
 
-### removeAgentDictionary()
+### removeInteractorDictionary()
 
 ```lua
 
