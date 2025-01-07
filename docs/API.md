@@ -370,11 +370,11 @@ DataPredictAgent:bindChatToAgent(agentName: string, functionToRun: function): th
 
 * chatThread: The thread that controls the agent's chatting ability.
 
-### bindChatToAgent()
+### bindSenseToAgent()
 
 ```lua
 
-DataPredictAgent:bindSenseoAgent(agentName: string, functionToRun: function): thread
+DataPredictAgent:bindSenseToAgent(agentName: string, functionToRun: function): thread
 
 ```
 
