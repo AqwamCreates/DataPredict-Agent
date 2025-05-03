@@ -1,12 +1,12 @@
 # Welcome to Aqwam's DataPredict Agent Library!
 
-By using or possessing any copies of this library or its assets (including the icons), you agree to our [Terms and Conditions](TermsAndConditions.md). In short:
+By using or possessing any copies of this library or its assets (including the icons), you agree to our [Terms And Conditions](TermsAndConditions.md). In short:
 
 * Attribution is required when using this library.
 
 * Plus some more stuff...
 
-For information regarding potential license violations and eligibility for a bounty reward, please refer to the [Terms and Conditions Violation Bounty Reward Information](TermsAndConditionsViolationBountyRewardInformation.md).
+For information regarding potential license violations and eligibility for a bounty reward, please refer to the [Terms And Conditions Violation Bounty Reward Information](TermsAndConditionsViolationBountyRewardInformation.md).
 
 ![DataPredictAgentIconSmall](https://github.com/user-attachments/assets/7d92d759-5771-48dd-b934-2220817d4a28)
 
