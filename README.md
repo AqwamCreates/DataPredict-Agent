@@ -16,4 +16,4 @@ YouTube: https://www.youtube.com/channel/UCUrwoxv5dufEmbGsxyEUPZw
 	
 --------------------------------------------------------------------
 
-By using or possessing any copies of this library or its assets (including the icons), you agree to our [Terms and Conditions](docs/TermsAndConditions.md).
+By using or possessing any copies of this library or its assets (including the icons), you agree to our [Terms And Conditions](docs/TermsAndConditions.md).
