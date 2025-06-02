@@ -4,7 +4,7 @@
 
 1. **Exclusive External Softwares Definition**: 
 
-   * Exclusive External Softwares are defined as a collection of software libraries and frameworks containing DataPredict, DataPredict Neural, MatrixL, and TensorL.
+   * Exclusive External Softwares are defined as a collection of software libraries and frameworks containing DataPredict, DataPredict Neural, DataPredict Axon, MatrixL, and TensorL.
 
 2. **Original License Compliance**:
 
