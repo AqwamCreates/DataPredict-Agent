@@ -44,6 +44,10 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 
 * Only compatible with “Instruct” models.
 
+## API
+
+[API Reference](API.md)
+
 ## Tutorials
 
 [Installation For Roblox](Tutorials/InstallationForRoblox.md)
@@ -53,9 +57,5 @@ In addition, if you are interested in Roblox tutorials and future projects by me
 [Enabling Free Will To Our Agents](Tutorials/EnablingFreeWillToOurAgents.md)
 
 [Setting Up The Large Language Model On Self-Hosted Server](Tutorials/SettingUpTheLargeLanguageModelOnSelfHostedServer.md)
-
-## API
-
-[API Reference](API.md)
 
 ## Version History
