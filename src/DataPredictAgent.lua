@@ -228,6 +228,8 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
 
 	agentDictionary.modelParameter = agentDictionary.modelParameter or "default"
+	
+	agentDictionary.freeWillIntervalDuration = agentDictionary.freeWillIntervalDuration or 10
 
 	agentDictionary.globalMemoryArray = agentDictionary.globalMemoryArray or {}
 
@@ -729,10 +731,14 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 
 	local initialHiddenChatPrompt = agentDictionary.initialHiddenChatPrompt
+	
+	local adjustedInitialHiddenChatPrompt = string.gsub(initialHiddenChatPrompt, "{agent_name}", agentName)
+	
+	adjustedInitialHiddenChatPrompt = string.gsub(adjustedInitialHiddenChatPrompt, "{interactor_name}", interactorName)
 
 	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
 
-	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialHiddenChatPrompt end
+	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. adjustedInitialHiddenChatPrompt end
 
 	promptToAdd = promptToAdd .. "\n\nRespond to this as" .. agentName .. " from " .. interactorName ..":\n\n" .. interactorMessage
 
@@ -941,6 +947,8 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
 
 	local agentDictionary = dictionaryOfAgentDictionary[agentName]
+	
+	local freeWillIntervalDuration = agentDictionary.freeWillIntervalDuration
 
 	local agentActionToDoArray = agentDictionary.agentActionToDoArray
 
@@ -954,7 +962,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 
 		while (dictionaryOfAgentDictionary[agentName]) do
 			
-			task.wait(20)
+			task.wait(freeWillIntervalDuration)
 
 			if (#agentActionToDoArray == 0) then
 
