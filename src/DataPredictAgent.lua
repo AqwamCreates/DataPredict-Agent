@@ -104,6 +104,8 @@ function AqwamAgentLibrary.new(id)
 	setmetatable(NewDataPredictAgentInstance, AqwamAgentLibrary)
 
 	NewDataPredictAgentInstance.dictionaryOfServerDictionary = {}
+	
+	NewDataPredictAgentInstance.dictionaryOfModelParameterDictionary = {}
 
 	NewDataPredictAgentInstance.dictionaryOfAgentDictionary = {}
 
@@ -165,6 +167,38 @@ function AqwamAgentLibrary:getServerDictionary(serverName)
 
 end
 
+function AqwamAgentLibrary:addModelParameterDictionary(modelParameterName, modelParameterDictionary)
+	
+	local modelParameterDictionary = modelParameterDictionary or {}
+	
+	local dictionaryOfModelParameterDictionary = self.dictionaryOfModelParameterDictionary
+	
+	modelParameterDictionary.stream = returnDefaultValueIfNil(modelParameterDictionary.stream, false)
+
+	modelParameterDictionary.enable_thinking = returnDefaultValueIfNil(modelParameterDictionary.enable_thinking, false)
+	
+	modelParameterDictionary.temperature = returnDefaultValueIfNil(modelParameterDictionary.temperature, 1)
+	
+	dictionaryOfModelParameterDictionary[modelParameterName] = modelParameterDictionary
+	
+end
+
+function AqwamAgentLibrary:removeModelParameterDictionary(modelParameterName)
+	
+	self.dictionaryOfModelParameterDictionary[modelParameterName] = nil
+	
+end
+
+function AqwamAgentLibrary:getModelParameterDictionary(modelParameterName)
+	
+	local ModelParameterDictionary =  self.dictionaryOfModelParameterDictionary[modelParameterName]
+	
+	if (not ModelParameterDictionary) then error("The model parameter does not exist.") end
+	
+	return ModelParameterDictionary
+	
+end
+
 function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 
 	local dictionaryOfAgentDictionary = self.dictionaryOfAgentDictionary
@@ -191,7 +225,7 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 
 	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
 
-	agentDictionary.parameterDictionary = agentDictionary.parameterDictionary or {}
+	agentDictionary.modelParameter = agentDictionary.modelParameter or "default"
 
 	agentDictionary.globalMemoryArray = agentDictionary.globalMemoryArray or {}
 
@@ -429,8 +463,6 @@ function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage, parameter
 	local requestDictionary = {
 		
 		["messages"] = {message},
-		["stream"] = false,
-		["enable_thinking"] = false
 		
 	}
 
@@ -459,8 +491,10 @@ end
 function AqwamAgentLibrary:sendAgentServerRequest(agentName, inputMessage)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
+	
+	local modelParameterDictionary = self:getModelParameterDictionary(agentDictionary.modelParameter)
 
-	local outputMessage = self:sendServerRequest(agentDictionary.serverName, inputMessage, agentDictionary.parameterDictionary) or agentDictionary.errorPrompt
+	local outputMessage = self:sendServerRequest(agentDictionary.serverName, inputMessage, modelParameterDictionary) or agentDictionary.errorPrompt
 
 	return outputMessage
 
