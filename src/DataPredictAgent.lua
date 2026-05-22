@@ -87,7 +87,7 @@ User: "Do you see me right now?"
 
 User: "Follow me!"
 {agent_name}: I'm following!
-{action_to_do}follow,dodge{action_to_do_target}user
+{action_to_do}follow{action_to_do_target}user
 ]]
 
 --------------------------------------------------------------------------------
