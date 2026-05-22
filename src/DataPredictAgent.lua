@@ -84,6 +84,10 @@ User: "Do you see me?"
 
 User: "Do you see me right now?"
 {agent_name}: Yes I do! You are standing right in front of me! *tilts head*
+
+User: "Follow me!"
+{agent_name}: I'm following!
+{action_to_do}follow,dodge{action_to_do_target}user
 ]]
 
 --------------------------------------------------------------------------------
