@@ -10,9 +10,9 @@ local maximumViewDistance = 100
 
 local topNumberOfViews = 5
 
-local initialViewText = "---<Currently Viewing>---"
+local currentViewTextTag = "---<Currently Viewing>---"
 
-local finalViewText = "---<End of Viewing>---"
+local endViewTextTag = "---<End of Viewing>---"
 
 local materialEnum = Enum.Material
 
@@ -177,7 +177,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local filterDescentantsInstances = {viewingCharacter}
 
-	local viewText = initialViewText .. "\n"
+	local viewText = currentViewTextTag .. "\n"
 	
 	local textArray = {}
 	
@@ -307,7 +307,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local middleViewText = createViewText(topNTextArray, topNDistanceArray)
 
-	local completeViewText = viewText .. middleViewText .. finalViewText
+	local completeViewText = viewText .. middleViewText .. endViewTextTag
 	
 	return completeViewText
 	
