@@ -738,7 +738,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 
 	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialHiddenChatPrompt end
 	
-	local interactorPrompt = interactorName .. " " .. interactorType .. ": \n\n" .. interactorMessage
+	local interactorPrompt = "[" .. interactorType .. "] " .. interactorName .. ": \n\n" .. interactorMessage
 	
 	promptToAdd = promptToAdd .. "\n\n" .. interactorPrompt .. "\n\n" .. agentName .. ": "
 
