@@ -18,6 +18,8 @@ local materialEnum = Enum.Material
 
 local oneStudToMeters = 0.28
 
+local halfPi = math.pi / 2
+
 local objectViewPriorityDictionary = { -- The lower the number, the higher the priority.
 	
 	["Door"] = 2,
@@ -165,11 +167,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local headCFrame = head.CFrame
 	
-	local lookVector = headCFrame.LookVector
-	
-	local rightVector = headCFrame.RightVector
-	
-	local upVector = headCFrame.UpVector
+	local headLookVector = headCFrame.LookVector
 
 	local viewText = initialViewText .. "\n"
 	
@@ -199,7 +197,11 @@ function ViewToTextConverter:view(viewingCharacter)
 		
 		if (distance > maximumViewDistance) then continue end
 		
-		local isPartInFront = part.CFrame:ToObjectSpace(headCFrame).Z < 0
+		local dotProduct = headLookVector:Dot(differenceVector.Unit)
+		
+		local angle = math.acos(dotProduct)
+		
+		local isPartInFront = (angle < halfPi)
 		
 		if (not isPartInFront) then continue end
 		
@@ -227,14 +229,13 @@ function ViewToTextConverter:view(viewingCharacter)
 
 			subText = getPartDescription(part, nil, characterName)
 
-			local characterHead = viewingCharacter:FindFirstChild("Head")
-			local lookVector = characterHead and characterHead.CFrame.LookVector or Vector3.new(0,0,1)
-			local directionToCharacter = (headPosition - result.Position).Unit
-			local dotProduct = lookVector:Dot(directionToCharacter)
+			local otherHead = parentPart.Head
+			local otherHeadLookVector = otherHead.CFrame.LookVector
+			local otherDotProduct = otherHeadLookVector:Dot(-differenceVector.Unit)
 
-			local facingStatus = ""
-			if (dotProduct > 0.5) then facingStatus = " (Facing Towards)"
-			elseif (dotProduct < -0.5) then facingStatus = " (Facing Away)"
+			local facingStatus
+			if (otherDotProduct > 0.5) then facingStatus = " (Facing Towards)"
+			elseif (otherDotProduct < -0.5) then facingStatus = " (Facing Away)"
 			else facingStatus = " (Facing Sideways)"
 			end
 
