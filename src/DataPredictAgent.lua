@@ -772,7 +772,7 @@ function AqwamAgentLibrary:addToAgentTaskMemory(agentName, memoryToAdd)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
-	local taskMemoryArray = agentDictionary.tasksMemoryArray
+	local taskMemoryArray = agentDictionary.taskMemoryArray
 
 	table.insert(taskMemoryArray, memoryToAdd)
 
@@ -782,9 +782,9 @@ function AqwamAgentLibrary:getFromAgentTaskMemory(agentName, index)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
-	local tasksMemoryArray = agentDictionary.tasksMemoryArray
+	local taskMemoryArray = agentDictionary.taskMemoryArray
 
-	return tasksMemoryArray[index]
+	return taskMemoryArray[index]
 
 end
 
@@ -792,7 +792,7 @@ function AqwamAgentLibrary:removeFromAgentTaskMemory(agentName, index)
 
 	local agentDictionary = self:getAgentDictionary(agentName)
 
-	local taskMemoryArray = agentDictionary.tasksMemoryArray
+	local taskMemoryArray = agentDictionary.taskMemoryArray
 
 	table.remove(taskMemoryArray, index)
 
