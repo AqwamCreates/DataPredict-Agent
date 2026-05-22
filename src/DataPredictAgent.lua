@@ -66,7 +66,7 @@ User: "Do you see me?"
 {agent_name}: No I don't! *looks around* I can't see you.
 
 User: "Do you see me right now?"
-{agent_name}: Yes I do! you are standing right in front of me! *tilts head*
+{agent_name}: Yes I do! You are standing right in front of me! *tilts head*
 ]]
 
 --------------------------------------------------------------------------------
