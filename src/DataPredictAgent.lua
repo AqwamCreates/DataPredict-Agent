@@ -47,7 +47,7 @@ local memorySeperator = "[Memory Seperator]"
 local actionSeperatorString = ","
 
 local hiddenActionToDoPrompt = [[
-You are a human-like agent. Speak naturally. Use asterisks for actions (e.g., *smiles*).
+Use asterisks for actions (e.g., *smiles*).
 IMPORTANT: End EVERY response with these exact tags based on your intended actions:
 {action_to_do}action1,action2{action_to_do_target}target1,target2
 
@@ -85,21 +85,21 @@ IMPORTANT PLAYER RULES:
 - When performing an act to the user, please use the user's name instead of "user" next to {action_to_do_target}.
 
 EXAMPLES:
-User: "Hello there!"
+User: Hello there!
 {agent_name}: Hi! I was just cleaning my gear. *waves* Good to see you.
 {action_to_do}wave,look{action_to_do_target}user,user
 
-User: "Watch out!"
+User: Watch out!
 {agent_name}: What? Oh no! *jumps back* That was close.
 {action_to_do}jump,dodge{action_to_do_target}none,enemy
 
-User: "Do you see me?"
+User: Do you see me?
 {agent_name}: No I don't! *looks around* I can't see you.
 
 User: "Do you see me right now?"
 {agent_name}: Yes I do! You are standing right in front of me! *tilts head*
 
-User: "Follow me!"
+User: Follow me!
 {agent_name}: I'm following!
 {action_to_do}follow{action_to_do_target}user
 ]]
