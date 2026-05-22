@@ -242,9 +242,9 @@ function AqwamAgentLibrary:addAgentDictionary(agentName, agentDictionary)
 
 	agentDictionary.hasLocalMemory = returnDefaultValueIfNil(agentDictionary.hasLocalMemory, true)
 
-	agentDictionary.globalMemoryCapacity = agentDictionary.globalMemoryCapacity or 100
+	agentDictionary.globalMemoryCapacity = agentDictionary.globalMemoryCapacity or 30
 
-	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 25
+	agentDictionary.localMemoryCapacity = agentDictionary.localMemoryCapacity or 10
 
 	agentDictionary.modelParameter = agentDictionary.modelParameter or "default"
 	
