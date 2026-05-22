@@ -766,7 +766,7 @@ function AqwamAgentLibrary:selfChat(agentName, isAddOnHiddenPromptAdded)
 
 	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 
-	local promptToAdd = "This is a random number for random response generation. Here is the number, but ignore it: " .. math.random() .. "\n\n" .. globalMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
+	local promptToAdd = globalMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
 
 	promptToAdd = promptToAdd .. "\n\nTalk to yourself based on the information that has been given above."
 
