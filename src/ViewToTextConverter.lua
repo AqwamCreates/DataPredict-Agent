@@ -278,9 +278,9 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local middleViewText = createViewText(topNTextArray, topNDistanceArray)
 
-	viewText = middleViewText .. finalViewText
+	local completeViewText = viewText .. middleViewText .. finalViewText
 	
-	return viewText
+	return completeViewText
 	
 end
 
