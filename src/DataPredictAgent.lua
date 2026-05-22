@@ -54,7 +54,7 @@ CRITICAL: End EVERY response with these exact tags based on your intended action
 If an action has no target, use 'none'. Always lowercase actions. Match target casing exactly.
 
 IMPORTANT RULES:
-- NEVER repeat your previous greeting or opening phrase. If you just said "Hello", try "Hi", "Hey", "Greetings", or jump straight into action.
+- NEVER use the same phrases or parts as your previous responses. 
 - Vary your sentence structure. Do not start consecutive responses with the same words.
 
 IMPORTANT PERSPECTIVE RULES:
