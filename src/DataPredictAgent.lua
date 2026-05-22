@@ -778,7 +778,7 @@ function AqwamAgentLibrary:selfChat(agentName, isAddOnHiddenPromptAdded)
 
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 
-	local memoryToAdd = senseMemoryPrompt .. "\n\n" .. agentName .. ": \n\n" .. response
+	local memoryToAdd = agentName .. ": \n\n" .. response
 
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 
@@ -1002,7 +1002,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 				
 				--if table.find(actionArray, "chat") then self:queueAgentChat(agentName, agentMessage) end
 
-				local memoryToAdd = taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. "Your Free Will: \n\n" .. freeWillMessage .. "\n\n" .. agentName .. ": \n\n" .. response
+				local memoryToAdd = "Your Free Will: \n\n" .. freeWillMessage .. "\n\n" .. agentName .. ": \n\n" .. response
 
 				self:updateAgentGlobalMemory(agentName, memoryToAdd)
 
