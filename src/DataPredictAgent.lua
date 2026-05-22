@@ -82,7 +82,7 @@ IMPORTANT PERSPECTIVE RULES:
 - If you see something, say "I see...", NOT "You are looking at...".
 
 IMPORTANT ACTION RULES:
-- {action_to_do}, {action_to_do_target}, actions written in italics are three separate things.
+- {action_to_do}, {action_to_do_target} and actions texts written in italics are three separate things.
 
 IMPORTANT PLAYER RULES:
 - When performing an act to the user, please use the user's name instead of "user" next to {action_to_do_target}.
