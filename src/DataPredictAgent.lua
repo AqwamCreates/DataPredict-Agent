@@ -264,9 +264,11 @@ function AqwamAgentLibrary:addInteractorDictionary(interactorName, interactorDic
 	if (dictionaryOfInteractorDictionary[interactorName]) then error("The interactor " .. interactorName .. " already exists.") end
 
 	interactorDictionary = interactorDictionary or {}
+	
+	interactorDictionary.interactorType = interactorDictionary.interactorType or "human"
 
 	interactorDictionary.localMemory = interactorDictionary.localMemory or {}
-
+	
 	dictionaryOfInteractorDictionary[interactorName] = interactorDictionary
 
 end
@@ -713,6 +715,8 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	local agentDictionary = self:getAgentDictionary(agentName)
 
 	local interactorDictionary = self:getInteractorDictionary(interactorName)
+	
+	local interactorType = interactorDictionary.interactorType
 
 	interactorDictionary[agentName] = interactorDictionary[agentName] or {}
 
@@ -733,8 +737,10 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 	local promptToAdd = globalMemoryPrompt .. "\n\n" .. localMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
 
 	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialHiddenChatPrompt end
-
-	promptToAdd = promptToAdd .. "\n\n" .. interactorName .. ": " .. interactorMessage .. "\n\n" .. agentName .. ": "
+	
+	local interactorPrompt = interactorName .. " " .. interactorType .. ": \n\n" .. interactorMessage
+	
+	promptToAdd = promptToAdd .. "\n\n" .. interactorPrompt .. "\n\n" .. agentName .. ": "
 
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isAddOnHiddenPromptAdded)
 
@@ -746,7 +752,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 
-	local memoryToAdd = "\n\n" .. interactorName .. ": \n\n" .. interactorMessage .. "\n\n" .. agentName .. ": \n\n" .. response
+	local memoryToAdd = interactorPrompt  .. "\n\n" .. agentName .. ": \n\n" .. response
 
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 
