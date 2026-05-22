@@ -114,6 +114,8 @@ function AqwamAgentLibrary.new(id)
 	NewDataPredictAgentInstance.dictionaryOfAgentActionArray = {}
 
 	DataPredictAgentGlobalInstanceArray[id] = NewDataPredictAgentInstance
+	
+	NewDataPredictAgentInstance:addModelParameterDictionary("default")
 
 	return NewDataPredictAgentInstance
 
