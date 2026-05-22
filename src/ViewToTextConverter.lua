@@ -44,15 +44,33 @@ local function getPartDescription(part, alternativePartName, characterName)
 	
 	local colorName = part.BrickColor.Name
 	
-	local isPartTransparent = (part.Transparency > 0.5)
-	
 	local partMaterialName = part.Material.Name
 	
-	local transparentText = (isPartTransparent) and "Transparent " or ""
+	local transparency = part.Transparency
+	
+	local visibilityDescription
+	
+	if (transparency >= 0.7) then
+		
+		visibilityDescription = "Transparent"
+		
+	elseif (transparency >= 0.3) then
+		
+		visibilityDescription = "Translucent"
+		
+	elseif (transparency > 0) then
+			
+		visibilityDescription = "Slightly Translucent"
+				
+	else
+				
+		visibilityDescription = "Opaque"
+		
+	end
 	
 	local partName = alternativePartName or part.Name
 	
-	local partDescription = transparentText .. colorName .. " "
+	local partDescription = visibilityDescription .. " " .. colorName .. " "
 	
 	if (not characterName) then partDescription = partDescription .. partMaterialName .. " " end
 	
