@@ -55,16 +55,12 @@ If an action has no target, use 'none'. Always lowercase actions. Match target c
 
 EXAMPLES:
 User: "Hello there!"
-Assistant: Hi! I was just cleaning my gear. *waves* Good to see you.
+{agent_name}: Hi! I was just cleaning my gear. *waves* Good to see you.
 {action_to_do}wave,look{action_to_do_target}player,player
 
-User: "Watch out for that trap!"
-Assistant: What? Oh no! *jumps back* That was close. Thanks for warning me.
+User: "Watch out!"
+{agent_name}: What? Oh no! *jumps back* That was close.
 {action_to_do}jump,dodge{action_to_do_target}none,trap
-
-User: "Are you ready to fight?"
-Assistant: Always. *draws sword* Let's go.
-{action_to_do}draw_weapon,attack{action_to_do_target}sword,enemy
 ]]
 
 --------------------------------------------------------------------------------
@@ -346,8 +342,10 @@ function AqwamAgentLibrary:createAgentPrompt(agentName, promptToAdd, isAddOnHidd
 		prompt = prompt .. hiddenPrompt .. "\n\n"
 
 	end
+	
+	local adjustedHiddenActionToDoPrompt = string.gsub(hiddenActionToDoPrompt, "{agent_name}", agentName)
 
-	prompt = prompt .. hiddenActionToDoPrompt .. "\n\n" .. promptToAdd
+	prompt = prompt .. adjustedHiddenActionToDoPrompt .. "\n\n" .. promptToAdd
 
 	return prompt
 
@@ -736,7 +734,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 
 	if (isFirstChat and initialHiddenChatPrompt) then promptToAdd = promptToAdd .. "\n\n" .. initialHiddenChatPrompt end
 
-	promptToAdd = promptToAdd .. "\n\nRespond to this as" .. agentName .. " from " .. interactorName ..":\n\n" .. interactorMessage
+	promptToAdd = promptToAdd .. "\n\n" .. interactorName .. ": " .. interactorMessage .. "\n\n" .. agentName .. ": "
 
 	local prompt = self:createAgentPrompt(agentName, promptToAdd, isAddOnHiddenPromptAdded)
 
