@@ -20,6 +20,8 @@ local oneStudToMeters = 0.28
 
 local halfPi = math.pi / 2
 
+local viewRegionSize = Vector3.new(maximumViewDistance) * 2
+
 local objectViewPriorityDictionary = { -- The lower the number, the higher the priority.
 	
 	["Door"] = 2,
@@ -168,6 +170,8 @@ function ViewToTextConverter:view(viewingCharacter)
 	local headCFrame = head.CFrame
 	
 	local headLookVector = headCFrame.LookVector
+	
+	local viewRegionCFrame = CFrame.new(headPosition)
 
 	local viewText = initialViewText .. "\n"
 	
@@ -177,15 +181,25 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local distanceArray = {}
 	
+	local params = OverlapParams.new()
+	
+	params.FilterDescendantsInstances = {viewingCharacter}
+	
+	params.FilterType = Enum.RaycastFilterType.Exclude
+	
+	params.MaxParts = 200
+	
 	local raycastParams = RaycastParams.new()
 	
 	raycastParams.FilterDescendantsInstances = {viewingCharacter}
+	
+	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+	
+	local partsInRegionArray = workspace:GetPartsInPart(viewRegionCFrame, viewRegionSize, params)
 
 	-- Cast rays in a cone.
 	
-	local workspaceDescendantArray = workspace:GetDescendants()
-	
-	for i, part in pairs(workspaceDescendantArray) do
+	for i, part in ipairs(partsInRegionArray) do
 		
 		if (not part:IsA("BasePart")) then continue end
 			
@@ -211,7 +225,9 @@ function ViewToTextConverter:view(viewingCharacter)
 		
 		if (not result) then continue end
 
-		local part = result.Instance
+		local resultPart = result.Instance
+		
+		if (resultPart ~= part) then continue end
 
 		local parentPart = part.Parent
 		
