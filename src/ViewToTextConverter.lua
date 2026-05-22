@@ -22,6 +22,8 @@ local halfPi = math.pi / 2
 
 local viewRegionSize = Vector3.new(maximumViewDistance) * 2
 
+local excludeEnum = Enum.RaycastFilterType.Exclude
+
 local objectViewPriorityDictionary = { -- The lower the number, the higher the priority.
 	
 	["Door"] = 2,
@@ -172,6 +174,8 @@ function ViewToTextConverter:view(viewingCharacter)
 	local headLookVector = headCFrame.LookVector
 	
 	local viewRegionCFrame = CFrame.new(headPosition)
+	
+	local filterDescentandsInstances = {viewingCharacter}
 
 	local viewText = initialViewText .. "\n"
 	
@@ -183,19 +187,19 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local params = OverlapParams.new()
 	
-	params.FilterDescendantsInstances = {viewingCharacter}
+	params.FilterDescendantsInstances = filterDescentandsInstances
 	
-	params.FilterType = Enum.RaycastFilterType.Exclude
+	params.FilterType = excludeEnum
 	
 	params.MaxParts = 200
 	
 	local raycastParams = RaycastParams.new()
 	
-	raycastParams.FilterDescendantsInstances = {viewingCharacter}
+	raycastParams.FilterDescendantsInstances = filterDescentandsInstances
 	
-	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
+	raycastParams.FilterType = excludeEnum
 	
-	local partsInRegionArray = workspace:GetPartsInPart(viewRegionCFrame, viewRegionSize, params)
+	local partsInRegionArray = workspace:GetPartBoundsInBox(viewRegionCFrame, viewRegionSize, params)
 
 	-- Cast rays in a cone.
 	
