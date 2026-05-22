@@ -20,7 +20,7 @@ local oneStudToMeters = 0.28
 
 local halfPi = math.pi / 2
 
-local viewRegionSize = Vector3.new(maximumViewDistance) * 2
+local viewRegionSize = Vector3.new(maximumViewDistance, maximumViewDistance, maximumViewDistance) * 2
 
 local excludeEnum = Enum.RaycastFilterType.Exclude
 
@@ -199,9 +199,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	raycastParams.FilterType = excludeEnum
 	
-	local partsInRegionArray = workspace:GetPartBoundsInBox(viewRegionCFrame, viewRegionSize, params)
-
-	-- Cast rays in a cone.
+	local partsInRegionArray = workspace:GetPartBoundsInBox(headCFrame, viewRegionSize, params)
 	
 	for i, part in ipairs(partsInRegionArray) do
 		
