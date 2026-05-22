@@ -61,6 +61,12 @@ User: "Hello there!"
 User: "Watch out!"
 {agent_name}: What? Oh no! *jumps back* That was close.
 {action_to_do}jump,dodge{action_to_do_target}none,trap
+
+User: "Do you see me?"
+{agent_name}: No I don't! *looks around* I can't see you.
+
+User: "Do you see me right now?"
+{agent_name}: Yes I do! You are in front of me!
 ]]
 
 --------------------------------------------------------------------------------
