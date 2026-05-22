@@ -457,7 +457,7 @@ function AqwamAgentLibrary:sendServerRequest(serverName, inputMessage, parameter
 	
 	local message = {
 		
-		["role"] = "system",
+		["role"] = "user",
 		["content"] = inputMessage,
 		
 	}
