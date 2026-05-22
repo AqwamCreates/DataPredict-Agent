@@ -335,36 +335,6 @@ function AqwamAgentLibrary:getAgentActionArray(agentActionName)
 
 end
 
-function AqwamAgentLibrary:createAgentPrompt(agentName, promptToAdd, isAddOnHiddenPromptAdded)
-
-	local agentDictionary = self:getAgentDictionary(agentName)
-
-	local prompt = "You are " .. agentName .. ".\n\n"
-
-	local addOnHiddenPrompt = agentDictionary.addOnHiddenPrompt
-
-	local hiddenPrompt = agentDictionary.hiddenPrompt
-
-	if (addOnHiddenPrompt) and (isAddOnHiddenPromptAdded) then
-
-		prompt = prompt .. addOnHiddenPrompt .. "\n\n"
-
-	end
-
-	if (hiddenPrompt) then
-
-		prompt = prompt .. hiddenPrompt .. "\n\n"
-
-	end
-	
-	local adjustedHiddenActionToDoPrompt = string.gsub(hiddenActionToDoPrompt, "{agent_name}", agentName)
-
-	prompt = prompt .. adjustedHiddenActionToDoPrompt .. "\n\n" .. promptToAdd
-
-	return prompt
-
-end
-
 function AqwamAgentLibrary:createSystemPrompt(agentName)
 	
 	local agentDictionary = self:getAgentDictionary(agentName)
@@ -411,6 +381,22 @@ function AqwamAgentLibrary:createUserPrompt(agentName, interactorName, interacto
 
 	return promptToAdd
 	
+end
+
+function AqwamAgentLibrary:createContextPrompt(agentName)
+
+	local agentDictionary = self:getAgentDictionary(agentName)
+
+	local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
+
+	local taskMemoryPrompt = self:createAgentTaskMemoryPrompt(agentName)
+
+	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
+
+	local promptToAdd = globalMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
+
+	return promptToAdd
+
 end
 
 function AqwamAgentLibrary:createAgentGlobalMemoryPrompt(agentName)
@@ -840,8 +826,12 @@ function AqwamAgentLibrary:selfChat(agentName, isAddOnHiddenPromptAdded)
 	local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 
 	local systemPrompt = self:createSystemPrompt(agentName)
+	
+	local contextPrompt = self:createContextPrompt(agentName)
+	
+	contextPrompt = contextPrompt .. "\n\nTalk to yourself based on the information above."
 
-	local response = self:sendAgentServerRequest(agentName, systemPrompt, "Start thinking to yourself.")
+	local response = self:sendAgentServerRequest(agentName, systemPrompt, contextPrompt)
 
 	local agentMessage, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 
@@ -1056,15 +1046,9 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 				local systemPrompt = self:createSystemPrompt(agentName)
 				
 				systemPrompt = systemPrompt .. promptToAdd
-				
-				local globalMemoryPrompt = self:createAgentGlobalMemoryPrompt(agentName)
-				
-				local taskMemoryPrompt = self:createAgentTaskMemoryPrompt(agentName)
-				
-				local senseMemoryPrompt = self:createAgentSenseMemoryPrompt(agentName)
 
-				local contextPrompt = globalMemoryPrompt .. "\n\n" .. taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt
-				
+				local contextPrompt = self:createContextPrompt(agentName)
+
 				contextPrompt = contextPrompt .. "\n\nTalk to yourself based on the information above."
 
 				local response = self:sendAgentServerRequest(agentName, systemPrompt, contextPrompt)
