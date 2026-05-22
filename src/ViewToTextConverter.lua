@@ -175,7 +175,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local viewRegionCFrame = CFrame.new(headPosition)
 	
-	local filterDescentandsInstances = {viewingCharacter}
+	local filterDescentantsInstances = {viewingCharacter}
 
 	local viewText = initialViewText .. "\n"
 	
@@ -187,7 +187,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local params = OverlapParams.new()
 	
-	params.FilterDescendantsInstances = filterDescentandsInstances
+	params.FilterDescendantsInstances = filterDescentantsInstances
 	
 	params.FilterType = excludeEnum
 	
@@ -195,7 +195,7 @@ function ViewToTextConverter:view(viewingCharacter)
 	
 	local raycastParams = RaycastParams.new()
 	
-	raycastParams.FilterDescendantsInstances = filterDescentandsInstances
+	raycastParams.FilterDescendantsInstances = filterDescentantsInstances
 	
 	raycastParams.FilterType = excludeEnum
 	
