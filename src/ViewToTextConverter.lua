@@ -88,7 +88,7 @@ end
 
 local function sortViewsByPriorityAndDistance(textArray, priorityArray, distanceArray)
 
-	-- Create a list of indices [1, 2, 3, ... n]
+	-- Create a list of indices [1, 2, 3, ... n].
 	
 	local indices = {}
 	
@@ -98,24 +98,25 @@ local function sortViewsByPriorityAndDistance(textArray, priorityArray, distance
 		
 	end
 
-	-- Sort the indices based on the values in the priority and distance arrays
+	-- Sort the indices based on the values in the priority and distance arrays.
+	
 	table.sort(indices, function(a, b)
 		
 		local priorityA = priorityArray[a]
 		
 		local priorityB = priorityArray[b]
 
-		-- Primary Sort: Priority (Lower number = Higher Priority)
+		-- Primary Sort: Priority (Lower number = Higher Priority).
 		
 		if (priorityA ~= priorityB) then return priorityA < priorityB end
 
-		-- Secondary Sort: Distance (Closer = Higher Priority)
+		-- Secondary Sort: Distance (Closer = Higher Priority).
 		
 		return (distanceArray[a] < distanceArray[b])
 		
 	end)
 
-	-- Rebuild the arrays in the sorted order
+	-- Rebuild the arrays in the sorted order.
 	
 	local sortedTextArray = {}
 	
