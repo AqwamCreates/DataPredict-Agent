@@ -1,3 +1,5 @@
+local Players = game:GetService("Players")
+
 local CharacterFolder = workspace.CharactersFolder 
 
 local ViewToTextConverter = {}
@@ -5,8 +7,6 @@ local ViewToTextConverter = {}
 local viewAngle = 90
 
 local maximumViewDistance = 100
-
-local rayCount = 12
 
 local topNumberOfViews = 5
 
@@ -34,7 +34,7 @@ local objectViewPriorityDictionary = { -- The lower the number, the higher the p
 
 }
 
-local function getPartDescription(part, alternativePartName, isCharacter)
+local function getPartDescription(part, alternativePartName, characterName)
 	
 	local colorName = part.BrickColor.Name
 	
@@ -48,9 +48,11 @@ local function getPartDescription(part, alternativePartName, isCharacter)
 	
 	local partDescription = transparentText .. colorName .. " "
 	
-	if (not isCharacter) then partDescription = partDescription .. partMaterialName .. " " end
+	if (not characterName) then partDescription = partDescription .. partMaterialName .. " " end
 	
 	partDescription = partDescription .. partName
+	
+	if (characterName) then partDescription = partDescription .. "of " .. characterName end
 	
 	return partDescription
 	
@@ -183,80 +185,86 @@ function ViewToTextConverter:view(viewingCharacter)
 
 	-- Cast rays in a cone.
 	
-	for i = 1, rayCount, 1 do
+	local workspaceDescendantArray = workspace:GetDescendants()
+	
+	for i, part in pairs(workspaceDescendantArray) do
 		
-		-- Distribute rays in a cone pattern.
+		if (not part:IsA("BasePart")) then continue end
+			
+		if (part.Transparency >= 1) then continue end
 		
-		local angleU = generateRandomViewAngle(viewAngle)
+		local differenceVector = part.Position - headPosition
 		
-		local angleV = generateRandomViewAngle(viewAngle)
+		local distance = differenceVector.Magnitude
+		
+		if (distance > maximumViewDistance) then continue end
+		
+		local isPartInFront = part.CFrame:ToObjectSpace(headCFrame).Z < 0
+		
+		if (not isPartInFront) then continue end
+		
+		local direction = differenceVector.Unit
+		
+		local result = workspace:Raycast(headPosition, direction * maximumViewDistance, raycastParams)
+		
+		if (not result) then continue end
 
-		local spreadDirection = (lookVector * math.cos(angleU) * math.cos(angleV)) +
-			(rightVector * math.sin(angleU) * math.cos(angleV)) +
-			(upVector * math.sin(angleV))
+		local part = result.Instance
 
-		local result = workspace:Raycast(head.Position, spreadDirection * maximumViewDistance, raycastParams)
+		local parentPart = part.Parent
+		
+		local Player = Players:GetPlayerFromCharacter(parentPart)
 
-		if (result) then
-			
-			local distance = (result.Position - headPosition).Magnitude
-			
-			local part = result.Instance
-			
-			local parentPart = part.Parent
-			
-			local selectedObjectPriority
-			
-			local subText
-			
-			if (parentPart == CharacterFolder) then
-				
-				selectedObjectPriority = 1
-				
-				subText = getPartDescription(part, nil, true)
-				
-				local playerHead = viewingCharacter:FindFirstChild("Head")
-				local lookVector = playerHead and playerHead.CFrame.LookVector or Vector3.new(0,0,1)
-				local directionToKaela = (headPosition - result.Position).Unit
-				local dotProduct = lookVector:Dot(directionToKaela)
+		local selectedObjectPriority
 
-				local facingStatus = ""
-				if (dotProduct > 0.5) then facingStatus = " (Facing Me)"
-				elseif (dotProduct < -0.5) then facingStatus = " (Facing Away)"
-				else facingStatus = " (Facing Sideways)"
-				end
-				
-				subText = subText .. facingStatus
-				
-			else
-				
-				local partName = part.Name
-				
-				local parentPartName = parentPart.Name
-				
-				local selectedObjectPriority = math.huge
-				
-				for objectName, objectPriority in pairs(objectViewPriorityDictionary) do
-					
-					if (not parentPartName:match(objectName)) or (not partName:match(objectName)) then continue end
-					
-					selectedObjectPriority = objectPriority
-					
-					subText = getPartDescription(part, objectName)
-					
-					break
-					
-				end
-				
+		local subText
+
+		if (Player) or (parentPart.Parent == CharacterFolder) then
+
+			selectedObjectPriority = 1
+
+			subText = getPartDescription(part, nil, parentPart.Name)
+
+			local characterHead = viewingCharacter:FindFirstChild("Head")
+			local lookVector = characterHead and characterHead.CFrame.LookVector or Vector3.new(0,0,1)
+			local directionToCharacter = (headPosition - result.Position).Unit
+			local dotProduct = lookVector:Dot(directionToCharacter)
+
+			local facingStatus = ""
+			if (dotProduct > 0.5) then facingStatus = " (Facing Me)"
+			elseif (dotProduct < -0.5) then facingStatus = " (Facing Away)"
+			else facingStatus = " (Facing Sideways)"
 			end
-			
-			table.insert(priorityArray, selectedObjectPriority)
-			
-			table.insert(textArray, subText)
-			
-			table.insert(distanceArray, distance)
-			
+
+			subText = subText .. facingStatus
+
+		else
+
+			local partName = part.Name
+
+			local parentPartName = parentPart.Name
+
+			local selectedObjectPriority = math.huge
+
+			for objectName, objectPriority in pairs(objectViewPriorityDictionary) do
+
+				if (not parentPartName:match(objectName)) or (not partName:match(objectName)) then continue end
+
+				selectedObjectPriority = objectPriority
+
+				subText = getPartDescription(part, objectName)
+
+				break
+
+			end
+
 		end
+
+		table.insert(priorityArray, selectedObjectPriority)
+
+		table.insert(textArray, subText)
+
+		table.insert(distanceArray, distance)
 		
 	end
 	
