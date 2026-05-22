@@ -746,7 +746,7 @@ function AqwamAgentLibrary:chat(agentName, interactorName, interactorMessage, is
 
 	for i, action in actionArray do self:act(agentName, action, actionTargetArray[i]) end
 
-	local memoryToAdd = taskMemoryPrompt .. "\n\n" .. senseMemoryPrompt .. "\n\n" .. interactorName .. ": \n\n" .. interactorMessage .. "\n\n" .. agentName .. ": \n\n" .. response
+	local memoryToAdd = "\n\n" .. interactorName .. ": \n\n" .. interactorMessage .. "\n\n" .. agentName .. ": \n\n" .. response
 
 	self:updateAgentGlobalMemory(agentName, memoryToAdd)
 
