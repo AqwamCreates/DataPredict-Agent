@@ -1067,7 +1067,7 @@ function AqwamAgentLibrary:bindFreeWillToAgent(agentName, functionToRun)
 				
 				contextPrompt = contextPrompt .. "\n\nTalk to yourself based on the information above."
 
-				local response = self:sendAgentServerRequest(agentName, contextPrompt)
+				local response = self:sendAgentServerRequest(agentName, systemPrompt, contextPrompt)
 
 				local agentMessage, actionArray, actionTargetArray = self:splitMessageFromAction(response)
 
