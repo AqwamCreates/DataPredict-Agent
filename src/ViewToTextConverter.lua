@@ -220,10 +220,12 @@ function ViewToTextConverter:view(viewingCharacter)
 		local subText
 
 		if (Player) or (parentPart.Parent == CharacterFolder) then
+			
+			local characterName = parentPart.Name
 
 			selectedObjectPriority = 1
 
-			subText = getPartDescription(part, nil, parentPart.Name)
+			subText = getPartDescription(part, nil, characterName)
 
 			local characterHead = viewingCharacter:FindFirstChild("Head")
 			local lookVector = characterHead and characterHead.CFrame.LookVector or Vector3.new(0,0,1)
@@ -231,7 +233,7 @@ function ViewToTextConverter:view(viewingCharacter)
 			local dotProduct = lookVector:Dot(directionToCharacter)
 
 			local facingStatus = ""
-			if (dotProduct > 0.5) then facingStatus = " (Facing Me)"
+			if (dotProduct > 0.5) then facingStatus = " (Facing Towards)"
 			elseif (dotProduct < -0.5) then facingStatus = " (Facing Away)"
 			else facingStatus = " (Facing Sideways)"
 			end
